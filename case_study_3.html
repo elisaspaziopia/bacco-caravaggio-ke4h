@@ -409,41 +409,24 @@
             <!-- Code Box -->
             <div class="content-box fade-in">
                 <h2 class="box-title">Prompting per l'Analisi del Simbolismo</h2>
-                <div class="code-container">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
-PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
-PREFIX schema: &lt;http://schema.org/&gt;
-PREFIX cultural: &lt;https://w3id.org/arco/ontology/cultural-event/&gt;
+                <div class="code-container">Alternative Dating: 1589
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix a-cd: <https://w3id.org/arco/ontology/context-description/> .
+@prefix l0: <https://w3id.org/italia/onto/l0/> .
 
-# Query per l'arricchimento con simbolismo e significato iconografico
-CONSTRUCT {
-  ?opera arco:hasSymbolicMeaning ?simbolismo ;
-         arco:hasIconographicElement ?elemento ;
-         arco:hasCulturalInterpretation ?interpretazione ;
-         arco:hasArtisticTechnique ?chiaroscuro .
-  
-  ?simbolismo rdfs:label "Simbolismo del vino e della giovinezza"@it ;
-              rdfs:comment "Il vino rappresenta l'ebbrezza divina e la transitorietà della vita"@it .
-  
-  ?elemento rdfs:label "Grappolo d'uva"@it ;
-            arco:represents "Simbolo di fertilità e abbondanza"@it .
-  
-  ?interpretazione rdfs:label "Interpretazione barocca della mitologia"@it ;
-                   rdfs:comment "Fusione tra sacro e profano tipica del periodo"@it .
-  
-  ?chiaroscuro rdfs:label "Tecnica del chiaroscuro caravaggesco"@it ;
-               arco:hasDescription "Contrasto drammatico tra luce e ombra per creare volume"@it .
-}
-WHERE {
-  ?opera a arco:HistoricOrArtisticProperty ;
-         rdfs:label ?titolo .
-  FILTER(REGEX(LCASE(STR(?titolo)), "bacco.*caravaggio", "i"))
-  
-  BIND(IRI(CONCAT(STR(?opera), "/simbolismo")) AS ?simbolismo)
-  BIND(IRI(CONCAT(STR(?opera), "/elemento-iconografico")) AS ?elemento)
-  BIND(IRI(CONCAT(STR(?opera), "/interpretazione")) AS ?interpretazione)
-  BIND(IRI(CONCAT(STR(?opera), "/chiaroscuro")) AS ?chiaroscuro)
-}</div>
+# Link artwork to alternative dating
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    a-cd:hasAlternativeDating 
+    <https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> .
+
+# Alternative dating entity
+<https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> 
+    rdf:type a-cd:AlternativeDating ;
+    rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
+    l0:name "Datazione alternativa del Bacco al 1589"@it ;
+    a-cd:hasDatingDescription "prima datazione al 1589"@it .
+</div>
             </div>
 
             <!-- Description Box -->
