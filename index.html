@@ -642,15 +642,9 @@ LIMIT 200</div>
                 </div>
                 <div class="query-description-box">
                     <p class="query-description">
-                        Questa query si concentra sui dettagli fisici dell'opera, come il materiale, le dimensioni e la tecnica utilizzata, oltre alla sua ubicazione attuale. È fondamentale per comprendere il contesto materiale e la conservazione del Bacco, fornendo dati specifici che possono essere arricchiti.
-                        <br><br>
-                        **Spiegazione della query:**<br>
-                        - `DISTINCT`: Evita risultati duplicati.<br>
-                        - `FILTER (REGEX(LCASE(STR(?titolo)), "bacco", "i"))`: Limita i risultati al titolo "Bacco" (case-insensitive).<br>
-                        - `UNION`: Combina risultati da diverse proprietà del titolo o dell'autore.<br>
-                        - `OPTIONAL`: Rende non obbligatoria la presenza di determinate informazioni (es. autore), per non escludere risultati validi.<br>
-                        - `ORDER BY`: Ordina i risultati.<br>
-                        - `LIMIT`: Limita il numero massimo di risultati.
+                      Where:
+-        UNION in the first block: search for works with a label (rdfs:label) containing both ‘bacco’ and ‘caravaggio’ (two FILTERS which must both be true). In the second block: search for works with a label containing “bacco” and an associated author (a-cd:hasAuthor) whose name contains “michelangelo merisi”.
+-        FILTER and REGEX in the first block require the title to contain both ‘bacco’ and ‘caravaggio’. In the second block, FILTER(REGEX(?label, "bacco", "i")) looks for titles with "bacco", and FILTER(REGEX(?authorLabel, "michelangelo merisi", "i")) looks for authors with the name "michelangelo merisi".
                     </p>
                     <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">Visualizza Risultati su Arco</a>
                 </div>
