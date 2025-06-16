@@ -31,6 +31,7 @@
             color: var(--text-dark);
             line-height: 1.6;
             font-size: 0.95rem;
+            padding-top: 80px; /* Ensures content is below fixed navbar */
         }
 
         /* Navigation styles */
@@ -59,6 +60,11 @@
             font-size: 1.4rem;
             font-weight: 700;
             color: var(--accent-color);
+        }
+
+        .logo a {
+            color: var(--accent-color);
+            text-decoration: none;
         }
 
         .nav-menu {
@@ -123,10 +129,16 @@
             color: var(--accent-color);
         }
 
+        /* Active dropdown item for the current page */
+        .dropdown-item.active {
+            background: rgba(218, 165, 32, 0.3);
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
         /* Main content area */
         .main-content {
-            padding-top: 100px;
-            min-height: 100vh;
+            padding-bottom: 4rem;
             max-width: 1200px;
             margin: 0 auto;
             padding-left: 2rem;
@@ -155,7 +167,7 @@
         }
 
         /* Navigation between case studies */
-        .case-study-nav {
+        .case-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -191,11 +203,12 @@
             transform: none;
         }
 
-        .current-case {
+        .case-nav-info {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             color: var(--primary-color);
             font-weight: 600;
+            text-align: center; /* Center the text within the info box */
         }
 
         /* Content boxes */
@@ -235,6 +248,7 @@
             color: var(--primary-color);
             margin-bottom: 1.5rem;
             font-weight: 700;
+            text-align: left; /* Align box titles to the left */
         }
 
         .code-container {
@@ -250,10 +264,23 @@
             line-height: 1.4;
         }
 
-        .description-text {
+        .description-container { /* New class for description box styling */
+            background: var(--background-light);
+            border: 1px solid rgba(218, 165, 32, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            color: #444;
+            line-height: 1.6;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            text-align: left;
+            margin-bottom: 1.5rem; /* Space between description and action button/next box */
+        }
+
+        .description-text { /* Use for text inside description-container */
             font-size: 1rem;
             line-height: 1.7;
             color: #444;
+            margin-bottom: 1rem; /* Space between paragraphs */
         }
 
         .description-text strong {
@@ -273,6 +300,27 @@
             padding: 1.5rem;
             margin: 1.5rem 0;
             border-radius: 8px;
+        }
+
+        /* Action button (e.g., Copy Prompt) */
+        .action-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-top: 1rem; /* Space above button */
+        }
+
+        .action-button:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
         }
 
         /* Footer */
@@ -328,7 +376,7 @@
                 font-size: 2rem;
             }
 
-            .case-study-nav {
+            .case-nav {
                 flex-direction: column;
                 gap: 1rem;
             }
@@ -340,6 +388,9 @@
 
             .content-box {
                 padding: 1.5rem;
+            }
+            .code-container, .description-container {
+                padding: 1rem;
             }
         }
 
@@ -360,7 +411,9 @@
     <!-- Fixed Navbar -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Arco KG Enhancement</div>
+            <div class="logo">
+                <a href="index.html">Arco KG Enhancement</a>
+            </div>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="index.html#home" class="nav-link">Home</a>
@@ -376,7 +429,7 @@
                     <div class="dropdown">
                         <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
                         <a href="case_study_2.html" class="dropdown-item">Case Study 2</a>
-                        <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
+                        <a href="case_study_3.html" class="dropdown-item active">Case Study 3</a>
                         <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
                         <a href="case_study_5.html" class="dropdown-item">Case Study 5</a>
                     </div>
@@ -389,16 +442,19 @@
     <div class="main-content">
         <!-- Header -->
         <div class="case-study-header">
-            <h1 class="case-study-title">Case Study 3</h1>
-            <p class="case-study-subtitle">Analisi del Simbolismo e Tecnica del Chiaroscuro nel "Bacco" di Caravaggio</p>
+            <h1 class="case-study-title">Case Study 3: Analisi Approfondita con Chain-of-Thought</h1>
+            <p class="case-study-subtitle">Utilizzo della tecnica Chain-of-Thought per estrarre ragionamenti complessi e strutturare informazioni.</p>
         </div>
 
         <!-- Navigation between case studies -->
-        <div class="case-study-nav">
+        <div class="case-nav">
             <a href="case_study_2.html" class="nav-button">
                 ← Case Study 2
             </a>
-            <div class="current-case">Case Study 3 di 5</div>
+            <div class="case-nav-info">
+                <strong>Case Study 3 di 5</strong><br>
+                Analisi con Chain-of-Thought
+            </div>
             <a href="case_study_4.html" class="nav-button">
                 Case Study 4 →
             </a>
@@ -406,59 +462,64 @@
 
         <!-- Content Section -->
         <div class="content-section">
-            <!-- Code Box -->
+            <!-- Description Box (now first) -->
             <div class="content-box fade-in">
-                <h2 class="box-title">Prompting per l'Analisi del Simbolismo</h2>
-                <div class="code-container">Alternative Dating: 1589
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix a-cd: <https://w3id.org/arco/ontology/context-description/> .
-@prefix l0: <https://w3id.org/italia/onto/l0/> .
+                <h2 class="box-title">Strategia e Risultati del Chain-of-Thought</h2>
+                <div class="description-container">
+                    <p class="description-text"><strong>Identificazione del gap:</strong> Per quesiti che richiedono un'analisi profonda o la derivazione di informazioni tramite passaggi logici intermedi, i semplici prompt "zero-shot" o "few-shot" possono risultare insufficienti. Era necessario un approccio che spingesse il modello a "ragionare" esplicitamente.</p>
 
-# Link artwork to alternative dating
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
-    a-cd:hasAlternativeDating 
-    <https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> .
+                    <p class="description-text"><strong>Metodologia:</strong> Abbiamo implementato la tecnica **Chain-of-Thought (CoT)**. Questo approccio consiste nel chiedere all'LLM di **mostrare i passaggi intermedi del suo ragionamento** prima di fornire la risposta finale. Il prompt è stato strutturato per guidare il modello attraverso una serie di domande sequenziali o di istruzioni passo-passo, forzandolo a elaborare le informazioni in modo più sistematico. Ad esempio, per analizzare l'influenza di eventi storici sul percorso artistico di Caravaggio, il modello è stato prima invitato a identificare gli eventi, poi a descrivere l'impatto e infine a collegarlo alle opere.</p>
 
-# Alternative dating entity
-<https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> 
-    rdf:type a-cd:AlternativeDating ;
-    rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
-    l0:name "Datazione alternativa del Bacco al 1589"@it ;
-    a-cd:hasDatingDescription "prima datazione al 1589"@it .
-</div>
+                    <div class="highlight-box">
+                        <strong>Esempio di Prompt Chain-of-Thought per "Bacco":</strong><br>
+                        "Assumi il ruolo di un critico d'arte rinomato. Analizza il 'Bacco' di Caravaggio (1595-1597) in relazione alle seguenti domande, rispondendo passo dopo passo:
+                        1. Quali sono gli elementi stilistici principali del dipinto (es. chiaroscuro, realismo)?
+                        2. Come questi elementi riflettono o si discostano dalle tendenze artistiche del tardo Cinquecento a Roma?
+                        3. Quali possibili interpretazioni (simboliche, psicologiche, storiche) emergono dall'analisi combinata di stile e contesto?"
+                    </div>
+
+                    <p class="description-text"><strong>Risultati:</strong> L'adozione del CoT ha portato a risposte non solo più accurate e dettagliate, ma anche più **trasparenzi e verificabili**. Il modello è stato in grado di fornire un percorso logico per le sue deduzioni, facilitando la validazione delle informazioni estratte. Questo ha permesso di arricchire il Knowledge Graph con relazioni più complesse e di alta qualità, come la correlazione tra eventi biografici e scelte stilistiche, o l'evoluzione del significato simbolico nel tempo.</p>
+                    <a href="#" class="action-button" onclick="copyPromptText(event, 'promptForCoT')">Copia Prompt</a>
+                </div>
             </div>
 
-            <!-- Description Box -->
+            <!-- Code Box (now second) -->
             <div class="content-box fade-in">
-                <h2 class="box-title">Analisi e Risultati dell'Arricchimento Simbolico</h2>
-                <div class="description-text">
-                    <p>Questo case study si concentra sull'<strong>arricchimento semantico</strong> del dipinto "Bacco" attraverso l'analisi del <em>simbolismo iconografico</em> e delle tecniche pittoriche caratteristiche di Caravaggio.</p>
+                <h2 class="box-title">Esempio di Triple RDF da Analisi CoT</h2>
+                <div class="code-container">
+                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+@prefix ex: http://example.org/ontology/ . # Prefisso per proprietà estese
 
-                    <div class="highlight-box">
-                        <strong>Elementi Simbolici Identificati:</strong>
-                        <ul style="margin-top: 0.5rem;">
-                            <li><strong>Il vino:</strong> Rappresenta l'ebbrezza divina e la connessione con il sacro</li>
-                            <li><strong>L'uva:</strong> Simbolo di fertilità, abbondanza e cicli naturali</li>
-                            <li><strong>La giovinezza:</strong> Riflessione sulla transitorietà della bellezza</li>
-                            <li><strong>Lo sguardo diretto:</strong> Invito allo spettatore a partecipare alla scena</li>
-                        </ul>
-                    </div>
+# Esempio di triple generate da analisi CoT
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214>
+    ex:hasStylisticElement <http://example.org/Chiaroscuro> ;
+    ex:relatesToArtisticMovement <http://example.org/MannerismTransition> ;
+    ex:hasHistoricalImpact "Il dipinto si discosta dall'idealizzazione manierista..."@it .
 
-                    <p>L'approccio utilizzato combina <strong>analisi iconografica tradizionale</strong> con metodologie di arricchimento automatico del knowledge graph. Attraverso prompt specifici ai LLM, siamo riusciti a estrarre e formalizzare conoscenze implicite sull'opera.</p>
+<http://example.org/Chiaroscuro>
+    rdf:type ex:ArtisticTechnique ;
+    rdfs:label "Chiaroscuro Caravaggesco"@it ;
+    ex:contributesToMeaning "Profondità simbolica sulla dualità umano/divino"@it .
 
-                    <p>La <em>tecnica del chiaroscuro</em> caravaggesca viene documentata non solo come elemento stilistico, ma come strumento semantico che contribuisce al significato dell'opera. Il contrasto tra luce e ombra diventa metafora della dualità tra divino e umano.</p>
+<http://example.org/MannerismTransition>
+    rdf:type ex:ArtisticMovement ;
+    rdfs:label "Tendenze artistiche fine '500 a Roma"@it ;
+    ex:characteristics "Idealizzazione, retorica"@it .
 
-                    <div class="highlight-box">
-                        <strong>Metodologia di Arricchimento:</strong><br>
-                        1. Identificazione degli elementi simbolici presenti<br>
-                        2. Contestualizzazione storico-culturale<br>
-                        3. Formalizzazione in triple RDF usando l'ontologia ArCo<br>
-                        4. Validazione attraverso fonti storiche e critiche d'arte
-                    </div>
-
-                    <p>I risultati mostrano come l'integrazione di <strong>analisi semantica avanzata</strong> possa arricchire significativamente la rappresentazione digitale del patrimonio culturale, rendendo accessibili livelli di interpretazione tradizionalmente riservati agli esperti del settore.</p>
+# Placeholder per altre triple che dettaglierebbero le interpretazioni e le correlazioni
+# basate sui passaggi di ragionamento dell'LLM.
+                    </pre>
                 </div>
+            </div>
+            <!-- Hidden element to hold the actual prompt text for copying -->
+            <div id="promptForCoT" style="display:none;">
+                "Assumi il ruolo di un critico d'arte rinomato. Analizza il 'Bacco' di Caravaggio (1595-1597) in relazione alle seguenti domande, rispondendo passo dopo passo:
+                1. Quali sono gli elementi stilistici principali del dipinto (es. chiaroscuro, realismo)?
+                2. Come questi elementi riflettono o si discostano dalle tendenze artistiche del tardo Cinquecento a Roma?
+                3. Quali possibili interpretazioni (simboliche, psicologiche, storiche) emergono dall'analisi combinata di stile e contesto?"
             </div>
         </div>
     </div>
@@ -480,7 +541,7 @@
                 <h4>Case Studies</h4>
                 <a href="case_study_1.html">Caso Studio 1</a>
                 <a href="case_study_2.html">Caso Studio 2</a>
-                <a href="case_study_3.html">Caso Studio 3</a>
+                <a href="case_study_3.html" class="active">Caso Studio 3</a>
                 <a href="case_study_4.html">Caso Studio 4</a>
                 <a href="case_study_5.html">Caso Studio 5</a>
             </div>
@@ -537,6 +598,37 @@
                 }
             });
         });
+
+        // Copy to clipboard function for prompt text
+        function copyPromptText(event, elementId) { // Pass event object
+            const textToCopy = document.getElementById(elementId).textContent;
+            
+            // Create a temporary textarea element to hold the text
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Find the specific button that was clicked
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745'; // Green for success
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = ''; // Revert to original background
+                }, 2000);
+            } catch (err) {
+                console.error('Errore nella copia: ', err);
+                // Fallback for older browsers or if execCommand fails
+                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+            } finally {
+                document.body.removeChild(tempTextArea); // Clean up the temporary element
+            }
+        }
     </script>
 </body>
 </html>
