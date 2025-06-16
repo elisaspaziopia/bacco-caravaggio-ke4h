@@ -561,7 +561,7 @@
         <div class="query-layout-vertical">
             <!-- Query Item 1: Titolo sopra il codice, descrizione in box separata sotto -->
             <div class="query-item fade-in">
-                <h3 class="query-title">Query 1: Localizzazione e Dettagli Principali</h3>
+                <h3 class="query-title">Query 1:</h3>
                 <div class="query-code-container">
                     <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
 PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
@@ -599,11 +599,15 @@ LIMIT 200</div>
                 </div>
                 <div class="query-description-box">
                     <p class="query-description">
-                        Questa query fondamentale è progettata per localizzare rapidamente l'opera "Bacco" nel
-                        Knowledge Graph di Arco. Non solo recupera il titolo e l'autore, ma cerca anche di
-                        stabilire un link diretto all'autore per poter esplorare ulteriori dettagli biografici
-                        o altre opere a lui attribuite, fornendo un punto di partenza per l'analisi.
-                        **Puoi aggiungere qui una descrizione più dettagliata o i risultati chiave di questa query.**
+                       Where:
+-        DISTINCT is used to avoid duplicate results, i.e. to show only unique combinations of work, title and author, even though the query may find more than one identical one.
+-        FILTER limits results in which the title contains the word “bacco” .
+-        REGEX is used to do a more flexible text search (pattern matching) on the title.
+-        Likewise, OPTIONAL is used to include only authors whose name contains “caravaggio” (always case-insensitive).
+-        UNION in the first block, WHERE, is used to search for titles that may be given different properties, then combines results that satisfy one or the other pattern. In the OPTIONAL block on authors, it serves to search for the author indicated with different properties.
+-        OPTIONAL is used to make sure that the part about authors is not mandatory: if a work has an author, it includes it (and tries to filter on the author's label), but if it has no author or the author has no label, the query does not fail and still returns the title work.
+-        ORDER BY serves to sort the results by title in ascending alphabetical order.
+-        LIMIT is used to limit the maximum number of results to 200, so as not to have an overly long response.
                     </p>
                     <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">Visualizza Risultati su Arco</a>
                 </div>
@@ -611,12 +615,12 @@ LIMIT 200</div>
 
             <!-- Spazio per il testo tra le query 1 e 2 -->
             <p class="query-separator-text">
-                Dopo aver identificato l'opera principale, abbiamo approfondito la ricerca per estrarre dettagli specifici che ci avrebbero aiutato a comprendere meglio le lacune informative nel Knowledge Graph di ArCo.
+              We thus obtained several results, so to narrow the field, we generated a new query:
             </p>
 
             <!-- Query Item 2: Titolo sopra il codice, descrizione in box separata sotto -->
             <div class="query-item fade-in">
-                <h3 class="query-title">Query 2: Dettagli Tecnici e Localizzazione dell'Opera</h3>
+                <h3 class="query-title">Query 2</h3>
                 <div class="query-code-container">
                     <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
 PREFIX schema: &lt;http://schema.org/&gt;
