@@ -429,7 +429,7 @@
                     <p><strong>Metodologia:</strong> Per colmare questa lacuna, è stato utilizzato un prompt strutturato con una "expertise persona". Al modello è stato chiesto di agire come un esperto storico dell'arte del periodo barocco, fornendo risposte dettagliate e contestualizzate. Il prompt ha richiesto la descrizione accurata della commissione, le figure coinvolte, il contesto storico a Roma, e le implicazioni per l'opera stessa. L'obiettivo era ottenere un output che potesse essere facilmente trasformato in triple RDF per arricchire il Knowledge Graph di ArCo con dati relazionali sulla committenza e la contestualizzazione.</p>
 
                     <p><strong>Risultati:</strong> L'applicazione di questa tecnica ha permesso di generare una ricca serie di informazioni sulla commissione del "Bacco", inclusi dettagli sul Cardinale Del Monte e il contesto della corte romana. Queste informazioni sono state poi modellate in triple RDF, migliorando significativamente la granularità e l'interconnessione dei dati disponibili su ArCo riguardo all'opera.</p>
-                    <a href="#" class="action-button" onclick="copyPromptText('promptForCommission')">Copia Prompt</a>
+                    <a href="#" class="action-button" onclick="copyPromptText(event, 'promptForCommission')">Copia Prompt</a>
                 </div>
             </div>
 
@@ -518,10 +518,17 @@
         });
 
         // Copy to clipboard function for prompt text
-        function copyPromptText(elementId) {
+        function copyPromptText(event, elementId) { // Pass event object
             const textToCopy = document.getElementById(elementId).textContent;
             
-            navigator.clipboard.writeText(textToCopy).then(function() {
+            // Create a temporary textarea element to hold the text
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                document.execCommand('copy');
                 // Find the specific button that was clicked
                 const button = event.target;
                 const originalText = button.textContent;
@@ -532,10 +539,13 @@
                     button.textContent = originalText;
                     button.style.background = ''; // Revert to original background
                 }, 2000);
-            }, function(err) {
+            } catch (err) {
                 console.error('Errore nella copia: ', err);
-                // Optionally provide user feedback for error
-            });
+                // Fallback for older browsers or if execCommand fails
+                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+            } finally {
+                document.body.removeChild(tempTextArea); // Clean up the temporary element
+            }
         }
     </script>
 </body>
