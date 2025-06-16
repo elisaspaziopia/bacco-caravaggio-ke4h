@@ -25,16 +25,16 @@
             --shadow: rgba(44, 24, 16, 0.15);
         }
 
-        /* Global styles for the document body */
         body {
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
             color: var(--text-dark);
             line-height: 1.6;
             font-size: 0.95rem;
+            padding-top: 80px; /* Ensures content is below fixed navbar */
         }
 
-        /* Styles for the fixed header (navigation) */
+        /* Fixed header styles */
         nav {
             position: fixed;
             top: 0;
@@ -46,7 +46,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Navigation container */
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -56,7 +55,6 @@
             padding: 0 2rem;
         }
 
-        /* Style for the logo/title in the navigation */
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
@@ -64,7 +62,11 @@
             color: var(--accent-color);
         }
 
-        /* Navigation menu */
+        .logo a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
         .nav-menu {
             display: flex;
             list-style: none;
@@ -89,7 +91,6 @@
             color: var(--accent-color);
         }
 
-        /* Dropdown menu */
         .dropdown {
             display: none;
             position: absolute;
@@ -128,94 +129,109 @@
             color: var(--accent-color);
         }
 
-        /* Hero section */
-        .hero {
-            min-height: 50vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%);
-            overflow: hidden;
-            padding-top: 80px;
-            padding-bottom: 2rem;
+        /* Active dropdown item for the current page */
+        .dropdown-item.active {
+            background: rgba(218, 165, 32, 0.3);
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg') center/cover;
-            opacity: 0.3;
-            z-index: -1;
-        }
-
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-            color: var(--text-light);
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.15rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both;
-        }
-
-        /* Content section */
-        .content-section {
-            padding: 4rem 2rem;
+        /* Main content area (container for all sections) */
+        .main-content {
+            padding-bottom: 4rem;
             max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* Header section (for main title and subtitle) */
+        .case-study-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding: 2rem 0; /* Padding within the header itself */
+        }
+
+        .case-study-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .case-study-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-        }
-
-        /* Case study layout */
-        .case-study-layout {
+        /* Navigation between case studies (top navigation block) */
+        .case-nav {
             display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-
-        .case-study-item {
-            display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 1rem;
-            padding: 2rem;
+            margin-bottom: 3rem;
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .case-nav-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .case-nav-button:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .case-nav-button.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .case-nav-info {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* General content section (wrapper for content boxes) */
+        .content-section {
+            margin-bottom: 4rem;
+            display: flex; /* Use flexbox for direct child arrangement */
+            flex-direction: column;
+            gap: 2rem; /* Space between the main content blocks */
+        }
+
+        /* Standard content box (for description and code blocks) */
+        .content-box {
             background: var(--card-bg);
             border-radius: 20px;
+            padding: 2.5rem;
             box-shadow: 0 10px 30px var(--shadow);
             border: 1px solid rgba(218, 165, 32, 0.2);
             position: relative;
             overflow: hidden;
-            text-align: center;
+            /* margin-bottom: 2rem; Removed as parent .content-section handles gaps */
         }
 
-        .case-study-item::before {
+        .content-box::before {
             content: '';
             position: absolute;
             top: 0;
@@ -226,143 +242,169 @@
             transition: all 0.5s ease;
         }
 
-        .case-study-item:hover::before {
+        .content-box:hover::before {
             left: 0;
         }
 
-        .case-study-title {
+        .box-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 0.8rem;
+            margin-bottom: 1.5rem;
             font-weight: 700;
-        }
-
-        .case-study-code-container {
-            width: 100%;
-            max-width: 650px;
-            padding-right: 0;
-        }
-
-        .case-study-code {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 0.7rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            color: var(--text-dark);
-            white-space: pre-wrap;
-            width: 100%;
-            overflow-x: auto;
             text-align: left;
         }
 
-        .case-study-description-box {
+        /* Description container inside content-box */
+        .description-container {
             background: var(--background-light);
             border: 1px solid rgba(218, 165, 32, 0.1);
             border-radius: 12px;
-            padding: 1.2rem;
-            margin-top: 0.8rem;
-            max-width: 80%;
-            text-align: left;
+            padding: 1.5rem;
+            color: #444;
+            line-height: 1.6;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            text-align: left;
+            margin-bottom: 1.5rem; /* Space between description and code/button */
         }
 
-        .case-study-description-box .case-study-description {
+        .description-text { /* For paragraphs inside description-container */
+            font-size: 1rem;
+            line-height: 1.7;
             color: #444;
             margin-bottom: 1rem;
-            line-height: 1.6;
+        }
+
+        .description-text strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .description-text em {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        /* Code container inside content-box */
+        .code-container {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Courier New', monospace;
             font-size: 0.9rem;
+            color: var(--text-dark);
+            white-space: pre-wrap;
+            overflow-x: auto;
+            line-height: 1.4;
+            margin-top: 1.5rem; /* Space if code is below description */
         }
 
-        /* Navigation buttons */
-        .navigation-buttons {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin: 3rem 0;
-            padding: 0 2rem;
+        /* Highlight boxes for important info (used within descriptions) */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(139, 69, 19, 0.1) 100%);
+            border-left: 4px solid var(--accent-color);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
         }
 
-        .nav-button {
+        /* Action button (e.g., Copy Prompt, View Results) */
+        .action-button {
             background: var(--secondary-color);
             color: white;
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 20px;
             font-weight: 500;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
+            display: inline-block;
             font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
-        .nav-button:hover {
+        .action-button:hover {
             background: var(--primary-color);
-            transform: translateY(-2px);
+            transform: scale(1.05);
         }
 
-        .nav-button.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        /* Query Grid Specific Styles */
+        .query-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns */
+            gap: 2rem; /* Space between query boxes */
+            margin-bottom: 3rem; /* Space below the grid */
         }
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .query-box {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+        .query-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            transition: all 0.5s ease;
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .query-box:hover::before {
+            left: 0;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .case-study-description-box {
-                max-width: 100%;
-            }
-
-            .navigation-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
+        .query-box-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-align: left;
         }
 
-        /* Footer styles */
+        .query-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+            background-color: #f8f9fa;
+        }
+
+        .query-results {
+            background-color: #e9ecef;
+            border: 1px dashed #ced4da;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 1rem;
+            text-align: center;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        /* Footer styles (consistent) */
         .footer {
             background: var(--primary-color);
             color: var(--text-light);
@@ -407,13 +449,68 @@
         .footer-link-group a {
             margin-bottom: 0.5rem;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .case-study-title {
+                font-size: 2rem;
+            }
+
+            .case-nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .content-box {
+                padding: 1.5rem;
+            }
+            .description-container, .code-container {
+                padding: 1rem;
+            }
+            .query-grid-container {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+        }
     </style>
 </head>
 <body>
-    <!-- Fixed Navbar -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Arco KG Enhancement</div>
+            <div class="logo">
+                <a href="index.html">Arco KG Enhancement</a>
+            </div>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="index.html#home" class="nav-link">Home</a>
@@ -430,7 +527,7 @@
                         <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
                         <a href="case_study_2.html" class="dropdown-item">Case Study 2</a>
                         <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
-                        <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
+                        <a href="case_study_4.html" class="dropdown-item active">Case Study 4</a>
                         <a href="case_study_5.html" class="dropdown-item">Case Study 5</a>
                     </div>
                 </li>
@@ -438,129 +535,126 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Case Study 4: Arricchimento Simbolico e Storico</h1>
-            <p>Approfondimento del simbolismo del Bacco e del contesto storico-culturale dell'opera attraverso multiple tecniche di prompting avanzate.</p>
-        </div>
-    </section>
-
-    <!-- Content Section -->
-    <section class="content-section">
-        <h2 class="section-title">Analisi Simbolica e Contestualizzazione Storica</h2>
-        
-        <div class="case-study-layout">
-            <!-- Case Study Item 1 -->
-            <div class="case-study-item fade-in">
-                <h3 class="case-study-title">Simbolismo Mitologico e Iconografico</h3>
-                <div class="case-study-code-container">
-                    <div class="case-study-code">@prefix arco: &lt;https://w3id.org/arco/ontology/arco/&gt; .
-@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
-@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
-@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
-
-&lt;https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176&gt;
-    arco:hasSymbolicMeaning [
-        a arco:SymbolicElement ;
-        rdfs:label "Simbolismo di Bacco come divinità del vino e dell'estasi"@it ;
-        arco:represents "Dualità tra piacere e malinconia"@it ;
-        arco:culturalContext "Mitologia romana e tradizione classica"@it ;
-        arco:iconographicElements "Corona di foglie di vite, grappoli d'uva, calice di vino"@it
-    ] ;
-    arco:hasAllegoricalMeaning [
-        a arco:AllegoricalInterpretation ;
-        rdfs:label "Allegoria della giovinezza e della mortalità"@it ;
-        dc:description "Il dipinto rappresenta la tensione tra la bellezza giovanile e la consapevolezza della caducità dell'esistenza"@it ;
-        arco:philosophicalTheme "Vanitas e riflessione sul tempo"@it
-    ] .</div>
-                </div>
-                <div class="case-study-description-box">
-                    <p class="case-study-description">
-                        Questo frammento RDF arricchisce la descrizione dell'opera con un'analisi approfondita del simbolismo mitologico. Bacco non è rappresentato solo come divinità del vino, ma come figura complessa che incarna la dualità tra piacere sensuale e malinconia esistenziale. Gli elementi iconografici tradizionali (corona di vite, grappoli, calice) sono contestualizzati nella loro funzione simbolica di rimando alla mitologia classica e alla tradizione culturale romana.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Case Study Item 2 -->
-            <div class="case-study-item fade-in">
-                <h3 class="case-study-title">Contesto Storico e Committenza</h3>
-                <div class="case-study-code-container">
-                    <div class="case-study-code">@prefix arco: &lt;https://w3id.org/arco/ontology/arco/&gt; .
-@prefix schema: &lt;http://schema.org/&gt; .
-@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
-@prefix time: &lt;http://www.w3.org/2006/time#&gt; .
-
-&lt;https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176&gt;
-    arco:hasHistoricalContext [
-        a arco:HistoricalPeriod ;
-        rdfs:label "Controriforma e rinnovamento artistico romano"@it ;
-        time:hasBeginning "1590"^^xsd:gYear ;
-        time:hasEnd "1596"^^xsd:gYear ;
-        arco:culturalMovement "Naturalismo caravaggesco"@it ;
-        dc:description "Periodo di transizione artistica caratterizzato dal superamento del manierismo"@it
-    ] ;
-    arco:hasCommissioner [
-        a foaf:Person ;
-        rdfs:label "Cardinale Francesco Maria Del Monte"@it ;
-        arco:socialRole "Mecenate e collezionista"@it ;
-        arco:culturalInfluence "Promotore dell'arte naturalistica a Roma"@it ;
-        schema:location "Palazzo Madama, Roma"@it ;
-        arco:patronageType "Commissione privata per collezione personale"@it
-    ] .</div>
-                </div>
-                <div class="case-study-description-box">
-                    <p class="case-study-description">
-                        L'arricchimento include informazioni dettagliate sul contesto storico dell'opera, situandola nel periodo della Controriforma e del rinnovamento artistico romano. La figura del Cardinale Del Monte viene caratterizzata non solo come committente, ma come figura chiave nel panorama culturale romano, mecenate illuminato che favorì lo sviluppo del naturalismo caravaggesco. Questo contesto è fondamentale per comprendere le scelte stilistiche e tematiche dell'artista.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Case Study Item 3 -->
-            <div class="case-study-item fade-in">
-                <h3 class="case-study-title">Innovazioni Tecniche e Stilistiche</h3>
-                <div class="case-study-code-container">
-                    <div class="case-study-code">@prefix arco: &lt;https://w3id.org/arco/ontology/arco/&gt; .
-@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
-
-&lt;https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176&gt;
-    arco:hasTechnicalInnovation [
-        a arco:ArtisticTechnique ;
-        rdfs:label "Chiaroscuro caravaggesco"@it ;
-        dc:description "Uso rivoluzionario del contrasto luce-ombra per creare volume e drammaticità"@it ;
-        arco:technicalCharacteristic "Illuminazione artificiale da fonte singola"@it ;
-        arco:artisticEffect "Modellato plastico e realismo tridimensionale"@it ;
-        arco:historicalSignificance "Influenza determinante sulla pittura barocca europea"@it
-    ] ;
-    arco:hasComposition [
-        a arco:CompositionElement ;
-        rdfs:label "Composizione diagonale e asimmetrica"@it ;
-        arco:spatialOrganization "Figura emergente dal fondo scuro"@it ;
-        arco:colorPalette "Tonalità calde per incarnati, contrasto con verde delle foglie"@it ;
-        arco:psychologicalEffect "Introspezione e malinconia del soggetto"@it
-    ] .</div>
-                </div>
-                <div class="case-study-description-box">
-                    <p class="case-study-description">
-                        Questo segmento si concentra sulle innovazioni tecniche introdotte da Caravaggio, con particolare attenzione al rivoluzionario uso del chiaroscuro. La tecnica non viene descritta solo nei suoi aspetti formali, ma viene contestualizzata nel suo significato storico-artistico come elemento di rottura con la tradizione precedente. L'analisi della composizione evidenzia come gli elementi tecnici contribuiscano all'effetto psicologico dell'opera, creando quella particolare atmosfera di introspezione malinconica che caratterizza il Bacco.
-                    </p>
-                </div>
-            </div>
+    <div class="main-content">
+        <div class="case-study-header">
+            <h1 class="case-study-title">Case Study 4: Interrogazione Avanzata del Knowledge Graph</h1>
+            <p class="case-study-subtitle">Esplorazione delle capacità di querying su dati arricchiti con SPARQL e visualizzazione dei risultati.</p>
         </div>
 
-        <!-- Navigation Buttons -->
-        <div class="navigation-buttons">
-            <a href="case_study_3.html" class="nav-button">
+        <div class="case-nav">
+            <a href="case_study_3.html" class="case-nav-button">
                 ← Case Study 3
             </a>
-            <span style="color: var(--primary-color); font-weight: 500;">4 di 5</span>
-            <a href="case_study_5.html" class="nav-button">
+            <div class="case-nav-info">
+                <strong>Case Study 4 di 5</strong><br>
+                Interrogazione Avanzata
+            </div>
+            <a href="case_study_5.html" class="case-nav-button">
                 Case Study 5 →
             </a>
         </div>
-    </section>
 
-    <!-- Footer -->
+        <div class="content-box fade-in">
+            <h2 class="box-title">Introduzione all'Interrogazione di Dati Arricchiti</h2>
+            <div class="description-container">
+                <p class="description-text">Dopo aver arricchito il Knowledge Graph di ArCo con descrizioni iconografiche, contesto storico e analisi approfondite tramite tecniche di prompting avanzate, il passo successivo è dimostrare come queste nuove informazioni possano essere interrogate in modo efficace. Questo caso studio si concentra sulla costruzione e sull'esecuzione di query SPARQL complesse che sfruttano i dati aggiunti.</p>
+                <p class="description-text">L'obiettivo è illustrare come l'arricchimento semantico non solo migliori la completezza delle descrizioni, ma apra anche nuove possibilità per l'analisi e la scoperta all'interno del patrimonio culturale.</p>
+            </div>
+        </div>
+
+        <div class="content-box fade-in">
+            <h2 class="box-title">Esempi di Query SPARQL su Dati Arricchiti</h2>
+            <div class="query-grid-container">
+                <div class="query-box">
+                    <h3 class="query-box-title">Query 1: Simbolismo del "Vino"</h3>
+                    <textarea id="query1" class="query-textarea">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cd: <https://w3id.org/arco/ontology/context-description/>
+
+SELECT ?opera ?descrizioneIconografica
+WHERE {
+  ?opera cd:hasIconographicDescription ?descrizioneIconografica .
+  FILTER(CONTAINS(LCASE(STR(?descrizioneIconografica)), "vino"))
+}
+                    </textarea>
+                    <button class="action-button" onclick="visualizeQuery(event, 'query1Results', 'query1')">Visualizza Risultati</button>
+                    <div id="query1Results" class="query-results"></div>
+                </div>
+
+                <div class="query-box">
+                    <h3 class="query-box-title">Query 2: Opere con "Committente" specifico</h3>
+                    <textarea id="query2" class="query-textarea">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX l0: <https://w3id.org/italia/onto/l0/>
+
+SELECT ?opera ?nomeCommittente
+WHERE {
+  ?opera cd:hasCommission ?commission .
+  ?commission cd:hasCommittent ?committente .
+  ?committente l0:name ?nomeCommittente .
+  FILTER(CONTAINS(LCASE(STR(?nomeCommittente)), "del monte"))
+}
+                    </textarea>
+                    <button class="action-button" onclick="visualizeQuery(event, 'query2Results', 'query2')">Visualizza Risultati</button>
+                    <div id="query2Results" class="query-results"></div>
+                </div>
+
+                <div class="query-box">
+                    <h3 class="query-box-title">Query 3: Opere con "Chiaroscuro" e Anno</h3>
+                    <textarea id="query3" class="query-textarea">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX ex: <http://example.org/ontology/>
+PREFIX time: <http://www.w3.org/2006/time#>
+
+SELECT ?opera ?descrizioneTecnica ?annoInizio
+WHERE {
+  ?opera ex:hasTechnicalInnovation ?tecnica .
+  ?tecnica rdfs:label "Chiaroscuro caravaggesco"@it .
+  OPTIONAL { ?opera time:hasBeginning ?annoInizio . } # Assuming you have dating
+}
+                    </textarea>
+                    <button class="action-button" onclick="visualizeQuery(event, 'query3Results', 'query3')">Visualizza Risultati</button>
+                    <div id="query3Results" class="query-results"></div>
+                </div>
+
+                <div class="query-box">
+                    <h3 class="query-box-title">Query 4: Allegorie e Tema Filosofico</h3>
+                    <textarea id="query4" class="query-textarea">
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+
+SELECT ?opera ?temaFilosofico
+WHERE {
+  ?opera arco:hasAllegoricalMeaning ?allegoria .
+  ?allegoria arco:philosophicalTheme ?temaFilosofico .
+  FILTER(CONTAINS(LCASE(STR(?temaFilosofico)), "mortalità"))
+}
+                    </textarea>
+                    <button class="action-button" onclick="visualizeQuery(event, 'query4Results', 'query4')">Visualizza Risultati</button>
+                    <div id="query4Results" class="query-results"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-box fade-in">
+            <h2 class="box-title">Il Potenziale delle Query Complesse</h2>
+            <div class="description-container">
+                <p class="description-text">Questi esempi dimostrano come l'aggiunta di metadati dettagliati, ottenuti anche tramite tecniche di prompting avanzato, permetta di formulare interrogazioni molto più ricche e specifiche rispetto ai dati originali. È possibile filtrare opere non solo per autore o titolo, ma per il loro significato simbolico, il contesto della commissione o le innovazioni tecniche che presentano.</p>
+                <p class="description-text">La capacità di eseguire query su queste nuove dimensioni semantiche apre la strada a nuove ricerche, analisi comparative e a una migliore fruizione del patrimonio culturale, consentendo agli studiosi e al pubblico di esplorare le opere d'arte da prospettive inedite.</p>
+            </div>
+        </div>
+
+        <div class="content-box fade-in">
+            <h2 class="box-title">Conclusioni e Prossimi Passi</h2>
+            <div class="description-container">
+                <p class="description-text">Questo Case Study ha evidenziato l'importanza dell'arricchimento del Knowledge Graph e la potenza che ne deriva nell'interrogazione dei dati. La possibilità di formulare query complesse su proprietà semantiche aggiuntive apre scenari inediti per la ricerca e l'analisi del patrimonio culturale.</p>
+                <p class="description-text">Nel prossimo e ultimo Case Study, esploreremo come l'integrazione di questi dati arricchiti possa migliorare l'interoperabilità e la sostenibilità del Knowledge Graph, rendendolo una risorsa ancora più preziosa e duratura per la comunità scientifica e culturale.</p>
+                <a href="case_study_5.html" class="action-button">Passa al Case Study 5 →</a>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer">
         <div class="footer-links">
             <div class="footer-link-group">
@@ -578,7 +672,7 @@
                 <a href="case_study_1.html">Caso Studio 1</a>
                 <a href="case_study_2.html">Caso Studio 2</a>
                 <a href="case_study_3.html">Caso Studio 3</a>
-                <a href="case_study_4.html">Caso Studio 4</a>
+                <a href="case_study_4.html" class="active">Caso Studio 4</a>
                 <a href="case_study_5.html">Caso Studio 5</a>
             </div>
             <div class="footer-link-group">
@@ -634,6 +728,60 @@
                 observer.observe(element);
             });
         });
+
+        // Function to visualize query results (placeholder for now)
+        function visualizeQuery(event, resultsElementId, queryTextareaId) {
+            const queryTextarea = document.getElementById(queryTextareaId);
+            const resultsDiv = document.getElementById(resultsElementId);
+            const button = event.target;
+            const originalButtonText = button.textContent;
+
+            // Clear previous results
+            resultsDiv.textContent = '';
+            resultsDiv.innerHTML = `<span style="font-style: italic; color: #6c757d;">Eseguendo la query...</span>`;
+
+
+            button.textContent = 'Caricamento...';
+            button.disabled = true; // Disable button during "loading"
+
+            setTimeout(() => {
+                // In a real application, you'd send this query to a SPARQL endpoint
+                // and parse the JSON/XML results to display them here.
+                const simulatedResults = `Risultati simulati per:\n\n${queryTextarea.value.substring(0, 100)}...\n\nQuery completata con successo! (Simulato)`;
+                resultsDiv.textContent = simulatedResults;
+                button.textContent = originalButtonText;
+                button.disabled = false;
+            }, 1500); // Simulate network delay
+        }
+
+        // Copy to clipboard function for prompt text/query text
+        function copyPromptText(event, elementId) {
+            const textToCopy = document.getElementById(elementId).textContent || document.getElementById(elementId).value; // Get text from div or textarea
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+
+            try {
+                document.execCommand('copy');
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Errore nella copia: ', err);
+                // Fallback using alert (as per instructions for iframe limitations)
+                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+            } finally {
+                document.body.removeChild(tempTextArea);
+            }
+        }
     </script>
 </body>
 </html>
