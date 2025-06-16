@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progetto KG: Bacco di Caravaggio su Arco Beni Culturali</title>
+    <!-- Carica Tailwind CSS per uno styling moderno e responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Nuovi font: Playfair Display (per titoli) e Lato (per corpo testo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Imposta i nuovi font in base alla scelta "Artistico ed Elegante" */
+        body {
+            font-family: 'Lato', sans-serif; /* Font per tutto il corpo del testo */
+            /* Nuovi colori di sfondo e testo basati sulla palette del Bacco */
+            @apply bg-stone-50 text-stone-800;
+        }
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif; /* Font per i titoli */
+        }
+        /* Stile per l'indicatore di scroll */
+        .scroll-down-indicator {
+            animation: bounce 2s infinite; /* Aggiunge un effetto rimbalzo */
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        /* Stile specifico per le query, per un look da blocco di codice */
+        .query-box pre {
+            @apply bg-stone-100 p-4 rounded-md text-sm overflow-auto max-h-48; /* Altezza massima per query lunghe */
+        }
+        /* Colori dinamici per i placeholder delle immagini (se non sostituite) */
+        img[src*="placehold.co"] {
+            background-color: #A0886A; /* Tonalità calda per i placeholder */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Header della Pagina con nuova palette -->
+    <header class="bg-gradient-to-r from-stone-900 to-gray-800 text-white shadow-lg py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Titolo del Sito / Logo del Progetto -->
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tight">
+                Progetto KG: Bacco di Caravaggio
+            </h1>
+            <!-- Navigazione aggiornata -->
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#introduzione" class="hover:text-amber-300 transition-colors duration-300">Introduzione</a></li>
+                    <li><a href="#le-nostre-query" class="hover:text-amber-300 transition-colors duration-300">Le Nostre Query</a></li>
+                    <li><a href="#metodologia" class="hover:text-amber-300 transition-colors duration-300">Metodologia</a></li>
+                    <li><a href="#risultati" class="hover:text-amber-300 transition-colors duration-300">Risultati</a></li>
+                    <li><a href="#contatti" class="hover:text-amber-300 transition-colors duration-300">Contatti</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sezione Hero: Benvenuto con Bacco di Caravaggio -->
+    <section id="introduzione" class="py-16 md:py-24 bg-white shadow-sm rounded-lg mx-auto mt-8 max-w-6xl px-6 lg:px-8 text-center">
+        <div class="flex flex-col items-center justify-center">
+            <!-- Immagine del Bacco di Caravaggio -->
+            <!-- Consigliamo di sostituire questo placeholder con l'URL di una vera immagine del Bacco -->
+            [Image of Bacco di Caravaggio]
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg" alt="Bacco di Caravaggio" class="mb-8 rounded-lg shadow-xl border-4 border-amber-200 max-w-full h-auto w-96 object-cover">
+            
+            <h2 class="text-3xl md:text-5xl font-extrabold text-stone-900 leading-tight mb-4">
+                Alla Ricerca del Bacco di Caravaggio nel Knowledge Graph di Arco
+            </h2>
+            <p class="text-lg text-stone-700 max-w-3xl mb-8">
+                Benvenuti nel nostro progetto dedicato all'arricchimento e all'interconnessione dei dati sui Beni Culturali italiani. Esploreremo insieme come il nostro lavoro sui **Knowledge Graphs** ci ha permesso di navigare e scoprire opere iconiche come il celebre **Bacco di Caravaggio**, un capolavoro inestimabile conservato agli Uffizi.
+            </p>
+            <!-- Indicazione per lo scroll down -->
+            <div class="flex flex-col items-center mt-6">
+                <p class="text-stone-500 text-sm mb-2">Scorri verso il basso per scoprire come abbiamo interrogato il Knowledge Graph per trovarlo!</p>
+                <div class="scroll-down-indicator text-amber-600 text-3xl">
+                    &#x2193; <!-- Freccia verso il basso -->
+                </div>
+            </div>
+            <!-- Pulsante Call-to-Action -->
+            <a href="#le-nostre-query" class="bg-amber-700 hover:bg-amber-800 text-white font-semibold py-3 px-8 rounded-full shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 mt-8">
+                Esplora le Nostre Query
+            </a>
+        </div>
+    </section>
+
+    <!-- Contenuto Principale del Sito -->
+    <main class="container mx-auto px-4 py-12">
+
+        <!-- Sezione per le Query -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12" id="le-nostre-query">
+            <h3 class="text-2xl font-bold text-stone-900 mb-6 border-b-2 border-amber-600 pb-2 text-center">
+                Interrogare il Knowledge Graph: Tre Esempi di Query
+            </h3>
+            <p class="text-stone-700 leading-relaxed mb-8 text-center max-w-2xl mx-auto">
+                Queste query dimostrano come possiamo esplorare il Knowledge Graph di **Arco Beni Culturali** per trovare informazioni dettagliate sul Bacco di Caravaggio e opere simili. Clicca sul link per vedere un risultato di esempio su Arco.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Query Box 1 -->
+                <div class="query-box bg-stone-50 p-6 rounded-lg shadow-lg border border-stone-200 hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-stone-900 mb-3">Query 1: Ricerca per Autore e Titolo</h4>
+                    <p class="text-stone-600 text-sm mb-4">Cerca opere di "Caravaggio" con il titolo "Bacco".</p>
+                    <pre class="whitespace-pre-wrap"><code>
+PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+SELECT ?opera ?titolo
+WHERE {
+  ?opera a arco:OperaArte ;
+         arco:hasAutore ?autore ;
+         arco:hasTitolo ?titolo .
+  ?autore rdfs:label "Caravaggio" .
+  FILTER (contains(lcase(?titolo), "bacco"))
+}
+LIMIT 10
+                    </code></pre>
+                    <div class="text-center mt-6">
+                        <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 ease-in-out">
+                            Vedi su Arco (Link Esempio)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Query Box 2 -->
+                <div class="query-box bg-stone-50 p-6 rounded-lg shadow-lg border border-stone-200 hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-stone-900 mb-3">Query 2: Opere a Tema Mitologico</h4>
+                    <p class="text-stone-600 text-sm mb-4">Trova tutte le opere di Caravaggio con soggetti mitologici.</p>
+                    <pre class="whitespace-pre-wrap"><code>
+PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX skos: &lt;http://www.w3.org/2004/02/skos/core#&gt;
+
+SELECT ?opera ?titolo ?soggetto
+WHERE {
+  ?opera a arco:OperaArte ;
+         arco:hasAutore ?autore ;
+         arco:hasTitolo ?titolo ;
+         arco:hasSoggetto ?soggettoURI .
+  ?autore rdfs:label "Caravaggio" .
+  ?soggettoURI skos:prefLabel ?soggetto .
+  FILTER (regex(?soggetto, "mitologic", "i"))
+}
+LIMIT 10
+                    </code></pre>
+                    <div class="text-center mt-6">
+                        <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 ease-in-out">
+                            Vedi su Arco (Link Esempio)
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Query Box 3 -->
+                <div class="query-box bg-stone-50 p-6 rounded-lg shadow-lg border border-stone-200 hover:shadow-xl transition-shadow duration-300">
+                    <h4 class="text-xl font-semibold text-stone-900 mb-3">Query 3: Opere di Autori Nati nel Periodo di Caravaggio</h4>
+                    <p class="text-stone-600 text-sm mb-4">Scopri opere di artisti attivi nello stesso periodo di Caravaggio.</p>
+                    <pre class="whitespace-pre-wrap"><code>
+PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+PREFIX schema: &lt;http://schema.org/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+SELECT DISTINCT ?opera ?titolo ?altroAutore
+WHERE {
+  ?opera a arco:OperaArte ;
+         arco:hasAutore ?altroAutoreURI ;
+         arco:hasTitolo ?titolo .
+  ?altroAutoreURI rdfs:label ?altroAutore .
+
+  ?caravaggioURI rdfs:label "Caravaggio" ;
+                  schema:birthDate ?nascitaCaravaggio .
+
+  ?altroAutoreURI schema:birthDate ?nascitaAltroAutore .
+
+  FILTER (?nascitaAltroAutore &gt;= "1570-01-01"^^xsd:date &amp;&amp; ?nascitaAltroAutore &lt;= "1620-12-31"^^xsd:date)
+  FILTER (?altroAutore != "Caravaggio") # Escludi Caravaggio stesso
+}
+LIMIT 10
+                    </code></pre>
+                    <div class="text-center mt-6">
+                        <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-2 px-6 rounded-full shadow-md transition-all duration-300 ease-in-out">
+                            Vedi su Arco (Link Esempio)
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Descrizione del Progetto (Modifica il testo qui) -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12" id="descrizione-progetto">
+            <h3 class="text-2xl font-bold text-stone-900 mb-4 border-b-2 border-amber-600 pb-2">Panoramica Approfondita del Progetto</h3>
+            <p class="text-stone-700 leading-relaxed mb-4">
+                [INSERISCI QUI IL TESTO DI INTRODUZIONE AL TUO PROGETTO]
+                Questo spazio è pensato per descrivere gli obiettivi generali, la rilevanza e l'impatto del progetto sull'arricchimento dei Knowledge Graphs nel contesto di Arco Beni Culturali.
+                Spiega cosa si propone di fare il progetto e perché è importante per il settore dei beni culturali.
+            </p>
+            <p class="text-stone-700 leading-relaxed">
+                Ad esempio: "Il progetto si concentra sull'estrazione automatica di entità e relazioni da fonti testuali non strutturate relative ai beni culturali, integrando queste informazioni nei Knowledge Graphs esistenti per migliorare l'accesso e la scoperta del patrimonio."
+            </p>
+        </section>
+
+        <!-- Sezione Metodologia (Modifica il testo e aggiungi diagrammi/immagini qui) -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12" id="metodologia">
+            <h3 class="text-2xl font-bold text-stone-900 mb-4 border-b-2 border-amber-600 pb-2">La Nostra Metodologia</h3>
+            <p class="text-stone-700 leading-relaxed mb-6">
+                [INSERISCI QUI IL TESTO SULLA METODOLOGIA]
+                Descrivi i passaggi chiave del tuo approccio. Puoi parlare di:
+                <ul>
+                    <li class="list-disc ml-6">Raccolta e pre-elaborazione dei dati</li>
+                    <li class="list-disc ml-6">Estrazione di entità e relazioni (NER, RE)</li>
+                    <li class="list-disc ml-6">Linkaggio delle entità a ontologie esistenti (es. CIDOC CRM)</li>
+                    <li class="list-disc ml-6">Integrazione e allineamento con Knowledge Graphs esistenti</li>
+                    <li class="list-disc ml-6">Validazione e valutazione dei risultati</li>
+                </ul>
+            </p>
+            <!-- Placeholder per un diagramma o un'immagine del Knowledge Graph -->
+            <div class="flex justify-center mb-6">
+                <img src="https://placehold.co/700x400/DDE4F0/333?text=Diagramma+di+Flusso+o+Esempio+KG" alt="Diagramma della Metodologia o Esempio di Knowledge Graph" class="rounded-lg shadow-lg max-w-full h-auto">
+            </div>
+            <p class="text-sm text-stone-500 text-center">
+                Sostituisci l'immagine con un diagramma che illustra la tua pipeline metodologica o un estratto visuale del Knowledge Graph.
+            </p>
+        </section>
+
+        <!-- Sezione Risultati (Modifica il testo e aggiungi grafici/tabelle qui) -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12" id="risultati">
+            <h3 class="text-2xl font-bold text-stone-900 mb-4 border-b-2 border-amber-600 pb-2">Risultati e Impatto</h3>
+            <p class="text-stone-700 leading-relaxed mb-6">
+                [INSERISCI QUI IL TESTO SUI RISULTATI E L'IMPATTO]
+                Illustra i risultati ottenuti dal progetto. Potresti includere:
+                <ul>
+                    <li class="list-disc ml-6">Statistiche sull'arricchimento (numero di nuove entità/relazioni)</li>
+                    <li class="list-disc ml-6">Esempi concreti di dati arricchiti</li>
+                    <li class="list-disc ml-6">Visualizzazioni dei dati o dei collegamenti</li>
+                    <li class="list-disc ml-6">Impatto sulla ricerca e sulla fruizione dei beni culturali</li>
+                </ul>
+            </p>
+            <!-- Esempio di sezione per una card di risultato con colori della palette -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-amber-50 p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-semibold text-amber-800 mb-2">Migliore Interconnessione</h4>
+                    <p class="text-stone-700">
+                        [Descrivi come il progetto ha migliorato l'interconnessione dei dati.]
+                        Ad esempio: "Abbiamo aumentato del X% il numero di collegamenti tra opere, artisti e luoghi, rendendo la navigazione del Knowledge Graph più ricca."
+                    </p>
+                </div>
+                <div class="bg-emerald-50 p-6 rounded-lg shadow-sm">
+                    <h4 class="text-xl font-semibold text-emerald-800 mb-2">Accesso Potenziato</h4>
+                    <p class="text-stone-700">
+                        [Descrivi come il progetto ha potenziato l'accesso alle informazioni.]
+                        Ad esempio: "La capacità di interrogare il KG con domande complesse è stata notevolmente migliorata, fornendo risposte più accurate e contestualizzate."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sezione Pubblicazioni (se presenti) -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12" id="pubblicazioni">
+            <h3 class="text-2xl font-bold text-stone-900 mb-4 border-b-2 border-amber-600 pb-2">Pubblicazioni</h3>
+            <ul class="list-disc pl-6 text-stone-700 leading-relaxed">
+                <li>[INSERISCI QUI I RIFERIMENTI ALLE TUE PUBBLICAZIONI]</li>
+                <li>Cognome, Nome. "Titolo dell'articolo." *Rivista/Conferenza*, Anno. <a href="#" class="text-amber-600 hover:underline">[Link al PDF]</a></li>
+                <li>...</li>
+            </ul>
+        </section>
+
+        <!-- Sezione Team (Modifica con i tuoi nomi) -->
+        <section class="bg-white p-8 rounded-lg shadow-md mb-12" id="team">
+            <h3 class="text-2xl font-bold text-stone-900 mb-4 border-b-2 border-amber-600 pb-2">Il Nostro Team</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Membro 1 -->
+                <div class="text-center">
+                    <img src="https://placehold.co/100x100/F0F0F0/666?text=Foto" alt="Nome Membro 1" class="rounded-full w-24 h-24 mx-auto mb-4 shadow-md">
+                    <h4 class="text-xl font-semibold text-stone-900">Nome Cognome 1</h4>
+                    <p class="text-stone-600">Ruolo / Affiliazione</p>
+                </div>
+                <!-- Membro 2 -->
+                <div class="text-center">
+                    <img src="https://placehold.co/100x100/F0F0F0/666?text=Foto" alt="Nome Membro 2" class="rounded-full w-24 h-24 mx-auto mb-4 shadow-md">
+                    <h4 class="text-xl font-semibold text-stone-900">Nome Cognome 2</h4>
+                    <p class="text-stone-600">Ruolo / Affiliazione</p>
+                </div>
+                <!-- Aggiungi altri membri del team qui -->
+            </div>
+        </section>
+
+        <!-- Sezione Contatti -->
+        <section class="bg-white p-8 rounded-lg shadow-md" id="contatti">
+            <h3 class="text-2xl font-bold text-stone-900 mb-4 border-b-2 border-amber-600 pb-2">Contatti</h3>
+            <p class="text-stone-700 leading-relaxed mb-4">
+                Per maggiori informazioni sul progetto, non esitate a contattarci:
+            </p>
+            <p class="text-stone-700 font-medium">Email: <a href="mailto:tuo.email@esempio.com" class="text-amber-600 hover:underline">tuo.email@esempio.com</a></p>
+            <p class="text-stone-700 font-medium">Link al Repository GitHub: <a href="https://github.com/tuo-user/tuo-repo" class="text-amber-600 hover:underline" target="_blank">github.com/tuo-user/tuo-repo</a></p>
+            <p class="text-stone-700 font-medium">Sito di Arco Beni Culturali: <a href="https://www.cultura.gov.it/arcomi/progetto" class="text-amber-600 hover:underline" target="_blank">Link al sito di ARCO MiC</a></p>
+        </section>
+
+    </main>
+
+    <!-- Footer della Pagina -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Progetto KG - Arco Beni Culturali. Tutti i diritti riservati.</p>
+            <p class="text-sm mt-2">Realizzato con ❤️ e GitHub Pages.</p>
+        </div>
+    </footer>
+</body>
+</html>
