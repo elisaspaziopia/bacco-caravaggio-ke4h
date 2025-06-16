@@ -1,79 +1,542 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Prompting Techniques</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompting Techniques - Arco Knowledge Graph Enhancement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Re-import the base styles from your main page to ensure consistency */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2C1810;
+            --secondary-color: #8B4513;
+            --accent-color: #DAA520;
+            --text-light: #F5F5DC;
+            --text-dark: #2C1810;
+            --background-light: #FAF9F6;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: rgba(44, 24, 16, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation (same as index.html) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--accent-color);
+        }
+
+        /* Dropdown Menu (same as index.html) */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-color);
+            min-width: 200px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0.75rem 1.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0.25rem;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--accent-color);
+        }
+
+        /* Main content styling for this page */
+        .content-section {
+            padding: 8rem 2rem 4rem; /* Adjusted top padding to clear fixed nav */
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin-top: 4rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        /* Table specific styles */
+        .comparison-table-container {
+            overflow-x: auto;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 12px;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border: 1px solid rgba(218, 165, 32, 0.2);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+            min-width: 700px; /* Ensures tables don't get too narrow on small screens */
+        }
+
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #e0e0e0;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 1.1rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .comparison-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .comparison-table tbody tr:hover {
+            background-color: #f0f0f0;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Footer Styles (same as index.html) */
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 5rem;
+        }
+
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--text-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-link-group h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .footer-link-group a {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Scroll to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.8rem 1rem;
+            border-radius: 50%;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            display: none; /* Hidden by default */
+            z-index: 999;
+        }
+
+        .back-to-top:hover {
+            background: #B8860B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            .page-title {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-container">
-      <div class="logo"><a href="index.html" style="color: var(--accent-color); text-decoration: none;">← Torna alla Home</a></div>
-    </div>
-  </nav>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Arco KG Enhancement</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#queries" class="nav-link">Query SPARQL</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Metodologia</a>
+                    <div class="dropdown">
+                        <a href="prompting_techniques.html" class="dropdown-item">Prompting Techniques</a>
+                        <a href="index.html#evaluation" class="dropdown-item">Valutazione</a>
+                        <a href="index.html#results" class="dropdown-item">Risultati</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Case Studies</a>
+                    <div class="dropdown">
+                        <a href="case_study_1.html" class="dropdown-item">Caso Studio 1</a>
+                        <a href="case_study_2.html" class="dropdown-item">Caso Studio 2</a>
+                        <a href="case_study_3.html" class="dropdown-item">Caso Studio 3</a>
+                        <a href="case_study_4.html" class="dropdown-item">Caso Studio 4</a>
+                        <a href="case_study_5.html" class="dropdown-item">Caso Studio 5</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#documentation" class="nav-link">Documentazione</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-  <section class="queries-section" style="padding-top: 8rem;">
-    <h2 class="section-title">Tecniche di Prompting</h2>
-    <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem;">
-      Tre approcci sperimentati per arricchire automaticamente i grafi della conoscenza utilizzando modelli linguistici.
-    </p>
+    <main class="content-section">
+        <h1 class="page-title">Tecniche di Prompting per LLMs</h1>
+        <p class="section-description">
+            Questa sezione illustra le diverse tecniche di prompting utilizzate per interagire con i Large Language Models (LLMs) nel contesto del nostro progetto.
+            Abbiamo esplorato come diverse strategie influenzano la qualità e la pertinenza delle risposte ottenute, confrontando le performance di vari modelli.
+        </p>
 
-    <!-- Technique 1 -->
-    <div style="margin-top: 4rem;">
-      <h3 class="query-title">1. Zero-shot Entity Linking</h3>
-      <table class="prompt-table">
-        <thead>
-          <tr>
-            <th>Modello</th>
-            <th>Accuratezza</th>
-            <th>Velocità</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>GPT-4</td><td>92%</td><td>Alta</td></tr>
-          <tr><td>Claude 3</td><td>89%</td><td>Media</td></tr>
-        </tbody>
-      </table>
-    </div>
+        <h2 class="section-title" id="zero-vs-few-shot">Confronto: Zero-shot vs. Few-shot Prompting</h2>
+        <p class="section-description">
+            Analisi comparativa tra l'approccio **Zero-shot**, dove il modello non riceve esempi, e l'approccio **Few-shot**, che fornisce alcuni esempi per guidare la risposta.
+        </p>
+        <div class="comparison-table-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Zero-shot Prompting</th>
+                        <th>Few-shot Prompting</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Definizione**</td>
+                        <td>La richiesta è posta direttamente senza fornire esempi precedenti.</td>
+                        <td>La richiesta include alcuni esempi completi (input-output) per mostrare il formato desiderato.</td>
+                    </tr>
+                    <tr>
+                        <td>**Complessità Implementativa**</td>
+                        <td>Bassa. Non richiede dati di esempio preparati.</td>
+                        <td>Moderata. Necessita la cura di esempi rappresentativi.</td>
+                    </tr>
+                    <tr>
+                        <td>**Performance (Generale)**</td>
+                        <td>Variabile, dipende fortemente dalla capacità intrinseca del modello di comprendere il task.</td>
+                        <td>Generalmente superiore per task specifici, grazie alla guida fornita dagli esempi.</td>
+                    </tr>
+                    <tr>
+                        <td>**Casi d'Uso**</td>
+                        <td>Task semplici, risposte aperte, prototipazione rapida.</td>
+                        <td>Classificazione, estrazione informazioni strutturate, generazione di testo con stile specifico.</td>
+                    </tr>
+                    <tr>
+                        <td>**Esempio di Utilizzo nel Progetto**</td>
+                        <td>Generazione iniziale di descrizioni basate su etichette ontologiche.</td>
+                        <td>Estrazione di relazioni specifiche (es. "autore di") da descrizioni testuali, con esempi di frasi e output desiderato.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Technique 2 -->
-    <div style="margin-top: 4rem;">
-      <h3 class="query-title">2. Few-shot Property Prediction</h3>
-      <table class="prompt-table">
-        <thead>
-          <tr>
-            <th>Modello</th>
-            <th>Copertura</th>
-            <th>Flessibilità</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>GPT-4</td><td>87%</td><td>Alta</td></tr>
-          <tr><td>LLaMA 3</td><td>81%</td><td>Media</td></tr>
-          <tr><td>Gemini 1.5</td><td>85%</td><td>Alta</td></tr>
-        </tbody>
-      </table>
-    </div>
+        <h2 class="section-title" id="advanced-techniques">Tecniche Avanzate di Prompting a Confronto</h2>
+        <p class="section-description">
+            Un'analisi dettagliata di tre tecniche avanzate di prompting: **Chain-of-Thought (CoT)**, **Self-Consistency** e **Generated Knowledge Prompting**, evidenziando i loro punti di forza e applicazioni.
+        </p>
+        <div class="comparison-table-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Chain-of-Thought (CoT)</th>
+                        <th>Self-Consistency</th>
+                        <th>Generated Knowledge Prompting</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Concetto**</td>
+                        <td>Incoraggia il modello a mostrare il suo "ragionamento" passo-passo prima di fornire la risposta finale.</td>
+                        <td>Genera diverse risposte e poi sceglie la più coerente o frequente come risultato finale.</td>
+                        <td>Il modello genera conoscenza rilevante prima di rispondere alla query principale, migliorando la pertinenza.</td>
+                    </tr>
+                    <tr>
+                        <td>**Vantaggi**</td>
+                        <td>Migliora la precisione in compiti complessi, rende il ragionamento più trasparente, aiuta nel debugging.</td>
+                        <td>Aumenta la robustezza e l'affidabilità, riduce gli errori dovuti a singole "allucinazioni".</td>
+                        <td>Fornisce contesto aggiuntivo, riduce il bias e le allucinazioni, migliora la qualità delle risposte informate.</td>
+                    </tr>
+                    <tr>
+                        <td>**Svantaggi**</td>
+                        <td>Maggiore lunghezza del prompt, potenzialmente più costoso computazionalmente.</td>
+                        <td>Più costoso in termini di chiamate API (generazione multipla).</td>
+                        <td>Può aumentare la complessità del prompt, richiede validazione della conoscenza generata.</td>
+                    </tr>
+                    <tr>
+                        <td>**Applicazioni nel Progetto**</td>
+                        <td>Estrazione di relazioni complesse (es. identificazione di eventi di restauro con date e partecipanti).</td>
+                        <td>Validazione di fatti estratti o classificazione di oggetti ambigui, confrontando più interpretazioni.</td>
+                        <td>Miglioramento dell'identificazione di entità poco note, prima generando informazioni contestuali su di esse.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- Technique 3 -->
-    <div style="margin-top: 4rem;">
-      <h3 class="query-title">3. Natural Language to RDF Mapping</h3>
-      <table class="prompt-table">
-        <thead>
-          <tr>
-            <th>Modello</th>
-            <th>Completezza</th>
-            <th>Errore Sintattico</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>GPT-4</td><td>91%</td><td>1.5%</td></tr>
-          <tr><td>Mistral</td><td>83%</td><td>4.2%</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+        <h2 class="section-title" id="instruction-tuning">Confronto: Prompting Standard vs. Instruction-Tuning</h2>
+        <p class="section-description">
+            Esame della differenza tra l'utilizzo di LLMs standard pre-addestrati e quelli sottoposti a **Instruction-Tuning**, addestrati per seguire istruzioni più complesse e generali.
+        </p>
+        <div class="comparison-table-container">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Prompting Standard (Modello Base)</th>
+                        <th>Prompting con Instruction-Tuning (Modello Istruito)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>**Modello Base**</td>
+                        <td>Modello pre-addestrato su vasti dataset, ottimizzato per la previsione del prossimo token.</td>
+                        <td>Modello pre-addestrato ulteriormente raffinato per seguire istruzioni in linguaggio naturale.</td>
+                    </tr>
+                    <tr>
+                        <td>**Sensibilità al Prompt**</td>
+                        <td>Estremamente sensibile alla formulazione esatta del prompt; richiede spesso "prompt engineering" intensivo.</td>
+                        <td>Meno sensibile alla formulazione esatta del prompt, più tollerante a variazioni.</td>
+                    </tr>
+                    <tr>
+                        <td>**Generalizzazione**</td>
+                        <td>Minore capacità di generalizzare a task non visti nel pre-addestramento senza esempi.</td>
+                        <td>Migliore capacità di generalizzare a nuovi task, anche senza esempi, se le istruzioni sono chiare.</td>
+                    </tr>
+                    <tr>
+                        <td>**Performance (Specifici Task)**</td>
+                        <td>Richiede più iterazioni e fine-tuning del prompt per raggiungere performance ottimali.</td>
+                        <td>Più "out-of-the-box" performance su una varietà di task con istruzioni chiare.</td>
+                    </tr>
+                    <tr>
+                        <td>**Considerazioni**</td>
+                        <td>Utile per esperimenti su larga scala o quando il fine-tuning non è un'opzione.</td>
+                        <td>Preferibile per applicazioni dove la robustezza alle istruzioni è cruciale e si desidera un comportamento più prevedibile.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-links">
+            <div class="footer-link-group">
+                <h4>Navigazione Principale</h4>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#queries">Query SPARQL</a>
+                <a href="index.html#evaluation">Valutazione</a>
+                <a href="index.html#documentation">Documentazione</a>
+            </div>
+            <div class="footer-link-group">
+                <h4>Metodologia</h4>
+                <a href="prompting_techniques.html">Prompting Techniques</a>
+                <a href="index.html#evaluation">Valutazione Generale</a>
+                <a href="index.html#results">Risultati Finali</a>
+            </div>
+            <div class="footer-link-group">
+                <h4>Case Studies</h4>
+                <a href="case_study_1.html">Caso Studio 1</a>
+                <a href="case_study_2.html">Caso Studio 2</a>
+                <a href="case_study_3.html">Caso Studio 3</a>
+                <a href="case_study_4.html">Caso Studio 4</a>
+                <a href="case_study_5.html">Caso Studio 5</a>
+            </div>
+            <div class="footer-link-group">
+                <h4>Risorse Esterne</h4>
+                <a href="https://www.cultura.gov.it/arcomi/" target="_blank">Arco MiC</a>
+                <a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a>
+            </div>
+        </div>
+        <p style="margin-top: 3rem;">&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
+        <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
+    </footer>
+
+    <a href="#" class="back-to-top" id="backToTopBtn">↑ Torna Su</a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="index.html#"], a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                const targetId = href.split('#')[1];
+
+                // If it's a hash link on the current page, handle smooth scroll
+                if (href.startsWith('#') || (href.startsWith('index.html#') && window.location.pathname.endsWith('index.html'))) {
+                    e.preventDefault();
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+                // If it's a link to a different page, let default behavior happen
+            });
+        });
+
+        // Show/hide back to top button
+        const backToTopBtn = document.getElementById('backToTopBtn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        // Smooth scroll for back to top button
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Dynamic navigation background on scroll (for this page too)
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(44, 24, 16, 0.98)';
+            } else {
+                nav.style.background = 'rgba(44, 24, 16, 0.95)';
+            }
+        });
+    </script>
 </body>
 </html>
