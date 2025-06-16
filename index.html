@@ -6,134 +6,149 @@
     <title>Arco Knowledge Graph Enhancement</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* Reset di base per tutti gli elementi */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        /* Variabili CSS per una gestione semplice dei colori della palette */
         :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
+            --primary-color: #2C1810; /* Marrone scuro / quasi nero, base forte */
+            --secondary-color: #8B4513; /* Terra di Siena / Marrone rossastro, toni caldi del Bacco */
+            --accent-color: #DAA520; /* Giallo oro / Ambra, dettagli luminosi e preziosi */
+            --text-light: #F5F5DC; /* Bianco sporco / Crema, per testi su sfondi scuri */
+            --text-dark: #2C1810; /* Marrone scuro, per testi su sfondi chiari */
+            --background-light: #FAF9F6; /* Bianco caldo / Avorio, sfondo principale */
+            --card-bg: rgba(255, 255, 255, 0.95); /* Sfondo carte leggermente trasparente */
+            --shadow: rgba(44, 24, 16, 0.15); /* Ombra leggera ma presente */
         }
 
+        /* Stili globali per il corpo del documento */
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
+            font-family: 'Inter', sans-serif; /* Font per il corpo del testo, pulito e leggibile */
+            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%); /* Sfondo sfumato leggero */
+            color: var(--text-dark); /* Colore del testo predefinito */
+            line-height: 1.6; /* Altezza di riga per una migliore leggibilità */
+            font-size: 0.95rem; /* Rimpicciolito il font base */
         }
 
-        /* Navigation */
+        /* Stili per l'intestazione fissa (navigazione) */
         nav {
-            position: fixed;
+            position: fixed; /* Rende la navigazione fissa in alto */
             top: 0;
             width: 100%;
-            background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
+            background: rgba(44, 24, 16, 0.95); /* Sfondo scuro con leggera trasparenza */
+            backdrop-filter: blur(10px); /* Effetto sfocatura per il contenuto sottostante */
+            z-index: 1000; /* Assicura che sia sopra gli altri elementi */
+            padding: 1rem 0; /* Padding verticale */
+            transition: all 0.3s ease; /* Transizione fluida per eventuali cambiamenti */
         }
 
+        /* Contenitore della navigazione per centrare e limitare la larghezza */
         .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
+            max-width: 1200px; /* Larghezza massima */
+            margin: 0 auto; /* Centra orizzontalmente */
+            display: flex; /* Utilizza flexbox per allineare gli elementi */
+            justify-content: space-between; /* Spazia logo e menu */
+            align-items: center; /* Allinea verticalmente */
+            padding: 0 2rem; /* Padding laterale */
         }
 
+        /* Stile per il logo/titolo nella navigazione */
         .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
+            font-family: 'Playfair Display', serif; /* Font specifico per il logo */
+            font-size: 1.4rem; /* Dimensione del font */
+            font-weight: 700; /* Grassetto */
+            color: var(--accent-color); /* Colore accento */
         }
 
+        /* Menu di navigazione */
         .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
+            display: flex; /* Flexbox per gli elementi del menu */
+            list-style: none; /* Rimuove i pallini delle liste */
+            gap: 1.5rem; /* Spazio tra gli elementi del menu */
         }
 
+        /* Elemento singolo del menu */
         .nav-item {
-            position: relative;
+            position: relative; /* Necessario per il posizionamento del dropdown */
         }
 
+        /* Link di navigazione */
         .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            color: var(--text-light); /* Colore del testo chiaro */
+            text-decoration: none; /* Rimuove la sottolineatura */
+            font-weight: 500; /* Peso del font */
+            padding: 0.4rem 0.8rem; /* Padding interno leggermente ridotto */
+            border-radius: 8px; /* Bordi arrotondati */
+            transition: all 0.3s ease; /* Transizione per l'hover */
         }
 
+        /* Effetto hover per i link di navigazione */
         .nav-link:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
+            background: rgba(218, 165, 32, 0.2); /* Sfondo leggermente trasparente all'hover */
+            color: var(--accent-color); /* Cambia colore all'hover */
         }
 
-        /* Dropdown Menu */
+        /* Menu a tendina (dropdown) */
         .dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
+            display: none; /* Nascosto di default */
+            position: absolute; /* Posizionamento assoluto */
+            top: 100%; /* Sotto l'elemento padre */
             left: 0;
-            background: var(--primary-color);
-            min-width: 200px;
-            box-shadow: 0 10px 30px var(--shadow);
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
+            background: var(--primary-color); /* Sfondo scuro */
+            min-width: 180px; /* Larghezza minima ridotta */
+            box-shadow: 0 10px 30px var(--shadow); /* Ombra */
+            border-radius: 12px; /* Bordi arrotondati */
+            opacity: 0; /* Trasparente di default */
+            visibility: hidden; /* Nascosto per l'accessibilità */
+            transform: translateY(-10px); /* Spostato leggermente in alto */
+            transition: all 0.3s ease; /* Transizione fluida */
+            margin-top: 0.5rem; /* Margine superiore */
         }
 
+        /* Mostra il dropdown all'hover sull'elemento padre */
         .nav-item:hover .dropdown {
-            opacity: 1;
+            display: block; /* Mostra il dropdown */
+            opacity: 1; /* Rende visibile */
             visibility: visible;
-            transform: translateY(0);
+            transform: translateY(0); /* Rimuove lo spostamento */
         }
 
+        /* Elemento singolo nel dropdown */
         .dropdown-item {
-            padding: 0.75rem 1.5rem;
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            margin: 0.25rem;
+            padding: 0.6rem 1.2rem; /* Padding interno ridotto */
+            color: var(--text-light); /* Colore del testo chiaro */
+            text-decoration: none; /* Rimuove sottolineatura */
+            display: block; /* Ogni link occupa la sua riga */
+            transition: all 0.3s ease; /* Transizione all'hover */
+            border-radius: 8px; /* Bordi arrotondati */
+            margin: 0.2rem; /* Margine tra gli elementi ridotto */
         }
 
+        /* Effetto hover per gli elementi del dropdown */
         .dropdown-item:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
+            background: rgba(218, 165, 32, 0.2); /* Sfondo leggermente trasparente all'hover */
+            color: var(--accent-color); /* Cambia colore all'hover */
         }
 
-        /* Hero Section */
+        /* Sezione Hero (introduzione principale) */
         .hero {
-            min-height: 100vh;
+            min-height: 100vh; /* Altezza minima 100% della viewport */
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Contenuto in colonna */
             align-items: center;
             justify-content: center;
-            position: relative;
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%);
-            overflow: hidden;
-            padding-top: 80px;
-            padding-bottom: 4rem; /* Added padding bottom */
+            position: relative; /* Per il posizionamento dello sfondo e dell'indicatore */
+            background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%); /* Sfumatura in sovrapposizione */
+            overflow: hidden; /* Nasconde ciò che esce dai bordi */
+            padding-top: 80px; /* Padding per lasciare spazio alla navbar fissa */
+            padding-bottom: 4rem; /* Padding inferiore per lo scroll indicator */
         }
 
+        /* Immagine di sfondo per la sezione hero */
         .hero::before {
             content: '';
             position: absolute;
@@ -141,53 +156,60 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Michelangelo_Merisi_da_Caravaggio_-_Bacchus_%281595%29.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacchus_%281595%29.jpg') center/cover;
-            opacity: 0.3;
-            z-index: -1;
+            /* Immagine del Bacco di Caravaggio come sfondo con bassa opacità */
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg') center/cover;
+            opacity: 0.3; /* Bassa opacità per l'immagine di sfondo */
+            z-index: -1; /* Manda l'immagine dietro il contenuto */
         }
 
+        /* Contenuto testuale principale della sezione hero */
         .hero-content {
             text-align: center;
             max-width: 800px;
             padding: 2rem;
-            color: var(--text-light);
-            z-index: 2;
+            color: var(--text-light); /* Testo chiaro */
+            z-index: 2; /* Sopra l'immagine di sfondo */
             margin-bottom: 2rem;
         }
 
+        /* Titolo principale della sezione hero */
         .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif; /* Font per i titoli */
+            font-size: 2.8rem; /* Rimpicciolito */
             font-weight: 700;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-            animation: fadeInUp 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Ombra per il testo */
+            animation: fadeInUp 1s ease-out; /* Animazione all'apparizione */
         }
 
+        /* Paragrafo della sezione hero */
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.15rem; /* Rimpicciolito */
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both;
+            animation: fadeInUp 1s ease-out 0.3s both; /* Animazione con ritardo */
         }
 
+        /* Contenitore per l'immagine principale nella sezione hero */
         .hero .image-container {
             width: 70%;
             max-width: 600px;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            border: 3px solid var(--accent-color);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4); /* Ombra marcata */
+            border: 3px solid var(--accent-color); /* Bordo color accento */
             margin-bottom: 2rem;
-            animation: fadeInScale 1s ease-out 0.8s both;
+            animation: fadeInScale 1s ease-out 0.8s both; /* Animazione con scala e ritardo */
         }
 
+        /* Immagine all'interno del contenitore */
         .hero .image-container img {
             width: 100%;
             height: auto;
             display: block;
         }
 
+        /* Testo che appare dopo l'immagine nella hero */
         .hero-text-after-image {
             text-align: center;
             max-width: 800px;
@@ -195,130 +217,138 @@
             color: var(--text-light);
             z-index: 2;
             margin-bottom: 3rem;
-            font-size: 1.1rem;
+            font-size: 1rem; /* Rimpicciolito */
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 1.2s both;
+            animation: fadeInUp 1s ease-out 1.2s both; /* Animazione con ritardo maggiore */
         }
 
-        /* Removed .cta-button related styles as it's no longer present */
-
-        /* Queries Section */
+        /* Sezione Query (Metodologia) */
         .queries-section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 6rem 2rem; /* Padding della sezione */
+            max-width: 1200px; /* Larghezza massima */
+            margin: 0 auto; /* Centra */
         }
 
+        /* Titolo delle sezioni (es. "Metodologia") */
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif; /* Font specifico per i titoli */
+            font-size: 2.2rem; /* Rimpicciolito */
             text-align: center;
             margin-bottom: 3rem;
             color: var(--primary-color);
         }
 
-        .query-layout-vertical { /* New class for vertical layout */
+        /* Layout verticale per le query (predefinito per schermi piccoli) */
+        .query-layout-vertical {
             display: flex;
             flex-direction: column;
-            gap: 4rem; /* More space between vertical sections */
+            gap: 4rem; /* Maggiore spazio tra le query in verticale */
         }
 
-        .query-item { /* Wrapper for each query and its description */
+        /* Contenitore per ogni singola query */
+        .query-item {
             display: flex;
-            flex-direction: column; /* Default to column for small screens */
-            align-items: center;
-            gap: 2rem;
+            flex-direction: column; /* Sempre in colonna, anche su desktop */
+            align-items: center; /* Centra orizzontalmente gli elementi interni */
+            gap: 1.5rem; /* Spazio ridotto tra gli elementi interni */
             padding: 2rem;
-            background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
+            background: var(--card-bg); /* Sfondo della carta */
+            border-radius: 20px; /* Bordi arrotondati */
+            box-shadow: 0 10px 30px var(--shadow); /* Ombra */
+            border: 1px solid rgba(218, 165, 32, 0.2); /* Bordo sottile color accento */
+            position: relative; /* Per l'effetto barra superiore */
+            overflow: hidden; /* Nasconde la barra iniziale */
+            text-align: center; /* Allineamento testo generale nella card */
         }
 
+        /* Effetto barra superiore animata all'hover sulla query box */
         .query-item::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: -100%; /* Inizia fuori dallo schermo a sinistra */
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
+            height: 3px; /* Spessore della barra */
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color)); /* Sfumatura per la barra */
+            transition: all 0.5s ease; /* Transizione per l'animazione */
         }
 
+        /* Mostra la barra all'hover */
         .query-item:hover::before {
-            left: 0;
+            left: 0; /* Sposta la barra per renderla visibile */
         }
 
-        @media (min-width: 769px) { /* Adjust to row layout for larger screens */
-            .query-item {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: flex-start; /* Align items to the top */
-            }
-
-            .query-details {
-                flex: 1;
-                padding-right: 2rem; /* Space between description and code */
-            }
-
-            .query-code-container {
-                flex: 1.5; /* Give code more space */
-                max-width: 50%; /* Max width for code block */
-            }
-        }
-
-
+        /* Stili per i titoli delle singole query */
         .query-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem; /* Slightly larger title for impact */
+            font-family: 'Playfair Display', serif; /* Font per i titoli delle query */
+            font-size: 1.4rem; /* Rimpicciolito */
             color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 700; /* Bolder title */
+            margin-bottom: 1rem; /* Spazio sotto il titolo e sopra il codice */
+            font-weight: 700;
         }
 
-        .query-description {
-            color: #444; /* Darker text for readability */
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-            font-size: 1rem;
+        /* Contenitore del codice per assicurare piena larghezza nella card */
+        .query-code-container {
+            width: 100%;
+            padding-right: 0; /* Rimuove padding extra */
         }
 
+        /* Stili per il blocco di codice delle query */
         .query-code {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 1rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            background: #f8f9fa; /* Sfondo chiaro per il codice */
+            border: 1px solid #e9ecef; /* Bordo sottile */
+            border-radius: 8px; /* Bordi arrotondati */
+            padding: 0.8rem; /* Rimpicciolito */
+            font-family: 'Courier New', monospace; /* Font monospace per il codice */
+            font-size: 0.85rem; /* Rimpicciolito */
             color: var(--text-dark);
-            white-space: pre-wrap;
-            margin-bottom: 1rem;
-            width: 100%; /* Ensure it takes full width of its container */
-            overflow-x: auto; /* Allow horizontal scrolling for long lines */
+            white-space: pre-wrap; /* Mantiene la formattazione e va a capo */
+            width: 100%; /* Occupa tutta la larghezza disponibile */
+            overflow-x: auto; /* Permette lo scroll orizzontale per righe lunghe */
+            text-align: left; /* Allinea il testo del codice a sinistra */
         }
 
+        /* Nuova box per la descrizione e il pulsante */
+        .query-description-box {
+            background: var(--background-light); /* Sfondo leggermente diverso per la box */
+            border: 1px solid rgba(218, 165, 32, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem; /* Spazio dopo il codice */
+            max-width: 90%; /* Limita la larghezza per renderla una "piccola box" */
+            text-align: left; /* Allinea il testo della descrizione a sinistra */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Sottile ombra interna */
+        }
+
+        /* Stili per la descrizione delle query all'interno della sua box */
+        .query-description-box .query-description {
+            color: #444; /* Colore testo leggermente più scuro per la leggibilità */
+            margin-bottom: 1.5rem; /* Spazio tra descrizione e pulsante */
+            line-height: 1.7;
+            font-size: 0.95rem; /* Rimpicciolito */
+        }
+
+        /* Stili per i pulsanti "Visualizza Risultati" */
         .view-results {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
+            background: var(--secondary-color); /* Colore secondario */
+            color: white; /* Testo bianco */
+            padding: 0.6rem 1.2rem; /* Rimpicciolito */
             border: none;
-            border-radius: 25px;
+            border-radius: 25px; /* Bordi molto arrotondati */
             font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            cursor: pointer; /* Indica che è cliccabile */
+            transition: all 0.3s ease; /* Transizione per l'hover */
+            text-decoration: none; /* Rimuove sottolineatura */
+            display: inline-block; /* Per applicare padding e trasformazioni */
         }
 
+        /* Effetto hover per i pulsanti */
         .view-results:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
+            background: var(--primary-color); /* Sfondo più scuro all'hover */
+            transform: scale(1.05); /* Lieve ingrandimento */
         }
 
-        /* Animations */
+        /* Animazioni */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -341,35 +371,33 @@
             }
         }
 
+        /* Stile per gli elementi che appariranno con animazione fade-in */
         .fade-in {
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.8s ease;
         }
 
+        /* Stato visibile dell'animazione fade-in */
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Responsive Design */
+        /* Responsive Design per schermi più piccoli */
         @media (max-width: 768px) {
             .nav-menu {
-                display: none;
+                display: none; /* Nasconde il menu di navigazione su mobile (potrebbe essere aggiunto un hamburger menu) */
             }
 
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2.2rem; /* Rimpicciolito per mobile */
             }
 
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1rem; /* Rimpicciolito per mobile */
             }
-
-            .queries-grid {
-                grid-template-columns: 1fr;
-            }
-
+            
             .nav-container {
                 padding: 0 1rem;
             }
@@ -378,27 +406,25 @@
                 width: 90%;
             }
 
-            .query-item {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .query-details, .query-code-container {
-                padding-right: 0;
-                width: 100%;
+            /* Le query-item sono già in colonna di default, quindi non servono modifiche qui */
+            .query-details, .query-code-container, .query-description-box {
+                padding-right: 0; /* Rimuove padding extra su mobile */
+                width: 100%; /* Occupano tutta la larghezza disponibile */
+                max-width: 100%; /* Assicura che la description box si espanda */
             }
         }
 
-        /* Scroll indicator */
+        /* Indicatore di scroll */
         .scroll-indicator {
             position: absolute;
             bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--text-light);
-            animation: bounce 2s infinite;
+            color: var(--text-light); /* Colore chiaro per contrasto */
+            animation: bounce 2s infinite; /* Animazione di rimbalzo */
         }
 
+        /* Animazione di rimbalzo per l'indicatore di scroll */
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateX(-50%) translateY(0);
@@ -411,35 +437,39 @@
             }
         }
 
-        /* Footer Styles */
+        /* Stili per il piè di pagina (footer) */
         .footer {
-            background: var(--primary-color);
-            color: var(--text-light);
+            background: var(--primary-color); /* Sfondo scuro */
+            color: var(--text-light); /* Testo chiaro */
             padding: 3rem 2rem;
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.85rem; /* Rimpicciolito */
             margin-top: 5rem;
         }
 
+        /* Link nel footer */
         .footer a {
-            color: var(--accent-color);
+            color: var(--accent-color); /* Colore accento */
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
+        /* Effetto hover per i link nel footer */
         .footer a:hover {
-            color: var(--text-light);
+            color: var(--text-light); /* Colore testo chiaro all'hover */
         }
 
+        /* Raggruppamento link nel footer */
         .footer-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
             margin-top: 1rem;
-            flex-wrap: wrap;
+            flex-wrap: wrap; /* Permette ai link di andare a capo */
         }
 
+        /* Titoli dei gruppi di link nel footer */
         .footer-link-group {
             display: flex;
             flex-direction: column;
@@ -447,8 +477,8 @@
         }
 
         .footer-link-group h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif; /* Font per i titoli dei gruppi */
+            font-size: 1rem; /* Rimpicciolito */
             margin-bottom: 0.8rem;
             color: var(--accent-color);
         }
@@ -456,18 +486,29 @@
         .footer-link-group a {
             margin-bottom: 0.5rem;
         }
+
+        /* Stile per il testo inserito tra le query */
+        .query-separator-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 3rem auto; /* Spazio sopra e sotto il testo */
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
+    <!-- Navbar fissa -->
     <nav>
         <div class="nav-container">
             <div class="logo">Arco KG Enhancement</div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html#queries" class="nav-link">Query SPARQL</a>
+                    <a href="#queries" class="nav-link">Query SPARQL</a>
                 </li>
                 <li class="nav-item">
                     <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a>
@@ -486,18 +527,20 @@
         </div>
     </nav>
 
+    <!-- Sezione Hero con Bacco di Caravaggio -->
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Exploring Bacchus by Caravaggio: how much does ArCo tell us?</h1>
-            <p>Our project is based on enriching the content of the Italian ArCo database concerning Caravaggio's artwork Bacchus. This painting is part of the Uffizi Gallery in florence, contibuiting, together with the other works of art, to making it one of the most visited museums in the world.</p>
+            <p>Our project is based on enriching the content of the Italian ArCo database concerning Caravaggio's artwork Bacchus. This painting is part of the Uffizi Gallery in Florence, contributing, together with the other works of art, to making it one of the most visited museums in the world.</p>
         </div>
         <div class="image-container">
-            <img src="https://www.datocms-assets.com/103094/1688660099-1516881182235047-638880.jpg?auto=format%2Ccompress&cs=srgb&dpr=0.25&max-w=160000%20658w,https://www.datocms-assets.com/103094/1688660099-1516881182235047-638880.jpg?auto=format%2Ccompress&cs=srgb&dpr=0.5&max-w=320000%201316w,https://www.datocms-assets.com/103094/1688660099-1516881182235047-638880.jpg?auto=format%2Ccompress&cs=srgb&dpr=0.75&max-w=480000%201974w,https://www.datocms-assets.com/103094/1688660099-1516881182235047-638880.jpg?auto=format%2Ccompress&cs=srgb&max-w=800%202633w" alt="Esempio di opera d'arte per tecniche di prompting">
+            <!-- Sostituisci questo URL con l'immagine definitiva del Bacco se desideri caricare da una fonte esterna. -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg" alt="Esempio di opera d'arte per tecniche di prompting">
         </div>
         <div class="hero-text-after-image">
             <p>
-                To find it on ArCo, and note the missing information, that is, gaps, we developed somme SPARQL queries. Then, to add said information, we made use of several LLMs (Large Language Models) using prompting techniqes. We then transformed the outputs obtained into triples that could enrich the ArCo database.
-                
+                To find it on ArCo, and note the missing information, that is, gaps, we developed some SPARQL queries. Then, to add said information, we made use of several LLMs (Large Language Models) using prompting techniques. We then transformed the outputs obtained into triples that could enrich the ArCo database.
+                <br><br>
                 Please scroll down for more detailed information about our research.
             </p>
         </div>
@@ -508,30 +551,22 @@
         </div>
     </section>
 
+    <!-- Sezione Metodologia e Query -->
     <section class="queries-section" id="queries">
         <h2 class="section-title">Methodology</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
-            First, after choosing the subject to search on ArCo, we used this query already containing the main SPARQL keywords
+            First, after choosing the subject to search on ArCo, we used these queries, already containing the main SPARQL keywords.
         </p>
         
         <div class="query-layout-vertical">
+            <!-- Query Item 1: Titolo sopra il codice, descrizione in box separata sotto -->
             <div class="query-item fade-in">
-                <div class="query-details">
-                    <h3 class="query-title">Query 1</h3>
-                    <p class="query-description">
-                        Questa query fondamentale è progettata per localizzare rapidamente l'opera "Bacco" nel
-                        Knowledge Graph di Arco. Non solo recupera il titolo e l'autore, ma cerca anche di
-                        stabilire un link diretto all'autore per poter esplorare ulteriori dettagli biografici
-                        o altre opere a lui attribuite, fornendo un punto di partenza per l'analisi.
-                        **Puoi aggiungere qui una descrizione più dettagliata o i risultati chiave di questa query.**
-                    </p>
-                    <a href="#" class="view-results">Visualizza Risultati</a>
-                </div>
+                <h3 class="query-title">Query 1: Localizzazione e Dettagli Principali</h3>
                 <div class="query-code-container">
-                    <div class="query-code">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dc: <http://purl.org/dc/elements/1.1/>
-PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
+PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
  
 SELECT DISTINCT ?opera ?titolo ?autoreLabel
 WHERE {
@@ -560,46 +595,68 @@ WHERE {
   }
 }
 ORDER BY ?titolo
-LIMIT 200
-
-}</div>
+LIMIT 200</div>
+                </div>
+                <div class="query-description-box">
+                    <p class="query-description">
+                        Questa query fondamentale è progettata per localizzare rapidamente l'opera "Bacco" nel
+                        Knowledge Graph di Arco. Non solo recupera il titolo e l'autore, ma cerca anche di
+                        stabilire un link diretto all'autore per poter esplorare ulteriori dettagli biografici
+                        o altre opere a lui attribuite, fornendo un punto di partenza per l'analisi.
+                        **Puoi aggiungere qui una descrizione più dettagliata o i risultati chiave di questa query.**
+                    </p>
+                    <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">Visualizza Risultati su Arco</a>
                 </div>
             </div>
 
+            <!-- Spazio per il testo tra le query 1 e 2 -->
+            <p class="query-separator-text">
+                Dopo aver identificato l'opera principale, abbiamo approfondito la ricerca per estrarre dettagli specifici che ci avrebbero aiutato a comprendere meglio le lacune informative nel Knowledge Graph di ArCo.
+            </p>
+
+            <!-- Query Item 2: Titolo sopra il codice, descrizione in box separata sotto -->
             <div class="query-item fade-in">
-                <div class="query-details">
-                    <h3 class="query-title">Query 2: Dettagli Tecnici e Localizzazione dell'Opera</h3>
-                    <p class="query-description">
-                        Where:
--        DISTINCT is used to avoid duplicate results, i.e. to show only unique combinations of work, title and author, even though the query may find more than one identical one.
--        FILTER limits results in which the title contains the word “bacco” .
--        REGEX is used to do a more flexible text search (pattern matching) on the title.
--        Likewise, OPTIONAL is used to include only authors whose name contains “caravaggio” (always case-insensitive).
--        UNION in the first block, WHERE, is used to search for titles that may be given different properties, then combines results that satisfy one or the other pattern. In the OPTIONAL block on authors, it serves to search for the author indicated with different properties.
--        OPTIONAL is used to make sure that the part about authors is not mandatory: if a work has an author, it includes it (and tries to filter on the author's label), but if it has no author or the author has no label, the query does not fail and still returns the title work.
--        ORDER BY serves to sort the results by title in ascending alphabetical order.
--        LIMIT is used to limit the maximum number of results to 200, so as not to have an overly long response.
-                    </p>
-                    <a href="#" class="view-results">Visualizza Risultati</a>
-                </div>
+                <h3 class="query-title">Query 2: Dettagli Tecnici e Localizzazione dell'Opera</h3>
                 <div class="query-code-container">
                     <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
 PREFIX schema: &lt;http://schema.org/&gt;
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
 
 SELECT ?opera ?materiale ?dimensioni ?tecnica ?ubicazioneNome WHERE {
   ?opera arco:hasTitle ?titolo ;
-          arco:hasMaterial ?materiale ;
-          arco:hasDimension ?dimensioni ;
-          arco:hasTechnique ?tecnica ;
+          arco:hasMaterial ?materialeUri ;
+          arco:hasDimension ?dimensioniUri ;
+          arco:hasTechnique ?tecnicaUri ;
           schema:location ?ubicazione .
-  ?ubicazione rdfs:label ?ubicazioneNome .
+  OPTIONAL { ?materialeUri rdfs:label ?materiale . }
+  OPTIONAL { ?dimensioniUri rdfs:label ?dimensioni . }
+  OPTIONAL { ?tecnicaUri rdfs:label ?tecnica . }
+  OPTIONAL { ?ubicazione rdfs:label ?ubicazioneNome . }
   FILTER(contains(lcase(?titolo), "bacco"))
-}</div>
+}
+LIMIT 200</div>
+                </div>
+                <div class="query-description-box">
+                    <p class="query-description">
+                        Questa query si concentra sui dettagli fisici dell'opera, come il materiale, le dimensioni e la tecnica utilizzata, oltre alla sua ubicazione attuale. È fondamentale per comprendere il contesto materiale e la conservazione del Bacco, fornendo dati specifici che possono essere arricchiti.
+                        <br><br>
+                        **Spiegazione della query:**<br>
+                        - `DISTINCT`: Evita risultati duplicati.<br>
+                        - `FILTER (REGEX(LCASE(STR(?titolo)), "bacco", "i"))`: Limita i risultati al titolo "Bacco" (case-insensitive).<br>
+                        - `UNION`: Combina risultati da diverse proprietà del titolo o dell'autore.<br>
+                        - `OPTIONAL`: Rende non obbligatoria la presenza di determinate informazioni (es. autore), per non escludere risultati validi.<br>
+                        - `ORDER BY`: Ordina i risultati.<br>
+                        - `LIMIT`: Limita il numero massimo di risultati.
+                    </p>
+                    <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">Visualizza Risultati su Arco</a>
                 </div>
             </div>
+            
+            <!-- Ho rimosso la Query 3 come richiesto -->
         </div>
     </section>
 
+    <!-- Footer della Pagina -->
     <footer class="footer">
         <div class="footer-links">
             <div class="footer-link-group">
@@ -631,59 +688,48 @@ SELECT ?opera ?materiale ?dimensioni ?tecnica ?ubicazioneNome WHERE {
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Smooth scrolling per i link di navigazione interni
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href.startsWith('#')) {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
+                e.preventDefault(); // Previeni il comportamento predefinito del link
+                const href = this.getAttribute('href'); // Ottieni l'ID della sezione
+                const targetElement = document.querySelector(href); // Trova l'elemento target
+
+                if (targetElement) {
+                    // Calcola la posizione di scorrimento, sottraendo l'altezza della navbar fissa
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth' // Scorri in modo fluido
+                    });
+                }
+            });
+        });
+
+        // Animazione fade-in all'apparizione degli elementi con Intersection Observer
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null, // Si riferisce alla viewport
+                rootMargin: '0px',
+                threshold: 0.1 // L'elemento è visibile al 10%
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible'); // Aggiunge la classe 'visible'
+                        observer.unobserve(entry.target); // Ferma l'osservazione dopo l'animazione
                     }
-                }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element); // Inizia ad osservare ogni elemento 'fade-in'
             });
-        });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Enhanced query card interactions
-        document.querySelectorAll('.query-item').forEach(card => { // Changed from .query-card to .query-item
-            card.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-
-        // Dynamic navigation background on scroll
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(44, 24, 16, 0.98)';
-            } else {
-                nav.style.background = 'rgba(44, 24, 16, 0.95)';
-            }
         });
     </script>
 </body>
