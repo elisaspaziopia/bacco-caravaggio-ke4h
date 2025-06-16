@@ -624,7 +624,7 @@ Questa versione si caratterizza per l'immediatezza della presenza fisica e l'amb
         </div>
 
         <!-- NEW TABLE SECTION 4: 5 Rows, 4 Columns -->
-        <h2 class="section-title">Sintesi dei Risultati e Implicazioni Future</h2>
+        <h2 class="section-title">Updated Summary Table: Overall Performance by Prompt Type</h2>
         <p class="section-description">
             Riepilogo dei risultati ottenuti con le diverse tecniche di prompting e le loro implicazioni per lo sviluppo futuro.
         </p>
@@ -632,36 +632,36 @@ Questa versione si caratterizza per l'immediatezza della presenza fisica e l'amb
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th>Tecnica</th>
-                        <th>Risultati Ottenuti</th>
-                        <th>Sfide Incontrate</th>
-                        <th>Prossimi Passi</th>
+                        <th>LLM \ Prompt Type</th>
+                        <th>Zero-shot</th>
+                        <th>Few-shot</th>
+                        <th>Chain-of-thought</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Zero-shot</td>
-                        <td>Buona baseline, risposte generali e coerenti.</td>
-                        <td>Mancanza di specificità, potenziale per allucinazioni su dettagli.</td>
-                        <td>Valutare l'integrazione con dati strutturati.</td>
+                        <td>ChatGPT</td>
+                        <td>✅ Descriptive, well-balanced</td>
+                        <td>✅ Structured and symbolic with model</td>
+                        <td>✅ Best for completeness and academic depth</td>
                     </tr>
                     <tr>
-                        <td>Few-shot</td>
-                        <td>Miglioramento della pertinenza e del formato dell'output.</td>
-                        <td>Sensibilità alla qualità e quantità degli esempi.</td>
-                        <td>Ottimizzare la selezione degli esempi per ogni task.</td>
+                        <td>Claude</td>
+                        <td>– (Not tested)</td>
+                        <td>✅ Literary, symbolic, interpretative</td>
+                        <td>✅ Poetic, reflective, philosophically rich</td>
                     </tr>
                     <tr>
-                        <td>Chain-of-Thought</td>
-                        <td>Aumento significativo dell'accuratezza su problemi complessi.</td>
-                        <td>Maggiore lunghezza degli output, latenza.</td>
-                        <td>Sviluppare strategie per abbreviare i passaggi di ragionamento.</td>
+                        <td>Gemini</td>
+                        <td>✅ Detailed, symbolic</td>
+                        <td>⚠️ Short and general</td>
+                        <td>– (Not tested)</td>
                     </tr>
                     <tr>
-                        <td>Instruction-Tuning</td>
-                        <td>Grande versatilità e robustezza alle variazioni del prompt.</td>
-                        <td>Richiede dataset di istruzioni ben curati.</td>
-                        <td>Esplorare fine-tuning con istruzioni specifiche del dominio.</td>
+                        <td>Mistral</td>
+                        <td>– (Not tested)</td>
+                        <td>✅ Balanced realism and symbolism</td>
+                        <td>– (Not tested)</td>
                     </tr>
                     <tr>
                         <td>Combinazioni di Tecniche</td>
