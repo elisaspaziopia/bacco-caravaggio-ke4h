@@ -647,20 +647,24 @@ LIMIT 200</div>
     </section>
 
     <!-- Space after the last query for consistency -->
-    <p class="query-separator-text" style="margin-top: 2rem;">
-       Now, thanks to this query we unexpectedly received only four results – actually, two, but in both the English and Italian versions –, from which we chose to work on
-https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176, "Bacco (dipinto) di Merisi Michelangelo detto Caravaggio (sec. XVI)"@it.
+  <!-- Space after the last query for consistency -->
+<div class="query-separator-text" style="margin-top: 2rem;">
+   <p>Now, thanks to this query we unexpectedly received only four results – actually, two, but in both the English and Italian versions –, from which we chose to work on
+<a href="https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176</a>, "Bacco (dipinto) di Merisi Michelangelo detto Caravaggio (sec. XVI)"@it.</p>
 
-So, we opened it and realised that there were some gaps, and we used three prompting techniques on different LLMs to enrich the Knowledge Graph. We worked using both English and Italian, since ArCo is an Italian database and not all the information is translated into English, so we wanted the prompts and the outputs to be in Italian. We decided to include this information:
-        Iconographic Description
-        Commission
-        Alternative Dating
-        The Chiaroscuro Technique
-“Young Sick Bacchus” by Caravaggio
+<p>So, we opened it and realised that there were some gaps, and we used three prompting techniques on different LLMs to enrich the Knowledge Graph. We worked using both English and Italian, since ArCo is an Italian database and not all the information is translated into English, so we wanted the prompts and the outputs to be in Italian. We decided to include this information:</p>
 
-        In conclusion, we compared the outputs from each of the used LLMs and transformed them into RDF triples, using ArCo’s vocabulary.
+        <!-- Case Study Buttons Container -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0; padding: 1rem;">
+            <a href="case_study_1.html" class="view-results" style="margin: 0.3rem;">Iconographic Description</a>
+            <a href="case_study_2.html" class="view-results" style="margin: 0.3rem;">Commission</a>
+            <a href="case_study_3.html" class="view-results" style="margin: 0.3rem;">Alternative Dating</a>
+            <a href="case_study_4.html" class="view-results" style="margin: 0.3rem;">The Chiaroscuro Technique</a>
+            <a href="case_study_5.html" class="view-results" style="margin: 0.3rem;">"Young Sick Bacchus" by Caravaggio</a>
+        </div>
 
-    </p>
+        <p>In conclusion, we compared the outputs from each of the used LLMs and transformed them into RDF triples, using ArCo's vocabulary.</p>
+</div>
 
     <!-- Page Footer -->
     <footer class="footer">
