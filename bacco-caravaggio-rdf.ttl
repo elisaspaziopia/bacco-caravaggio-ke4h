@@ -1,0 +1,9 @@
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex: <http://dati.beniculturali.it/resource/Opera/> .
+
+ex:Bacco_Caravaggio rdfs:label "Bacco di Caravaggio" ;
+    foaf:depicts <http://dati.beniculturali.it/resource/Persona/Caravaggio> ;
+    dc:creator "Caravaggio" ;
+    dc:date "1596-1597" .

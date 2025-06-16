@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RDF Triples - Bacco di Caravaggio - Progetto KE4H</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Bacco di Caravaggio</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="llms.html">LLMs</a>
+      <a href="rdf.html">RDF</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <main>
+    <h2>RDF Triples estratti dall'ontologia ArCo</h2>
+    <table border="1" cellpadding="5" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Soggetto</th>
+          <th>Predicato</th>
+          <th>Oggetto</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>http://dati.beniculturali.it/resource/Opera/Bacco_Caravaggio</td>
+          <td>http://www.w3.org/2000/01/rdf-schema#label</td>
+          <td>Bacco di Caravaggio</td>
+        </tr>
+        <tr>
+          <td>http://dati.beniculturali.it/resource/Opera/Bacco_Caravaggio</td>
+          <td>http://xmlns.com/foaf/0.1/depicts</td>
+          <td>http://dati.beniculturali.it/resource/Persona/Caravaggio</td>
+        </tr>
+        <tr>
+          <td>http://dati.beniculturali.it/resource/Opera/Bacco_Caravaggio</td>
+          <td>http://purl.org/dc/terms/creator</td>
+          <td>Caravaggio</td>
+        </tr>
+        <tr>
+          <td>http://dati.beniculturali.it/resource/Opera/Bacco_Caravaggio</td>
+          <td>http://purl.org/dc/terms/date</td>
+          <td>1596-1597</td>
+        </tr>
+      </tbody>
+    </table>
+    <p><a href="bacco-caravaggio-rdf.ttl" download>Scarica il file RDF (.ttl)</a></p>
+  </main>
+</body>
+</html>
