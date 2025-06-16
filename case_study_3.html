@@ -466,11 +466,11 @@
             <div class="content-box fade-in">
                 <h2 class="box-title">Alternative Dating</h2>
                 <div class="description-container">
-                    <p class="description-text"><strong>Identifying the gap:</strong>Looking at the record of Caravaggio's Bacchus on ArCo, we noticed that within the historicalInformation property, a date, now outdated, was given in relation to the creation of the painting.</p>
+                    <p class="description-text"><strong>Identifying the gap:</strong> Looking at the record of Caravaggio's Bacchus on ArCo, we noticed that within the historicalInformation property, a date, now outdated, was given in relation to the creation of the painting.</p>
 
-                    <p class="description-text"><strong>Methodology:</strong>Searching within ArCo's ontology, we found the Alternative Dating property within the Context Description Ontology.</p>
+                    <p class="description-text"><strong>Methodology:</strong> Searching within ArCo's ontology, we found the Alternative Dating property within the Context Description Ontology.</p>
 
-                    <p class="description-text"><strong>Results:</strong>As a result, linking the cultural asset to this property will make it easier to query the database for information.</p>
+                    <p class="description-text"><strong>Results:</strong> As a result, linking the cultural asset to this property will make it easier to query the database for information.</p>
                     <a href="#" class="action-button" onclick="copyPromptText(event, 'promptForCoT')">Copia Prompt</a>
                 </div>
             </div>
@@ -479,31 +479,18 @@
             <div class="content-box fade-in">
                 <h2 class="box-title">Esempio di Triple RDF da Analisi CoT</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix cd: https://w3id.org/arco/ontology/context-description/ .
-@prefix ex: http://example.org/ontology/ . # Prefisso per proprietà estese
+                    <pre class="code-block"># Link artwork to alternative dating
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    a-cd:hasAlternativeDating 
+    <https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> .
 
-# Esempio di triple generate da analisi CoT
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214>
-    ex:hasStylisticElement <http://example.org/Chiaroscuro> ;
-    ex:relatesToArtisticMovement <http://example.org/MannerismTransition> ;
-    ex:hasHistoricalImpact "Il dipinto si discosta dall'idealizzazione manierista..."@it .
+# Alternative dating entity
+<https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> 
+    rdf:type a-cd:AlternativeDating ;
+    rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
+    l0:name "Datazione alternativa del Bacco al 1589"@it ;
+    a-cd:hasDatingDescription "prima datazione al 1589"@it .
 
-<http://example.org/Chiaroscuro>
-    rdf:type ex:ArtisticTechnique ;
-    rdfs:label "Chiaroscuro Caravaggesco"@it ;
-    ex:contributesToMeaning "Profondità simbolica sulla dualità umano/divino"@it .
-
-<http://example.org/MannerismTransition>
-    rdf:type ex:ArtisticMovement ;
-    rdfs:label "Tendenze artistiche fine '500 a Roma"@it ;
-    ex:characteristics "Idealizzazione, retorica"@it .
-
-# Placeholder per altre triple che dettaglierebbero le interpretazioni e le correlazioni
-# basate sui passaggi di ragionamento dell'LLM.
-                    </pre>
                 </div>
             </div>
             <!-- Hidden element to hold the actual prompt text for copying -->
