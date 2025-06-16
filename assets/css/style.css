@@ -1,0 +1,35 @@
+body {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Michelangelo_Caravaggio_062.jpg/1920px-Michelangelo_Caravaggio_062.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #000;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7); /* patina bianca */
+  z-index: 0;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 5vh auto;
+  background: rgba(255, 255, 255, 0.85); /* sfondo testo trasparente */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
