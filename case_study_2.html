@@ -424,11 +424,11 @@
             <div class="content-box fade-in">
                 <h2 class="box-title">Analisi e Contestualizzazione della Commissione</h2>
                 <div class="description-container">
-                    <p><strong>Identificazione del gap:</strong> Nello stesso filone del Case Study 1, pur essendo presenti informazioni descrittive sull'opera, mancavano dettagli approfonditi sulla sua commissione e sul contesto storico-biografico di Caravaggio durante la sua realizzazione. Queste informazioni sono cruciali per comprendere appieno il significato e la genesi dell'opera.</p>
+                    <p><strong>Identifying the gap:</strong>Looking at the record of Caravaggio's Bacchus on ArCo and, especially, the contents of the property a-cd:HistoricalInformation, we realize that the work was commissioned by Francesco Maria del Monte.</p>
 
-                    <p><strong>Metodologia:</strong> Per colmare questa lacuna, è stato utilizzato un prompt strutturato con una "expertise persona". Al modello è stato chiesto di agire come un esperto storico dell'arte del periodo barocco, fornendo risposte dettagliate e contestualizzate. Il prompt ha richiesto la descrizione accurata della commissione, le figure coinvolte, il contesto storico a Roma, e le implicazioni per l'opera stessa. L'obiettivo era ottenere un output che potesse essere facilmente trasformato in triple RDF per arricchire il Knowledge Graph di ArCo con dati relazionali sulla committenza e la contestualizzazione.</p>
+                    <p><strong>Methodology:</strong>After a thorough search within the ArCo ontology, especially following the discovery of the existence of the class Commission within the Context Description Ontology and querying the LLMs for information regarding the circumstances of the commission, the following triple was generated.</p>
 
-                    <p><strong>Risultati:</strong> L'applicazione di questa tecnica ha permesso di generare una ricca serie di informazioni sulla commissione del "Bacco", inclusi dettagli sul Cardinale Del Monte e il contesto della corte romana. Queste informazioni sono state poi modellate in triple RDF, migliorando significativamente la granularità e l'interconnessione dei dati disponibili su ArCo riguardo all'opera.</p>
+                    <p><strong>Results:</strong>As a result, this information is now present as structured data within ArCo, making it more easily usable.</p>
                     <a href="#" class="action-button" onclick="copyPromptText(event, 'promptForCommission')">Copia Prompt</a>
                 </div>
             </div>
