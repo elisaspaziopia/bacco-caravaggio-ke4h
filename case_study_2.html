@@ -32,10 +32,9 @@
             color: var(--text-dark);
             line-height: 1.6;
             font-size: 0.95rem;
-            padding-top: 80px;
         }
 
-        /* Fixed header styles */
+        /* Styles for the fixed header (navigation) */
         nav {
             position: fixed;
             top: 0;
@@ -44,8 +43,10 @@
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
+            transition: all 0.3s ease;
         }
 
+        /* Navigation container to center and limit width */
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -55,6 +56,7 @@
             padding: 0 2rem;
         }
 
+        /* Style for the logo/title in the navigation */
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
@@ -62,16 +64,24 @@
             color: var(--accent-color);
         }
 
+        .logo a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        /* Navigation menu */
         .nav-menu {
             display: flex;
             list-style: none;
             gap: 1.5rem;
         }
 
+        /* Single menu item */
         .nav-item {
             position: relative;
         }
 
+        /* Navigation link */
         .nav-link {
             color: var(--text-light);
             text-decoration: none;
@@ -81,11 +91,13 @@
             transition: all 0.3s ease;
         }
 
+        /* Hover effect for navigation links */
         .nav-link:hover {
             background: rgba(218, 165, 32, 0.2);
             color: var(--accent-color);
         }
 
+        /* Dropdown menu */
         .dropdown {
             display: none;
             position: absolute;
@@ -102,6 +114,7 @@
             margin-top: 0.5rem;
         }
 
+        /* Show dropdown on hover over parent item */
         .nav-item:hover .dropdown {
             display: block;
             opacity: 1;
@@ -109,6 +122,7 @@
             transform: translateY(0);
         }
 
+        /* Single dropdown item */
         .dropdown-item {
             padding: 0.6rem 1.2rem;
             color: var(--text-light);
@@ -119,99 +133,74 @@
             margin: 0.2rem;
         }
 
+        /* Hover effect for dropdown items */
         .dropdown-item:hover {
             background: rgba(218, 165, 32, 0.2);
             color: var(--accent-color);
         }
 
-        /* Case Study Container */
-        .case-study-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        .case-study-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .case-study-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .case-study-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Navigation between case studies */
-        .case-navigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 2rem;
-            background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .nav-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-button:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        .nav-button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .case-indicator {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--primary-color);
+        /* Active dropdown item */
+        .dropdown-item.active {
+            background: rgba(218, 165, 32, 0.3);
+            color: var(--accent-color);
             font-weight: 600;
         }
 
-        /* Content boxes */
-        .content-section {
-            margin-bottom: 3rem;
+        /* Main content area */
+        .main-content {
+            padding-top: 120px;
+            padding-bottom: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }
 
-        .content-box {
+        /* Page title */
+        .page-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        /* Page subtitle */
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Case study container */
+        .case-study-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        /* Case study item */
+        .case-study-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
             background: var(--card-bg);
             border-radius: 20px;
-            padding: 2rem;
             box-shadow: 0 10px 30px var(--shadow);
             border: 1px solid rgba(218, 165, 32, 0.2);
-            margin-bottom: 2rem;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
-        .content-box::before {
+        /* Animated top bar effect on hover */
+        .case-study-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -222,50 +211,144 @@
             transition: all 0.5s ease;
         }
 
-        .content-box:hover::before {
+        .case-study-item:hover::before {
             left: 0;
         }
 
-        .box-title {
+        /* Case study title */
+        .case-study-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-weight: 700;
         }
 
+        /* Code container */
         .code-container {
+            width: 100%;
+            max-width: 800px;
+            padding-right: 0;
+        }
+
+        /* Code block */
+        .code-block {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 1.5rem;
+            border-radius: 8px;
+            padding: 1rem;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-dark);
             white-space: pre-wrap;
+            width: 100%;
             overflow-x: auto;
-            margin-bottom: 1rem;
-            line-height: 1.4;
+            text-align: left;
         }
 
-        .description-container {
+        /* Description box */
+        .description-box {
             background: var(--background-light);
             border: 1px solid rgba(218, 165, 32, 0.1);
             border-radius: 12px;
             padding: 1.5rem;
-            color: #444;
-            line-height: 1.6;
+            margin-top: 0.8rem;
+            max-width: 90%;
+            text-align: left;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
         }
 
-        /* Footer */
-        .footer {
+        /* Description text */
+        .description-text {
+            color: #444;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Action button */
+        .action-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+
+        .action-button:hover {
             background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
+            transform: scale(1.05);
+        }
+
+        /* Navigation between case studies */
+        .case-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .case-nav-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .case-nav-button:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .case-nav-button.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .case-nav-info {
             text-align: center;
-            font-size: 0.85rem;
-            margin-top: 5rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Responsive Design */
@@ -273,19 +356,28 @@
             .nav-menu {
                 display: none;
             }
-            
-            .case-study-title {
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .page-title {
                 font-size: 2rem;
             }
-            
-            .case-navigation {
+
+            .case-nav {
                 flex-direction: column;
                 gap: 1rem;
-                text-align: center;
             }
-            
-            .content-box {
-                padding: 1.5rem;
+
+            .case-nav-button {
+                width: 100%;
+                text-align: center;
             }
         }
     </style>
@@ -294,10 +386,12 @@
     <!-- Fixed Navbar -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Arco KG Enhancement</div>
+            <div class="logo">
+                <a href="index.html">Arco KG Enhancement</a>
+            </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="index.html#home" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="index.html#queries" class="nav-link">Query SPARQL</a>
@@ -309,7 +403,7 @@
                     <a href="#" class="nav-link">Case Studies</a>
                     <div class="dropdown">
                         <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
-                        <a href="case_study_2.html" class="dropdown-item">Case Study 2</a>
+                        <a href="case_study_2.html" class="dropdown-item active">Case Study 2</a>
                         <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
                         <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
                         <a href="case_study_5.html" class="dropdown-item">Case Study 5</a>
@@ -319,48 +413,116 @@
         </div>
     </nav>
 
-    <!-- Case Study Content -->
-    <div class="case-study-container">
-        <!-- Header -->
-        <div class="case-study-header">
-            <h1 class="case-study-title">Case Study 2</h1>
-            <p class="case-study-subtitle">
-                Applicazione del Chain-of-Thought Prompting per l'analisi simbolica del "Bacco" di Caravaggio
-            </p>
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">Case Study 2</h1>
+        <p class="page-subtitle">
+            Prompting Avanzato per l'Estrazione di Informazioni Storiche e Artistiche
+        </p>
+
+        <div class="case-study-container">
+            <!-- Case Study Item -->
+            <div class="case-study-item fade-in">
+                <h3 class="case-study-title">Prompt per Informazioni sulla Commissione e Contesto Storico</h3>
+                <div class="code-container">
+                    <div class="code-block">Sei un esperto storico dell'arte specializzato nel periodo barocco italiano. 
+Analizza l'opera "Bacco" di Caravaggio conservata agli Uffizi e fornisci informazioni dettagliate su:
+
+1. COMMISSIONE E COMMITTENZA:
+   - Chi ha commissionato l'opera
+   - Contesto della commissione
+   - Motivazioni storiche e culturali
+
+2. DATAZIONE ALTERNATIVA:
+   - Discussioni accademiche sulla datazione
+   - Evidenze stilistiche che supportano diverse datazioni
+   - Confronto con altre opere del periodo
+
+3. CONTESTO STORICO:
+   - Situazione politica e sociale dell'epoca
+   - Ambiente artistico romano
+   - Relazione con altri artisti contemporanei
+
+4. ICONOGRAFIA E SIMBOLISMO:
+   - Significato simbolico degli elementi presenti
+   - Riferimenti mitologici e allegorici
+   - Interpretazioni critiche moderne
+
+Struttura la risposta in formato adatto per l'integrazione in un knowledge graph, utilizzando affermazioni chiare e verificabili. Includi riferimenti a fonti storiche quando possibile.</div>
+                </div>
+                <div class="description-box">
+                    <p class="description-text">
+                        Questo prompt utilizza una tecnica di <strong>prompting strutturato con expertise persona</strong>. Assegnando al modello il ruolo di "esperto storico dell'arte specializzato nel periodo barocco", aumentiamo la probabilità di ottenere risposte più accurate e dettagliate.
+                        <br><br>
+                        <strong>Tecniche utilizzate:</strong>
+                        <br>• <em>Role-playing</em>: Definizione di una persona esperta specifica
+                        <br>• <em>Strutturazione numerata</em>: Organizzazione chiara delle richieste
+                        <br>• <em>Specifiche di output</em>: Formato adatto per knowledge graph
+                        <br>• <em>Constraint setting</em>: Richiesta di fonti verificabili
+                        <br><br>
+                        Questo approccio è particolarmente efficace per ottenere informazioni storiche dettagliate e contestualizzate, essenziali per arricchire la rappresentazione dell'opera nel database ArCo.
+                    </p>
+                    <a href="#" class="action-button" onclick="copyToClipboard('prompt2')">Copia Prompt</a>
+                </div>
+            </div>
         </div>
 
         <!-- Navigation between case studies -->
-        <div class="case-navigation">
-            <a href="case_study_1.html" class="nav-button">
-                ← Precedente
-            </a>
-            <div class="case-indicator">Case Study 2 di 5</div>
-            <a href="case_study_3.html" class="nav-button">
-                Successivo →
-            </a>
+        <div class="case-nav">
+            <a href="case_study_1.html" class="case-nav-button">← Case Study 1</a>
+            <div class="case-nav-info">
+                <strong>Case Study 2 di 5</strong><br>
+                Prompting Avanzato per Contesto Storico
+            </div>
+            <a href="case_study_3.html" class="case-nav-button">Case Study 3 →</a>
         </div>
+    </div>
 
-        <!-- Content Section -->
-        <div class="content-section">
-            <!-- Code Box -->
-            <div class="content-box">
-                <h2 class="box-title">Implementazione Chain-of-Thought Prompting</h2>
-                <div class="code-container">// Chain-of-Thought Prompting per analisi simbolica approfondita
-// Tecnica che guida il LLM attraverso un ragionamento step-by-step
+    <script>
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
 
-const chainOfThoughtPrompt = {
-    systemPrompt: `
-        Sei un esperto storico dell'arte specializzato in Caravaggio.
-        Analizza l'opera "Bacco" seguendo un ragionamento strutturato.
-    `,
-    
-    userPrompt: `
-        Analizza "Bacco" di Caravaggio seguendo questi passaggi:
-        
-        Passo 1: Osserva gli elementi visivi principali
-        - Descrivi la figura di Bacco
-        - Identifica gli oggetti presenti (frutta, vino, coppe)
-        - Nota i colori dominanti e la composizione
-        
-        Passo 2: Contestualizza storicamente
-        - Quando fu dipinto?
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Copy to clipboard function
+        function copyToClipboard(promptId) {
+            const codeBlock = document.querySelector('.code-block');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                // Temporary feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            }, function(err) {
+                console.error('Errore nella copia: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
