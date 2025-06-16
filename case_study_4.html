@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study 4 - Arco Knowledge Graph Enhancement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base reset for all elements */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* CSS variables for easy palette management */
+        :root {
+            --primary-color: #2C1810;
+            --secondary-color: #8B4513;
+            --accent-color: #DAA520;
+            --text-light: #F5F5DC;
+            --text-dark: #2C1810;
+            --background-light: #FAF9F6;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --shadow: rgba(44, 24, 16, 0.15);
+        }
+
+        /* Global styles for the document body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Styles for the fixed header (navigation) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Navigation container */
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        /* Style for the logo/title in the navigation */
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        /* Navigation menu */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--accent-color);
+        }
+
+        /* Dropdown menu */
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--primary-color);
+            min-width: 180px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 0.6rem 1.2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+            margin: 0.2rem;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(218, 165, 32, 0.2);
+            color: var(--accent-color);
+        }
+
+        /* Hero section */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%);
+            overflow: hidden;
+            padding-top: 80px;
+            padding-bottom: 2rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg') center/cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            color: var(--text-light);
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        /* Content section */
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Case study layout */
+        .case-study-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .case-study-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .case-study-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+            transition: all 0.5s ease;
+        }
+
+        .case-study-item:hover::before {
+            left: 0;
+        }
+
+        .case-study-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+        }
+
+        .case-study-code-container {
+            width: 100%;
+            max-width: 650px;
+            padding-right: 0;
+        }
+
+        .case-study-code {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 0.7rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dark);
+            white-space: pre-wrap;
+            width: 100%;
+            overflow-x: auto;
+            text-align: left;
+        }
+
+        .case-study-description-box {
+            background: var(--background-light);
+            border: 1px solid rgba(218, 165, 32, 0.1);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: 0.8rem;
+            max-width: 80%;
+            text-align: left;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .case-study-description-box .case-study-description {
+            color: #444;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        /* Navigation buttons */
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 3rem 0;
+            padding: 0 2rem;
+        }
+
+        .nav-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-button:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .nav-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .case-study-description-box {
+                max-width: 100%;
+            }
+
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        /* Footer styles */
+        .footer {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            margin-top: 5rem;
+        }
+
+        .footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--text-light);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-link-group h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--accent-color);
+        }
+
+        .footer-link-group a {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Arco KG Enhancement</div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#queries" class="nav-link">Query SPARQL</a>
+                </li>
+                <li class="nav-item">
+                    <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Case Studies</a>
+                    <div class="dropdown">
+                        <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
+                        <a href="case_study_2.html" class="dropdown-item">Case Study 2</a>
+                        <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
+                        <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
+                        <a href="case_study_5.html" class="dropdown-item">Case Study 5</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Case Study 4: Arricchimento Simbolico e Storico</h1>
+            <p>Approfondimento del simbolismo del Bacco e del contesto storico-culturale dell'opera attraverso multiple tecniche di prompting avanzate.</p>
+        </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="content-section">
+        <h2 class="section-title">Analisi Simbolica e Contestualizzazione Storica</h2>
+        
+        <div class="case-study-layout">
+            <!-- Case Study Item 1 -->
+            <div class="case-study-item fade-in">
+                <h3 class="case-study-title">Simbolismo Mitologico e Iconografico</h3>
+                <div class="case-study-code-container">
+                    <div class="case-study-code">@prefix arco: &lt;https://w3id.org/arco/ontology/arco/&gt; .
+@prefix rdf: &lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt; .
+@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt; .
+@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
+
+&lt;https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176&gt;
+    arco:hasSymbolicMeaning [
+        a arco:SymbolicElement ;
+        rdfs:label "Simbolismo di Bacco come divinità del vino e dell'estasi"@it ;
+        arco:represents "Dualità tra piacere e malinconia"@it ;
+        arco:culturalContext "Mitologia romana e tradizione classica"@it ;
+        arco:iconographicElements "Corona di foglie di vite, grappoli d'uva, calice di vino"@it
+    ] ;
+    arco:hasAllegoricalMeaning [
+        a arco:AllegoricalInterpretation ;
+        rdfs:label "Allegoria della giovinezza e della mortalità"@it ;
+        dc:description "Il dipinto rappresenta la tensione tra la bellezza giovanile e la consapevolezza della caducità dell'esistenza"@it ;
+        arco:philosophicalTheme "Vanitas e riflessione sul tempo"@it
+    ] .</div>
+                </div>
+                <div class="case-study-description-box">
+                    <p class="case-study-description">
+                        Questo frammento RDF arricchisce la descrizione dell'opera con un'analisi approfondita del simbolismo mitologico. Bacco non è rappresentato solo come divinità del vino, ma come figura complessa che incarna la dualità tra piacere sensuale e malinconia esistenziale. Gli elementi iconografici tradizionali (corona di vite, grappoli, calice) sono contestualizzati nella loro funzione simbolica di rimando alla mitologia classica e alla tradizione culturale romana.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Case Study Item 2 -->
+            <div class="case-study-item fade-in">
+                <h3 class="case-study-title">Contesto Storico e Committenza</h3>
+                <div class="case-study-code-container">
+                    <div class="case-study-code">@prefix arco: &lt;https://w3id.org/arco/ontology/arco/&gt; .
+@prefix schema: &lt;http://schema.org/&gt; .
+@prefix foaf: &lt;http://xmlns.com/foaf/0.1/&gt; .
+@prefix time: &lt;http://www.w3.org/2006/time#&gt; .
+
+&lt;https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176&gt;
+    arco:hasHistoricalContext [
+        a arco:HistoricalPeriod ;
+        rdfs:label "Controriforma e rinnovamento artistico romano"@it ;
+        time:hasBeginning "1590"^^xsd:gYear ;
+        time:hasEnd "1596"^^xsd:gYear ;
+        arco:culturalMovement "Naturalismo caravaggesco"@it ;
+        dc:description "Periodo di transizione artistica caratterizzato dal superamento del manierismo"@it
+    ] ;
+    arco:hasCommissioner [
+        a foaf:Person ;
+        rdfs:label "Cardinale Francesco Maria Del Monte"@it ;
+        arco:socialRole "Mecenate e collezionista"@it ;
+        arco:culturalInfluence "Promotore dell'arte naturalistica a Roma"@it ;
+        schema:location "Palazzo Madama, Roma"@it ;
+        arco:patronageType "Commissione privata per collezione personale"@it
+    ] .</div>
+                </div>
+                <div class="case-study-description-box">
+                    <p class="case-study-description">
+                        L'arricchimento include informazioni dettagliate sul contesto storico dell'opera, situandola nel periodo della Controriforma e del rinnovamento artistico romano. La figura del Cardinale Del Monte viene caratterizzata non solo come committente, ma come figura chiave nel panorama culturale romano, mecenate illuminato che favorì lo sviluppo del naturalismo caravaggesco. Questo contesto è fondamentale per comprendere le scelte stilistiche e tematiche dell'artista.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Case Study Item 3 -->
+            <div class="case-study-item fade-in">
+                <h3 class="case-study-title">Innovazioni Tecniche e Stilistiche</h3>
+                <div class="case-study-code-container">
+                    <div class="case-study-code">@prefix arco: &lt;https://w3id.org/arco/ontology/arco/&gt; .
+@prefix dc: &lt;http://purl.org/dc/elements/1.1/&gt; .
+
+&lt;https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176&gt;
+    arco:hasTechnicalInnovation [
+        a arco:ArtisticTechnique ;
+        rdfs:label "Chiaroscuro caravaggesco"@it ;
+        dc:description "Uso rivoluzionario del contrasto luce-ombra per creare volume e drammaticità"@it ;
+        arco:technicalCharacteristic "Illuminazione artificiale da fonte singola"@it ;
+        arco:artisticEffect "Modellato plastico e realismo tridimensionale"@it ;
+        arco:historicalSignificance "Influenza determinante sulla pittura barocca europea"@it
+    ] ;
+    arco:hasComposition [
+        a arco:CompositionElement ;
+        rdfs:label "Composizione diagonale e asimmetrica"@it ;
+        arco:spatialOrganization "Figura emergente dal fondo scuro"@it ;
+        arco:colorPalette "Tonalità calde per incarnati, contrasto con verde delle foglie"@it ;
+        arco:psychologicalEffect "Introspezione e malinconia del soggetto"@it
+    ] .</div>
+                </div>
+                <div class="case-study-description-box">
+                    <p class="case-study-description">
+                        Questo segmento si concentra sulle innovazioni tecniche introdotte da Caravaggio, con particolare attenzione al rivoluzionario uso del chiaroscuro. La tecnica non viene descritta solo nei suoi aspetti formali, ma viene contestualizzata nel suo significato storico-artistico come elemento di rottura con la tradizione precedente. L'analisi della composizione evidenzia come gli elementi tecnici contribuiscano all'effetto psicologico dell'opera, creando quella particolare atmosfera di introspezione malinconica che caratterizza il Bacco.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="navigation-buttons">
+            <a href="case_study_3.html" class="nav-button">
+                ← Case Study 3
+            </a>
+            <span style="color: var(--primary-color); font-weight: 500;">4 di 5</span>
+            <a href="case_study_5.html" class="nav-button">
+                Case Study 5 →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <div class="footer-link-group">
+                <h4>Navigazione Principale</h4>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#queries">Query SPARQL</a>
+                <a href="#documentation">Documentazione</a>
+            </div>
+            <div class="footer-link-group">
+                <h4>Approfondimenti</h4>
+                <a href="prompting_techniques.html">Prompting Techniques</a>
+            </div>
+            <div class="footer-link-group">
+                <h4>Case Studies</h4>
+                <a href="case_study_1.html">Caso Studio 1</a>
+                <a href="case_study_2.html">Caso Studio 2</a>
+                <a href="case_study_3.html">Caso Studio 3</a>
+                <a href="case_study_4.html">Caso Studio 4</a>
+                <a href="case_study_5.html">Caso Studio 5</a>
+            </div>
+            <div class="footer-link-group">
+                <h4>Risorse Esterne</h4>
+                <a href="https://www.cultura.gov.it/arcomi/" target="_blank">Arco MiC</a>
+                <a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a>
+            </div>
+        </div>
+        <p style="margin-top: 3rem;">&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
+        <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for internal navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const targetElement = document.querySelector(href);
+
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Fade-in animation on element appearance
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
+</body>
+</html>
