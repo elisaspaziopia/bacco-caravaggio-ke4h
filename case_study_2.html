@@ -32,9 +32,10 @@
             color: var(--text-dark);
             line-height: 1.6;
             font-size: 0.95rem;
+            padding-top: 80px; /* Ensures content is below fixed navbar */
         }
 
-        /* Styles for the fixed header (navigation) */
+        /* Fixed header styles */
         nav {
             position: fixed;
             top: 0;
@@ -46,7 +47,6 @@
             transition: all 0.3s ease;
         }
 
-        /* Navigation container to center and limit width */
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -56,7 +56,6 @@
             padding: 0 2rem;
         }
 
-        /* Style for the logo/title in the navigation */
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
@@ -69,19 +68,16 @@
             text-decoration: none;
         }
 
-        /* Navigation menu */
         .nav-menu {
             display: flex;
             list-style: none;
             gap: 1.5rem;
         }
 
-        /* Single menu item */
         .nav-item {
             position: relative;
         }
 
-        /* Navigation link */
         .nav-link {
             color: var(--text-light);
             text-decoration: none;
@@ -91,13 +87,11 @@
             transition: all 0.3s ease;
         }
 
-        /* Hover effect for navigation links */
         .nav-link:hover {
             background: rgba(218, 165, 32, 0.2);
             color: var(--accent-color);
         }
 
-        /* Dropdown menu */
         .dropdown {
             display: none;
             position: absolute;
@@ -114,7 +108,6 @@
             margin-top: 0.5rem;
         }
 
-        /* Show dropdown on hover over parent item */
         .nav-item:hover .dropdown {
             display: block;
             opacity: 1;
@@ -122,7 +115,6 @@
             transform: translateY(0);
         }
 
-        /* Single dropdown item */
         .dropdown-item {
             padding: 0.6rem 1.2rem;
             color: var(--text-light);
@@ -133,7 +125,6 @@
             margin: 0.2rem;
         }
 
-        /* Hover effect for dropdown items */
         .dropdown-item:hover {
             background: rgba(218, 165, 32, 0.2);
             color: var(--accent-color);
@@ -148,8 +139,7 @@
 
         /* Main content area */
         .main-content {
-            padding-top: 120px;
-            padding-bottom: 4rem;
+            padding-bottom: 4rem; /* Padding at the bottom of the main content */
             max-width: 1200px;
             margin: 0 auto;
             padding-left: 2rem;
@@ -176,31 +166,26 @@
             margin-right: auto;
         }
 
-        /* Case study container */
+        /* Case study container - general wrapper for case study content blocks */
         .case-study-container {
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            gap: 3rem; /* Space between content boxes */
         }
 
-        /* Case study item */
-        .case-study-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 2rem;
+        /* Content box for description and code */
+        .content-box {
             background: var(--card-bg);
             border-radius: 20px;
+            padding: 2rem;
             box-shadow: 0 10px 30px var(--shadow);
             border: 1px solid rgba(218, 165, 32, 0.2);
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
-        /* Animated top bar effect on hover */
-        .case-study-item::before {
+        /* Animated top bar effect on hover for content boxes */
+        .content-box::before {
             content: '';
             position: absolute;
             top: 0;
@@ -211,62 +196,57 @@
             transition: all 0.5s ease;
         }
 
-        .case-study-item:hover::before {
+        .content-box:hover::before {
             left: 0;
         }
 
-        /* Case study title */
-        .case-study-title {
+        /* Title inside content box */
+        .box-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary-color);
-            margin-bottom: 0.8rem;
-            font-weight: 700;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: left; /* Align box titles to the left */
         }
 
-        /* Code container */
+        /* Container for code block */
         .code-container {
             width: 100%;
-            max-width: 800px;
+            /* max-width: 800px; */ /* Removed max-width to allow full responsiveness */
             padding-right: 0;
         }
 
-        /* Code block */
+        /* Actual code block styling */
         .code-block {
             background: #f8f9fa;
             border: 1px solid #e9ecef;
             border-radius: 8px;
-            padding: 1rem;
+            padding: 1.5rem; /* Increased padding */
             font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
+            font-size: 0.9rem; /* Adjusted font size */
             color: var(--text-dark);
             white-space: pre-wrap;
             width: 100%;
             overflow-x: auto;
             text-align: left;
+            line-height: 1.4;
         }
 
-        /* Description box */
-        .description-box {
+        /* Description box styling */
+        .description-container {
             background: var(--background-light);
             border: 1px solid rgba(218, 165, 32, 0.1);
             border-radius: 12px;
             padding: 1.5rem;
-            margin-top: 0.8rem;
-            max-width: 90%;
-            text-align: left;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-        }
-
-        /* Description text */
-        .description-text {
             color: #444;
-            margin-bottom: 1rem;
             line-height: 1.6;
-            font-size: 0.95rem;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            text-align: left;
+            margin-bottom: 1.5rem; /* Space between description and code within the content-box */
         }
 
-        /* Action button */
+        /* Action button (e.g., Copy Prompt) */
         .action-button {
             background: var(--secondary-color);
             color: white;
@@ -279,6 +259,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 0.9rem;
+            margin-top: 1rem; /* Space above button */
         }
 
         .action-button:hover {
@@ -324,8 +305,10 @@
 
         .case-nav-info {
             text-align: center;
-            color: #666;
-            font-weight: 500;
+            color: var(--primary-color); /* Changed color for better visibility */
+            font-weight: 600; /* Made it bolder */
+            font-family: 'Playfair Display', serif; /* Consistent font */
+            font-size: 1.1rem;
         }
 
         /* Animations */
@@ -342,195 +325,4 @@
 
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .main-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .page-title {
-                font-size: 2rem;
-            }
-
-            .case-nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .case-nav-button {
-                width: 100%;
-                text-align: center;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Fixed Navbar -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">
-                <a href="index.html">Arco KG Enhancement</a>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="index.html#queries" class="nav-link">Query SPARQL</a>
-                </li>
-                <li class="nav-item">
-                    <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Case Studies</a>
-                    <div class="dropdown">
-                        <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
-                        <a href="case_study_2.html" class="dropdown-item active">Case Study 2</a>
-                        <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
-                        <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
-                        <a href="case_study_5.html" class="dropdown-item">Case Study 5</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <div class="main-content">
-        <h1 class="page-title">Case Study 2</h1>
-        <p class="page-subtitle">
-            Prompting Avanzato per l'Estrazione di Informazioni Storiche e Artistiche
-        </p>
-
-        <div class="case-study-container">
-            <!-- Case Study Item -->
-            <div class="case-study-item fade-in">
-                <h3 class="case-study-title">Prompt per Informazioni sulla Commissione e Contesto Storico</h3>
-                <div class="code-container">
-                    <div class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix a-cd: <https://w3id.org/arco/ontology/context-description/> .
-@prefix TI: <https://w3id.org/italia/onto/TI/> .
-@prefix l0: <https://w3id.org/italia/onto/l0/> .
-
-# Link artwork to commission
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
-    a-cd:hasCommission 
-    <https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> .
-
-# Commission entity
-<https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> 
-    rdf:type a-cd:Commission ;
-    rdfs:label "Committenza del Cardinale Del Monte per Bacco"@it ;
-    l0:name "Committenza del Cardinale Del Monte per Bacco"@it ;
-    a-cd:hasCommittent <https://w3id.org/arco/resource/Agent/cardinale-del-monte> ;
-    a-cd:hasCircumstance <https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> ;
-    TI:atTime <https://w3id.org/arco/resource/TimeInterval/1608> .
-
-# Agent (Commissioner)
-<https://w3id.org/arco/resource/Agent/cardinale-del-monte> 
-    rdf:type a-cd:Agent ;
-    rdfs:label "Cardinale Francesco Maria Del Monte"@it .
-
-# Circumstance
-<https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> 
-    rdf:type a-cd:Circumstance ;
-    rdfs:label "Donazione a Ferdinando I de' Medici per le nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
-
-</div>
-                </div>
-                <div class="description-box">
-                    <p class="description-text">
-                        Questo prompt utilizza una tecnica di <strong>prompting strutturato con expertise persona</strong>. Assegnando al modello il ruolo di "esperto storico dell'arte specializzato nel periodo barocco", aumentiamo la probabilità di ottenere risposte più accurate e dettagliate.
-                        <br><br>
-                        <strong>Tecniche utilizzate:</strong>
-                        <br>• <em>Role-playing</em>: Definizione di una persona esperta specifica
-                        <br>• <em>Strutturazione numerata</em>: Organizzazione chiara delle richieste
-                        <br>• <em>Specifiche di output</em>: Formato adatto per knowledge graph
-                        <br>• <em>Constraint setting</em>: Richiesta di fonti verificabili
-                        <br><br>
-                        Questo approccio è particolarmente efficace per ottenere informazioni storiche dettagliate e contestualizzate, essenziali per arricchire la rappresentazione dell'opera nel database ArCo.
-                    </p>
-                    <a href="#" class="action-button" onclick="copyToClipboard('prompt2')">Copia Prompt</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation between case studies -->
-        <div class="case-nav">
-            <a href="case_study_1.html" class="case-nav-button">← Case Study 1</a>
-            <div class="case-nav-info">
-                <strong>Case Study 2 di 5</strong><br>
-                Prompting Avanzato per Contesto Storico
-            </div>
-            <a href="case_study_3.html" class="case-nav-button">Case Study 3 →</a>
-        </div>
-    </div>
-
-    <script>
-        // Fade-in animation on scroll
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
-
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-
-        // Copy to clipboard function
-        function copyToClipboard(promptId) {
-            const codeBlock = document.querySelector('.code-block');
-            const text = codeBlock.textContent;
-            
-            navigator.clipboard.writeText(text).then(function() {
-                // Temporary feedback
-                const button = event.target;
-                const originalText = button.textContent;
-                button.textContent = 'Copiato!';
-                button.style.background = '#28a745';
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = '';
-                }, 2000);
-            }, function(err) {
-                console.error('Errore nella copia: ', err);
-            });
-        }
-    </script>
-</body>
-</html>
+            transform: translate
