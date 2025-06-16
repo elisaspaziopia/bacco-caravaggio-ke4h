@@ -455,7 +455,7 @@ In questo dipinto, Caravaggio usa la luce non solo per modellare le forme, ma an
         </div>
 
         <!-- NEW TABLE SECTION 1: 4 Rows, 4 Columns -->
-        <h2 class="section-title">Tecniche Avanzate di Prompting: Esempio 1</h2>
+        <h2 class="section-title">Comparison of Claude, Gemini and Minstral responses to the Few-shot Prompt</h2>
         <p class="section-description">
             Questa tabella presenta un confronto tra diverse tecniche di prompting, evidenziando i loro scenari d'uso e i potenziali benefici.
         </p>
@@ -463,30 +463,30 @@ In questo dipinto, Caravaggio usa la luce non solo per modellare le forme, ma an
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th>Tecnica</th>
-                        <th>Descrizione Breve</th>
-                        <th>Casi d'Uso</th>
-                        <th>Vantaggi Chiave</th>
+                        <th>LLM</th>
+                        <th>Output Summary</th>
+                        <th>Strengths</th>
+                        <th>Limitations</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Few-shot Prompting</td>
-                        <td>Fornire al modello alcuni esempi (pochi) prima della richiesta finale.</td>
-                        <td>Classificazione, Riassunto, Generazione di testo con stile specifico.</td>
-                        <td>Migliora la comprensione del task, riduce le allucinazioni.</td>
+                        <td>Claude</td>
+                        <td>Deeply poetic and symbolic; interprets Bacchus as a metaphor of Caravaggio’s inner turmoil. Focus on light, realism, seduction, and decadence.</td>
+                        <td>Strong symbolic reading, emotional tone, existential layer, reference to artist’s biography.</td>
+                        <td>Less structured, omits some concrete visual details, no direct historical context.</td>
                     </tr>
                     <tr>
-                        <td>Chain-of-Thought (CoT)</td>
-                        <td>Chiedere al modello di mostrare i passaggi intermedi del ragionamento.</td>
-                        <td>Risoluzione di problemi complessi, ragionamento logico, matematica.</td>
-                        <td>Aumenta l'accuratezza su task complessi, facilita il debug.</td>
+                        <td>Gemini</td>
+                        <td>Shorter answer emphasizing sensual realism, symbolic value of wine, and allusions to Caravaggio’s aesthetic development.</td>
+                        <td>Concise, links style with personal exploration, touches modernity vs classicism.</td>
+                        <td>Too brief, lacks visual specifics and deeper symbolic or critical readings.</td>
                     </tr>
                     <tr>
-                        <td>Self-Consistency</td>
-                        <td>Generare risposte multiple e scegliere la più comune o logicamente coerente.</td>
-                        <td>Problemi che richiedono robustezza e verifica interna.</td>
-                        <td>Maggiore affidabilità e robustezza delle risposte.</td>
+                        <td>Mistral</td>
+                        <td>Balanced description and symbolic interpretation. Emphasis on chiaroscuro, fruit symbolism, and sensual/spiritual tension.</td>
+                        <td>Clear visuals, good symbolic links, light biography mention.</td>
+                        <td>Lacks contextual anchoring in Caravaggio’s historical moment.</td>
                     </tr>
                     <tr>
                         <td>Tree of Thought (ToT)</td>
