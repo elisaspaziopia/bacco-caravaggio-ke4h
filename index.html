@@ -285,6 +285,33 @@
             transform: scale(1.05);
         }
 
+        /* New section for image and button */
+        .prompt-techniques-section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .prompt-techniques-section .image-container {
+            margin-bottom: 3rem;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px var(--shadow);
+            border: 1px solid rgba(218, 165, 32, 0.2);
+        }
+
+        .prompt-techniques-section .image-container img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .prompt-techniques-section .cta-button {
+            padding: 1.2rem 2.5rem; /* Larger button */
+            font-size: 1.2rem;
+        }
+
         /* Animations */
         @keyframes fadeInUp {
             from {
@@ -328,6 +355,11 @@
 
             .nav-container {
                 padding: 0 1rem;
+            }
+
+            .prompt-techniques-section .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
             }
         }
 
@@ -406,17 +438,16 @@
             <div class="logo">Arco KG Enhancement</div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html#queries" class="nav-link">Query SPARQL</a>
+                    <a href="#queries" class="nav-link">Query SPARQL</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Metodologia</a>
                     <div class="dropdown">
                         <a href="prompting_techniques.html" class="dropdown-item">Prompting Techniques</a>
-                        <a href="index.html#evaluation" class="dropdown-item">Valutazione</a>
-                        <a href="index.html#results" class="dropdown-item">Risultati</a>
+                        <a href="#results" class="dropdown-item">Risultati</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -430,7 +461,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a href="index.html#documentation" class="nav-link">Documentazione</a>
+                    <a href="#documentation" class="nav-link">Documentazione</a>
                 </li>
             </ul>
         </div>
@@ -440,7 +471,7 @@
         <div class="hero-content">
             <h1>Knowledge Graph Enhancement</h1>
             <p>Arricchimento automatico di Knowledge Graph attraverso tecniche di Natural Language Processing applicate al patrimonio culturale italiano</p>
-            <a href="index.html#queries" class="cta-button">Esplora le Query</a>
+            <a href="#queries" class="cta-button">Esplora le Query</a>
         </div>
         <div class="scroll-indicator">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -510,37 +541,32 @@ SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
         </div>
     </section>
 
-    <section class="queries-section" id="evaluation">
-        <h2 class="section-title">Valutazione e Risultati</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
-            Dettagli sulle metriche di valutazione e i risultati ottenuti dall'arricchimento del Knowledge Graph.
+    <section class="prompt-techniques-section fade-in" id="prompt-techniques-link-section">
+        <h2 class="section-title">Scopri le Nostre Tecniche di Prompting</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 3rem; color: #666; font-size: 1.1rem;">
+            Approfondisci come abbiamo utilizzato le più efficaci tecniche di prompting per interrogare i Large Language Models
+            e arricchire il Knowledge Graph con informazioni precise e contestuali.
         </p>
-        <div style="background: var(--card-bg); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px var(--shadow); border: 1px solid rgba(218, 165, 32, 0.2);">
-            <h3 class="query-title" style="text-align: center;">Performance del Modello</h3>
-            <p class="query-description" style="text-align: center; margin-bottom: 2rem;">
-                Spiega qui le metodologie di valutazione e le performance chiave del tuo sistema.
-                Potresti includere grafici o tabelle riassuntive dei risultati.
-            </p>
-            <div style="height: 200px; background: #f0f0f0; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #888;">
-                [Grafico o Tabella di Valutazione Qui]
-            </div>
+        <div class="image-container fade-in">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Caravaggio_-_David_with_the_Head_of_Goliath.jpg" alt="Esempio di opera d'arte per tecniche di prompting">
         </div>
+        <a href="prompting_techniques.html" class="cta-button fade-in">
+            Scopri come abbiamo interrogato le LLMs per arricchire il Knowledge Graph
+        </a>
     </section>
 
     <footer class="footer">
         <div class="footer-links">
             <div class="footer-link-group">
                 <h4>Navigazione Principale</h4>
-                <a href="index.html#home">Home</a>
-                <a href="index.html#queries">Query SPARQL</a>
-                <a href="index.html#evaluation">Valutazione</a>
-                <a href="index.html#documentation">Documentazione</a>
+                <a href="#home">Home</a>
+                <a href="#queries">Query SPARQL</a>
+                <a href="#documentation">Documentazione</a>
             </div>
             <div class="footer-link-group">
                 <h4>Metodologia</h4>
                 <a href="prompting_techniques.html">Prompting Techniques</a>
-                <a href="index.html#evaluation">Valutazione Generale</a>
-                <a href="index.html#results">Risultati Finali</a>
+                <a href="#results">Risultati Finali</a>
             </div>
             <div class="footer-link-group">
                 <h4>Case Studies</h4>
@@ -566,7 +592,7 @@ SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 // Only prevent default if it's an internal hash link on the current page
-                if (href.startsWith('#') && window.location.pathname.endsWith('index.html')) {
+                if (href.startsWith('#')) {
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) {
