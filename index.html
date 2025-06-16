@@ -601,15 +601,7 @@ LIMIT 200</div>
                 </div>
                 <div class="query-description-box">
                     <p class="query-description">
-                        Where:
-                        - DISTINCT is used to avoid duplicate results, i.e. to show only unique combinations of work, title and author, even though the query may find more than one identical one.
-                        - FILTER limits results in which the title contains the word “bacco”.
-                        - REGEX is used to do a more flexible text search (pattern matching) on the title.
-                        - Likewise, OPTIONAL is used to include only authors whose name contains “caravaggio” (always case-insensitive).
-                        - UNION in the first block, WHERE, is used to search for titles that may be given different properties, then combines results that satisfy one or the other pattern. In the OPTIONAL block on authors, it serves to search for the author indicated with different properties.
-                        - OPTIONAL is used to make sure that the part about authors is not mandatory: if a work has an author, it includes it (and tries to filter on the author's label), but if it has no author or the author has no label, the query does not fail and still returns the title work.
-                        - ORDER BY serves to sort the results by title in ascending alphabetical order.
-                        - LIMIT is used to limit the maximum number of results to 200, so as not to have an overly long response.
+                        
                     </p>
                     <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">Visualizza Risultati su Arco</a>
                 </div>
@@ -644,9 +636,7 @@ LIMIT 200</div>
                 </div>
                 <div class="query-description-box">
                     <p class="query-description">
-                        Where:
-                        - UNION in the first block: search for works with a label (rdfs:label) containing both ‘bacco’ and ‘caravaggio’ (two FILTERS which must both be true). In the second block: search for works with a label containing “bacco” and an associated author (a-cd:hasAuthor) whose name contains “michelangelo merisi”.
-                        - FILTER and REGEX in the first block require the title to contain both ‘bacco’ and ‘caravaggio’. In the second block, FILTER(REGEX(?label, "bacco", "i")) looks for titles with "bacco", and FILTER(REGEX(?authorLabel, "michelangelo merisi", "i")) looks for authors with the name "michelangelo merisi".
+                      
                     </p>
                     <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">Visualizza Risultati su Arco</a>
                 </div>
