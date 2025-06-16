@@ -325,4 +325,218 @@
 
         .fade-in {
             opacity: 0;
-            transform: translate
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .main-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .case-nav {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .case-nav-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .description-container, .code-block {
+                padding: 1rem; /* Adjust padding for smaller screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">Arco KG Enhancement</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#queries" class="nav-link">Query SPARQL</a>
+                </li>
+                <li class="nav-item">
+                    <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Case Studies</a>
+                    <div class="dropdown">
+                        <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
+                        <a href="case_study_2.html" class="dropdown-item active">Case Study 2</a>
+                        <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
+                        <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
+                        <a href="case_study_5.html" class="dropdown-item">Case Study 5</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">Case Study 2: Estrazione Contesto Storico e Commissione</h1>
+        <p class="page-subtitle">
+            Prompting Avanzato per l'Estrazione di Informazioni Storiche e Artistiche
+        </p>
+
+        <!-- Navigation between case studies -->
+        <div class="case-nav">
+            <a href="case_study_1.html" class="case-nav-button">← Case Study 1</a>
+            <div class="case-nav-info">
+                <strong>Case Study 2 di 5</strong><br>
+                Estrazione Contesto Storico e Commissione
+            </div>
+            <a href="case_study_3.html" class="case-nav-button">Case Study 3 →</a>
+        </div>
+
+        <!-- Content Section -->
+        <div class="case-study-container">
+            <!-- Description Box (now first) -->
+            <div class="content-box fade-in">
+                <h2 class="box-title">Analisi e Contestualizzazione della Commissione</h2>
+                <div class="description-container">
+                    <p><strong>Identificazione del gap:</strong> Nello stesso filone del Case Study 1, pur essendo presenti informazioni descrittive sull'opera, mancavano dettagli approfonditi sulla sua commissione e sul contesto storico-biografico di Caravaggio durante la sua realizzazione. Queste informazioni sono cruciali per comprendere appieno il significato e la genesi dell'opera.</p>
+
+                    <p><strong>Metodologia:</strong> Per colmare questa lacuna, è stato utilizzato un prompt strutturato con una "expertise persona". Al modello è stato chiesto di agire come un esperto storico dell'arte del periodo barocco, fornendo risposte dettagliate e contestualizzate. Il prompt ha richiesto la descrizione accurata della commissione, le figure coinvolte, il contesto storico a Roma, e le implicazioni per l'opera stessa. L'obiettivo era ottenere un output che potesse essere facilmente trasformato in triple RDF per arricchire il Knowledge Graph di ArCo con dati relazionali sulla committenza e la contestualizzazione.</p>
+
+                    <p><strong>Risultati:</strong> L'applicazione di questa tecnica ha permesso di generare una ricca serie di informazioni sulla commissione del "Bacco", inclusi dettagli sul Cardinale Del Monte e il contesto della corte romana. Queste informazioni sono state poi modellate in triple RDF, migliorando significativamente la granularità e l'interconnessione dei dati disponibili su ArCo riguardo all'opera.</p>
+                    <a href="#" class="action-button" onclick="copyPromptText('promptForCommission')">Copia Prompt</a>
+                </div>
+            </div>
+
+            <!-- Code Box (now second) -->
+            <div class="content-box fade-in">
+                <h2 class="box-title">Triple RDF generate dalla Prompt</h2>
+                <div class="code-container">
+                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+@prefix TI: https://w3id.org/italia/onto/TI/ .
+@prefix l0: https://w3id.org/italia/onto/l0/ .
+
+# Link artwork to commission
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    cd:hasCommission 
+    <https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> .
+
+# Commission entity
+<https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> 
+    rdf:type cd:Commission ;
+    rdfs:label "Committenza del Cardinale Del Monte per Bacco"@it ;
+    l0:name "Committenza del Cardinale Del Monte per Bacco"@it ;
+    cd:hasCommittent <https://w3id.org/arco/resource/Agent/cardinale-del-monte> ;
+    cd:hasCircumstance <https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> ;
+    TI:atTime <https://w3id.org/arco/resource/TimeInterval/1608> .
+
+# Agent (Commissioner)
+<https://w3id.org/arco/resource/Agent/cardinale-del-monte> 
+    rdf:type cd:Agent ;
+    rdfs:label "Cardinale Francesco Maria Del Monte"@it .
+
+# Circumstance
+<https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> 
+    rdf:type cd:Circumstance ;
+    rdfs:label "Donazione a Ferdinando I de' Medici per le nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
+                    </pre>
+                </div>
+            </div>
+            <!-- Hidden element to hold the actual prompt text for copying -->
+            <div id="promptForCommission" style="display:none;">
+                "Assumi il ruolo di un esperto storico dell'arte specializzato nel periodo barocco e nel pittore Caravaggio.
+                Analizza e contestualizza la commissione del dipinto 'Bacco' (1595-1597) di Caravaggio, fornendo risposte dettagliate e basate su fonti storiche verificabili.
+                Il tuo output deve includere:
+                1.  **Identificazione del committente:** Chi ha commissionato l'opera? Qual era il suo ruolo e la sua importanza nel contesto romano del tempo?
+                2.  **Contesto della commissione:** Quali furono le circostanze specifiche della commissione? Era parte di un ciclo di opere o un pezzo singolo?
+                3.  **Destinazione originale:** Per quale ambiente o scopo era destinata l'opera?
+                4.  **Contesto storico e culturale:** Come si inserisce la commissione nell'ambiente artistico e culturale della Roma di fine '500? Quali erano le tendenze e le figure di spicco?
+                5.  **Implicazioni per l'opera:** Come la commissione e il contesto influenzarono lo stile, il soggetto o il messaggio del 'Bacco'?
+                Formatta la tua risposta in un testo chiaro e strutturato, adatto per l'arricchimento di un Knowledge Graph, con enfasi sui nomi propri, date e relazioni chiave.
+                "
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
+        <p style="margin-top: 0.5rem;">Case Study 2 - Implementazione Tecniche di Prompting</p>
+    </footer>
+
+    <script>
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Copy to clipboard function for prompt text
+        function copyPromptText(elementId) {
+            const textToCopy = document.getElementById(elementId).textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // Find the specific button that was clicked
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745'; // Green for success
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = ''; // Revert to original background
+                }, 2000);
+            }, function(err) {
+                console.error('Errore nella copia: ', err);
+                // Optionally provide user feedback for error
+            });
+        }
+    </script>
+</body>
+</html>
