@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bacco di Caravaggio</title>
+  <style>
+    body {
+      background-color: pink;
+      font-family: Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #ffe6f0;
+      border-bottom: 2px solid #ccc;
+    }
+    nav a {
+      text-decoration: none;
+      color: #333;
+      padding: 15px 25px;
+      display: block;
+      font-weight: bold;
+    }
+    nav a:hover {
+      background-color: #ffccdd;
+    }
+    .content {
+      text-align: center;
+      padding: 40px;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 5px solid #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Bacco di Caravaggio</h1>
+  </header>
+
+  <nav>
+    <a href="case-study1.html">Case Study 1</a>
+    <a href="case-study2.html">Case Study 2</a>
+    <a href="case-study3.html">Case Study 3</a>
+    <a href="case-study4.html">Case Study 4</a>
+  </nav>
+
+  <div class="content">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Michelangelo_Caravaggio_061.jpg" alt="Bacco di Caravaggio">
+    <p>Un'opera iconica di Michelangelo Merisi da Caravaggio.</p>
+  </div>
+
+</body>
+</html>
