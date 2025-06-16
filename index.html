@@ -82,9 +82,9 @@
             color: var(--accent-color);
         }
 
-        /* Dropdown Menu (hidden as per request, but keeping styles in case needed later) */
+        /* Dropdown Menu */
         .dropdown {
-            display: none; /* Hide dropdown by default */
+            display: none;
             position: absolute;
             top: 100%;
             left: 0;
@@ -124,13 +124,14 @@
         .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* Changed to column to stack elements */
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             position: relative;
             background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%);
             overflow: hidden;
-            padding-top: 80px; /* Space for fixed nav */
+            padding-top: 80px;
+            padding-bottom: 4rem; /* Added padding bottom */
         }
 
         .hero::before {
@@ -151,14 +152,14 @@
             padding: 2rem;
             color: var(--text-light);
             z-index: 2;
-            margin-bottom: 2rem; /* Space between content and image */
+            margin-bottom: 2rem;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
             animation: fadeInUp 1s ease-out;
         }
@@ -171,13 +172,13 @@
         }
 
         .hero .image-container {
-            width: 70%; /* Adjust as needed */
-            max-width: 600px; /* Max width for the image */
+            width: 70%;
+            max-width: 600px;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             border: 3px solid var(--accent-color);
-            margin-bottom: 2rem; /* Space below the image */
+            margin-bottom: 2rem;
             animation: fadeInScale 1s ease-out 0.8s both;
         }
 
@@ -187,38 +188,19 @@
             display: block;
         }
 
-        .hero-text-after-image { /* New style for text below the image */
+        .hero-text-after-image {
             text-align: center;
             max-width: 800px;
             padding: 0 2rem;
             color: var(--text-light);
             z-index: 2;
-            margin-bottom: 3rem; /* Space below the text before the button */
+            margin-bottom: 3rem;
             font-size: 1.1rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 1.2s both; /* Delayed animation */
+            animation: fadeInUp 1s ease-out 1.2s both;
         }
 
-        .cta-button {
-            background: linear-gradient(135deg, var(--accent-color) 0%, #B8860B 100%);
-            color: var(--text-dark);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3);
-            animation: fadeInUp 1s ease-out 0.6s both;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(218, 165, 32, 0.4);
-        }
+        /* Removed .cta-button related styles as it's no longer present */
 
         /* Queries Section */
         .queries-section {
@@ -235,30 +217,27 @@
             color: var(--primary-color);
         }
 
-        .queries-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem; /* Space between query cards */
-            margin-top: 3rem;
-        }
-        
-        .query-card-wrapper { /* New wrapper for spacing between cards */
-            margin-bottom: 2rem; /* Add space below each query card */
+        .query-layout-vertical { /* New class for vertical layout */
+            display: flex;
+            flex-direction: column;
+            gap: 4rem; /* More space between vertical sections */
         }
 
-        .query-card {
-            background: var(--card-bg);
+        .query-item { /* Wrapper for each query and its description */
+            display: flex;
+            flex-direction: column; /* Default to column for small screens */
+            align-items: center;
+            gap: 2rem;
             padding: 2rem;
+            background: var(--card-bg);
             border-radius: 20px;
             box-shadow: 0 10px 30px var(--shadow);
-            transition: all 0.3s ease;
             border: 1px solid rgba(218, 165, 32, 0.2);
-            cursor: pointer;
             position: relative;
             overflow: hidden;
         }
 
-        .query-card::before {
+        .query-item::before {
             content: '';
             position: absolute;
             top: 0;
@@ -269,27 +248,42 @@
             transition: all 0.5s ease;
         }
 
-        .query-card:hover::before {
+        .query-item:hover::before {
             left: 0;
         }
 
-        .query-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(44, 24, 16, 0.2);
+        @media (min-width: 769px) { /* Adjust to row layout for larger screens */
+            .query-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start; /* Align items to the top */
+            }
+
+            .query-details {
+                flex: 1;
+                padding-right: 2rem; /* Space between description and code */
+            }
+
+            .query-code-container {
+                flex: 1.5; /* Give code more space */
+                max-width: 50%; /* Max width for code block */
+            }
         }
+
 
         .query-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
+            font-size: 1.6rem; /* Slightly larger title for impact */
             color: var(--primary-color);
             margin-bottom: 1rem;
-            font-weight: 600;
+            font-weight: 700; /* Bolder title */
         }
 
         .query-description {
-            color: #666;
+            color: #444; /* Darker text for readability */
             margin-bottom: 1.5rem;
             line-height: 1.7;
+            font-size: 1rem;
         }
 
         .query-code {
@@ -302,6 +296,8 @@
             color: var(--text-dark);
             white-space: pre-wrap;
             margin-bottom: 1rem;
+            width: 100%; /* Ensure it takes full width of its container */
+            overflow-x: auto; /* Allow horizontal scrolling for long lines */
         }
 
         .view-results {
@@ -379,7 +375,17 @@
             }
 
             .hero .image-container {
-                width: 90%; /* Wider on small screens */
+                width: 90%;
+            }
+
+            .query-item {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .query-details, .query-code-container {
+                padding-right: 0;
+                width: 100%;
             }
         }
 
@@ -493,14 +499,14 @@
         </div>
         <div class="hero-text-after-image">
             <p>
-                Qui puoi inserire del testo aggiuntivo per descrivere l'immagine o fornire ulteriori dettagli sul progetto.
-                Questo spazio è pensato per espandere le informazioni presentate, magari introducendo il motivo per cui
-                questa specifica opera è stata scelta o quale sia il valore aggiunto del vostro lavoro.
+                Questo progetto si propone di esplorare l'efficacia delle tecniche di **Natural Language Processing (NLP)** e **Large Language Models (LLMs)** nell'arricchire le descrizioni e le relazioni presenti nel 
+                **Knowledge Graph di Arco**. L'opera "Bacco" di Caravaggio, con la sua ricchezza di dettagli e il suo 
+                contesto storico-artistico complesso, rappresenta un caso studio ideale per dimostrare come le tecnologie 
+                semantiche possano valorizzare il patrimonio culturale digitale. Attraverso l'analisi e l'integrazione 
+                di nuove informazioni, miriamo a rendere i dati di Arco più completi, interconnessi e semanticamente 
+                ricchi, facilitando nuove forme di ricerca e scoperta per studiosi e appassionati.
             </p>
         </div>
-        <a href="prompting_techniques.html" class="cta-button">
-            Scopri come abbiamo interrogato le LLMs per arricchire il Knowledge Graph
-        </a>
         <div class="scroll-indicator">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7 10l5 5 5-5z"/>
@@ -510,63 +516,66 @@
 
     <section class="queries-section" id="queries">
         <h2 class="section-title">Query SPARQL per il Bacco di Caravaggio</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem;">
+        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
             Esplora le query utilizzate per identificare e analizzare l'opera "Bacco" di Caravaggio
-            all'interno del Knowledge Graph di Arco Beni Culturali.
+            all'interno del Knowledge Graph di Arco Beni Culturali. Ciascuna query è accompagnata da uno spazio
+            per descrizioni dettagliate sulla sua utilità e sui risultati attesi.
         </p>
         
-        <div class="queries-grid">
-            <div class="query-card-wrapper fade-in"> <div class="query-card">
-                    <h3 class="query-title">Query Base - Identificazione Opera</h3>
+        <div class="query-layout-vertical">
+            <div class="query-item fade-in">
+                <div class="query-details">
+                    <h3 class="query-title">Query 1: Identificazione Base e Contesto Autore</h3>
                     <p class="query-description">
-                        Query fondamentale per individuare l'opera "Bacco" di Caravaggio nel database Arco,
-                        recuperando informazioni essenziali come titolo, autore e classificazione.
+                        Questa query fondamentale è progettata per localizzare rapidamente l'opera "Bacco" nel
+                        Knowledge Graph di Arco. Non solo recupera il titolo e l'autore, ma cerca anche di
+                        stabilire un link diretto all'autore per poter esplorare ulteriori dettagli biografici
+                        o altre opere a lui attribuite, fornendo un punto di partenza per l'analisi.
+                        **Puoi aggiungere qui una descrizione più dettagliata o i risultati chiave di questa query.**
                     </p>
+                    <a href="#" class="view-results">Visualizza Risultati</a>
+                </div>
+                <div class="query-code-container">
                     <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
-SELECT ?opera ?titolo ?autore WHERE {
+PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+
+SELECT ?opera ?titolo ?autoreNome ?autoreUri WHERE {
   ?opera a arco:CulturalProperty ;
           arco:hasTitle ?titolo ;
-          arco:hasAuthor ?autore .
+          arco:hasAuthor ?autoreUri .
+  ?autoreUri rdfs:label ?autoreNome .
   FILTER(contains(lcase(?titolo), "bacco"))
-  FILTER(contains(lcase(?autore), "caravaggio"))
+  FILTER(contains(lcase(?autoreNome), "caravaggio"))
 }</div>
-                    <a href="#" class="view-results">Visualizza Risultati</a>
                 </div>
             </div>
 
-            <div class="query-card-wrapper fade-in"> <div class="query-card">
-                    <h3 class="query-title">Query Avanzata - Dettagli Tecnici</h3>
+            <div class="query-item fade-in">
+                <div class="query-details">
+                    <h3 class="query-title">Query 2: Dettagli Tecnici e Localizzazione dell'Opera</h3>
                     <p class="query-description">
-                        Query approfondita per ottenere informazioni tecniche dettagliate sull'opera,
-                        inclusi materiali, dimensioni, tecniche pittoriche e stato di conservazione.
+                        Questa query si concentra sui dati più specifici dell'opera "Bacco", recuperando informazioni
+                        cruciali come i materiali utilizzati, le dimensioni esatte e la tecnica pittorica. Inoltre,
+                        individua l'attuale ubicazione dell'opera all'interno di una collezione o di un museo,
+                        offrendo un quadro completo sulle sue caratteristiche fisiche e la sua collocazione attuale.
+                        **Utilizza questo spazio per descrivere l'importanza di questi dettagli o esempi di come le LLMs
+                        potrebbero arricchire queste informazioni.**
                     </p>
+                    <a href="#" class="view-results">Visualizza Risultati</a>
+                </div>
+                <div class="query-code-container">
                     <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
-SELECT ?opera ?materiale ?dimensioni ?tecnica WHERE {
+PREFIX schema: &lt;http://schema.org/&gt;
+
+SELECT ?opera ?materiale ?dimensioni ?tecnica ?ubicazioneNome WHERE {
   ?opera arco:hasTitle ?titolo ;
           arco:hasMaterial ?materiale ;
           arco:hasDimension ?dimensioni ;
-          arco:hasTechnique ?tecnica .
+          arco:hasTechnique ?tecnica ;
+          schema:location ?ubicazione .
+  ?ubicazione rdfs:label ?ubicazioneNome .
   FILTER(contains(lcase(?titolo), "bacco"))
 }</div>
-                    <a href="#" class="view-results">Visualizza Risultati</a>
-                </div>
-            </div>
-
-            <div class="query-card-wrapper fade-in"> <div class="query-card">
-                    <h3 class="query-title">Query Contestuale - Relazioni Storiche</h3>
-                    <p class="query-description">
-                        Query complessa per esplorare il contesto storico-artistico dell'opera,
-                        collegando informazioni su committenza, ubicazione storica e relazioni con altre opere.
-                    </p>
-                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
-SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
-  ?opera arco:hasTitle ?titolo ;
-          arco:hasLocation ?ubicazione ;
-          arco:hasCommission ?commissione ;
-          arco:belongsToPeriod ?periodo .
-  FILTER(contains(lcase(?titolo), "bacco"))
-}</div>
-                    <a href="#" class="view-results">Visualizza Risultati</a>
                 </div>
             </div>
         </div>
@@ -607,7 +616,6 @@ SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
-                // Only prevent default if it's an internal hash link on the current page
                 if (href.startsWith('#')) {
                     e.preventDefault();
                     const target = document.querySelector(href);
@@ -640,9 +648,8 @@ SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
         });
 
         // Enhanced query card interactions
-        document.querySelectorAll('.query-card').forEach(card => {
+        document.querySelectorAll('.query-item').forEach(card => { // Changed from .query-card to .query-item
             card.addEventListener('click', function() {
-                // Add subtle pulse effect
                 this.style.transform = 'scale(0.98)';
                 setTimeout(() => {
                     this.style.transform = '';
