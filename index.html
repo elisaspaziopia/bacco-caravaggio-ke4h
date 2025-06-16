@@ -177,7 +177,7 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             border: 3px solid var(--accent-color);
-            margin-bottom: 3rem; /* Space below the image */
+            margin-bottom: 2rem; /* Space below the image */
             animation: fadeInScale 1s ease-out 0.8s both;
         }
 
@@ -185,6 +185,18 @@
             width: 100%;
             height: auto;
             display: block;
+        }
+
+        .hero-text-after-image { /* New style for text below the image */
+            text-align: center;
+            max-width: 800px;
+            padding: 0 2rem;
+            color: var(--text-light);
+            z-index: 2;
+            margin-bottom: 3rem; /* Space below the text before the button */
+            font-size: 1.1rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 1.2s both; /* Delayed animation */
         }
 
         .cta-button {
@@ -226,8 +238,12 @@
         .queries-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
+            gap: 2rem; /* Space between query cards */
             margin-top: 3rem;
+        }
+        
+        .query-card-wrapper { /* New wrapper for spacing between cards */
+            margin-bottom: 2rem; /* Add space below each query card */
         }
 
         .query-card {
@@ -475,6 +491,13 @@
         <div class="image-container">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Caravaggio_-_David_with_the_Head_of_Goliath.jpg" alt="Esempio di opera d'arte per tecniche di prompting">
         </div>
+        <div class="hero-text-after-image">
+            <p>
+                Qui puoi inserire del testo aggiuntivo per descrivere l'immagine o fornire ulteriori dettagli sul progetto.
+                Questo spazio è pensato per espandere le informazioni presentate, magari introducendo il motivo per cui
+                questa specifica opera è stata scelta o quale sia il valore aggiunto del vostro lavoro.
+            </p>
+        </div>
         <a href="prompting_techniques.html" class="cta-button">
             Scopri come abbiamo interrogato le LLMs per arricchire il Knowledge Graph
         </a>
@@ -493,13 +516,13 @@
         </p>
         
         <div class="queries-grid">
-            <div class="query-card fade-in">
-                <h3 class="query-title">Query Base - Identificazione Opera</h3>
-                <p class="query-description">
-                    Query fondamentale per individuare l'opera "Bacco" di Caravaggio nel database Arco,
-                    recuperando informazioni essenziali come titolo, autore e classificazione.
-                </p>
-                <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+            <div class="query-card-wrapper fade-in"> <div class="query-card">
+                    <h3 class="query-title">Query Base - Identificazione Opera</h3>
+                    <p class="query-description">
+                        Query fondamentale per individuare l'opera "Bacco" di Caravaggio nel database Arco,
+                        recuperando informazioni essenziali come titolo, autore e classificazione.
+                    </p>
+                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
 SELECT ?opera ?titolo ?autore WHERE {
   ?opera a arco:CulturalProperty ;
           arco:hasTitle ?titolo ;
@@ -507,16 +530,17 @@ SELECT ?opera ?titolo ?autore WHERE {
   FILTER(contains(lcase(?titolo), "bacco"))
   FILTER(contains(lcase(?autore), "caravaggio"))
 }</div>
-                <a href="#" class="view-results">Visualizza Risultati</a>
+                    <a href="#" class="view-results">Visualizza Risultati</a>
+                </div>
             </div>
 
-            <div class="query-card fade-in">
-                <h3 class="query-title">Query Avanzata - Dettagli Tecnici</h3>
-                <p class="query-description">
-                    Query approfondita per ottenere informazioni tecniche dettagliate sull'opera,
-                    inclusi materiali, dimensioni, tecniche pittoriche e stato di conservazione.
-                </p>
-                <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+            <div class="query-card-wrapper fade-in"> <div class="query-card">
+                    <h3 class="query-title">Query Avanzata - Dettagli Tecnici</h3>
+                    <p class="query-description">
+                        Query approfondita per ottenere informazioni tecniche dettagliate sull'opera,
+                        inclusi materiali, dimensioni, tecniche pittoriche e stato di conservazione.
+                    </p>
+                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
 SELECT ?opera ?materiale ?dimensioni ?tecnica WHERE {
   ?opera arco:hasTitle ?titolo ;
           arco:hasMaterial ?materiale ;
@@ -524,16 +548,17 @@ SELECT ?opera ?materiale ?dimensioni ?tecnica WHERE {
           arco:hasTechnique ?tecnica .
   FILTER(contains(lcase(?titolo), "bacco"))
 }</div>
-                <a href="#" class="view-results">Visualizza Risultati</a>
+                    <a href="#" class="view-results">Visualizza Risultati</a>
+                </div>
             </div>
 
-            <div class="query-card fade-in">
-                <h3 class="query-title">Query Contestuale - Relazioni Storiche</h3>
-                <p class="query-description">
-                    Query complessa per esplorare il contesto storico-artistico dell'opera,
-                    collegando informazioni su committenza, ubicazione storica e relazioni con altre opere.
-                </p>
-                <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
+            <div class="query-card-wrapper fade-in"> <div class="query-card">
+                    <h3 class="query-title">Query Contestuale - Relazioni Storiche</h3>
+                    <p class="query-description">
+                        Query complessa per esplorare il contesto storico-artistico dell'opera,
+                        collegando informazioni su committenza, ubicazione storica e relazioni con altre opere.
+                    </p>
+                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
 SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
   ?opera arco:hasTitle ?titolo ;
           arco:hasLocation ?ubicazione ;
@@ -541,7 +566,8 @@ SELECT ?opera ?ubicazione ?commissione ?periodo WHERE {
           arco:belongsToPeriod ?periodo .
   FILTER(contains(lcase(?titolo), "bacco"))
 }</div>
-                <a href="#" class="view-results">Visualizza Risultati</a>
+                    <a href="#" class="view-results">Visualizza Risultati</a>
+                </div>
             </div>
         </div>
     </section>
