@@ -344,81 +344,21 @@
         <div class="content-section">
             <!-- Code Box -->
             <div class="content-box">
-                <h2 class="box-title">Codice di Implementazione</h2>
-                <div class="code-container">// Implementazione della tecnica di prompting per l'estrazione di informazioni
-// su "Bacco" di Caravaggio dal Knowledge Graph ArCo
+                <h2 class="box-title">Triple</h2>
+                <div class="code-container">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix cd: <https://w3id.org/arco/ontology/context-description/> .
 
-const arcoQuery = {
-    prefix: `
-        PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-        PREFIX dc: <http://purl.org/dc/elements/1.1/>
-    `,
-    
-    query: `
-        SELECT DISTINCT ?opera ?titolo ?descrizione ?simbolismo
-        WHERE {
-            ?opera a arco:HistoricOrArtisticProperty .
-            ?opera rdfs:label ?titolo .
-            FILTER(REGEX(LCASE(STR(?titolo)), "bacco", "i"))
-            
-            OPTIONAL {
-                ?opera arco:hasDescription ?descrizione .
-            }
-            OPTIONAL {
-                ?opera arco:hasSymbolism ?simbolismo .
-            }
-        }
-        LIMIT 10
-    `,
-    
-    // Tecnica di prompting utilizzata per arricchire i dati
-    promptingTechnique: {
-        type: "Few-shot prompting",
-        template: `
-            Analizza l'opera "Bacco" di Caravaggio e fornisci:
-            1. Una descrizione dettagliata dell'iconografia
-            2. Il significato simbolico degli elementi presenti
-            3. Il contesto storico della commissione
-            
-            Esempio per altra opera:
-            Opera: "Giuditta che decapita Oloferne"
-            Descrizione: Scena drammatica con forte chiaroscuro...
-            Simbolismo: Rappresentazione della virtù che trionfa...
-            Contesto: Commissionata per...
-            
-            Ora analizza "Bacco":
-        `
-    }
-};
-
-// Funzione per processare la risposta del LLM
-function processLLMResponse(response) {
-    const enrichedData = {
-        artwork: "https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176",
-        enhancedDescription: response.description,
-        symbolism: response.symbolism,
-        historicalContext: response.context,
-        technique: "chiaroscuro"
-    };
-    
-    return convertToRDFTriples(enrichedData);
-}
-
-// Conversione in triple RDF per ArCo
-function convertToRDFTriples(data) {
-    return `
-        <${data.artwork}> arco:hasEnhancedDescription "${data.enhancedDescription}"@it .
-        <${data.artwork}> arco:hasSymbolism "${data.symbolism}"@it .
-        <${data.artwork}> arco:hasHistoricalContext "${data.historicalContext}"@it .
-        <${data.artwork}> arco:hasTechnique "${data.technique}"@it .
-    `;
-}</div>
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    cd:hasIconographicDescription 
+    """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
+</div>
             </div>
 
             <!-- Description Box -->
             <div class="content-box">
-                <h2 class="box-title">Descrizione del Case Study</h2>
+                <h2 class="box-title">Lack of a symbolic description</h2>
                 <div class="description-container">
                     <p><strong>Obiettivo:</strong> Questo primo case study dimostra l'implementazione pratica delle tecniche di prompting per arricchire il Knowledge Graph ArCo con informazioni dettagliate sull'opera "Bacco" di Caravaggio.</p>
                     
