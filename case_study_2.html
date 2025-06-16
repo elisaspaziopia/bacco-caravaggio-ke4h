@@ -425,30 +425,54 @@
             <div class="case-study-item fade-in">
                 <h3 class="case-study-title">Prompt per Informazioni sulla Commissione e Contesto Storico</h3>
                 <div class="code-container">
-                    <div class="code-block">Sei un esperto storico dell'arte specializzato nel periodo barocco italiano. 
-Analizza l'opera "Bacco" di Caravaggio conservata agli Uffizi e fornisci informazioni dettagliate su:
+                    <div class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix a-cd: <https://w3id.org/arco/ontology/context-description/> .
+@prefix TI: <https://w3id.org/italia/onto/TI/> .
+@prefix l0: <https://w3id.org/italia/onto/l0/> .
 
-1. COMMISSIONE E COMMITTENZA:
-   - Chi ha commissionato l'opera
-   - Contesto della commissione
-   - Motivazioni storiche e culturali
+# Link artwork to commission
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    a-cd:hasCommission 
+    <https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> .
 
-2. DATAZIONE ALTERNATIVA:
-   - Discussioni accademiche sulla datazione
-   - Evidenze stilistiche che supportano diverse datazioni
-   - Confronto con altre opere del periodo
+# Commission entity
+<https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> 
+    rdf:type a-cd:Commission ;
+    rdfs:label "Committenza del Cardinale Del Monte per Bacco"@it ;
+    l0:name "Committenza del Cardinale Del Monte per Bacco"@it ;
+    a-cd:hasCommittent <https://w3id.org/arco/resource/Agent/cardinale-del-monte> ;
+    a-cd:hasCircumstance <https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> ;
+    TI:atTime <https://w3id.org/arco/resource/TimeInterval/1608> .
 
-3. CONTESTO STORICO:
-   - Situazione politica e sociale dell'epoca
-   - Ambiente artistico romano
-   - Relazione con altri artisti contemporanei
+# Agent (Commissioner)
+<https://w3id.org/arco/resource/Agent/cardinale-del-monte> 
+    rdf:type a-cd:Agent ;
+    rdfs:label "Cardinale Francesco Maria Del Monte"@it .
 
-4. ICONOGRAFIA E SIMBOLISMO:
-   - Significato simbolico degli elementi presenti
-   - Riferimenti mitologici e allegorici
-   - Interpretazioni critiche moderne
+# Circumstance
+<https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> 
+    rdf:type a-cd:Circumstance ;
+    rdfs:label "Donazione a Ferdinando I de' Medici per le nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
+Alternative Dating: 1589
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix a-cd: <https://w3id.org/arco/ontology/context-description/> .
+@prefix l0: <https://w3id.org/italia/onto/l0/> .
 
-Struttura la risposta in formato adatto per l'integrazione in un knowledge graph, utilizzando affermazioni chiare e verificabili. Includi riferimenti a fonti storiche quando possibile.</div>
+# Link artwork to alternative dating
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    a-cd:hasAlternativeDating 
+    <https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> .
+
+# Alternative dating entity
+<https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> 
+    rdf:type a-cd:AlternativeDating ;
+    rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
+    l0:name "Datazione alternativa del Bacco al 1589"@it ;
+    a-cd:hasDatingDescription "prima datazione al 1589"@it .
+</div>
                 </div>
                 <div class="description-box">
                     <p class="description-text">
