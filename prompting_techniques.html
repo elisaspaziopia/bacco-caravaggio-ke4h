@@ -372,44 +372,29 @@ In sintesi, il “Bacco” di Caravaggio è un’opera che affascina per il suo 
             </table>
         </div>
 
-        <h2 class="section-title" id="advanced-techniques">Tecniche Avanzate di Prompting a Confronto</h2>
-        <p class="section-description">
-            Un'analisi dettagliata di tre tecniche avanzate di prompting: **Chain-of-Thought (CoT)**, **Self-Consistency** e **Generated Knowledge Prompting**, evidenziando i loro punti di forza e applicazioni.
-        </p>
+        <h2 class="section-title" id="advanced-techniques">Comparison of ChatGPT and Gemini responses to the Zero-shot Prompt</h2>
         <div class="comparison-table-container">
             <table class="comparison-table">
                 <thead>
                     <tr>
-                        <th>Criterio</th>
-                        <th>Chain-of-Thought (CoT)</th>
-                        <th>Self-Consistency</th>
-                        <th>Generated Knowledge Prompting</th>
+                        <th>LLM</th>
+                        <th>Output Summary</th>
+                        <th>Strenghts</th>
+                        <th>Limitations</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>**Concetto**</td>
-                        <td>Incoraggia il modello a mostrare il suo "ragionamento" passo-passo prima di fornire la risposta finale.</td>
-                        <td>Genera diverse risposte e poi sceglie la più coerente o frequente come risultato finale.</td>
-                        <td>Il modello genera conoscenza rilevante prima di rispondere alla query principale, migliorando la pertinenza.</td>
+                        <td>ChatGPT</td>
+                        <td>Provides detailed visual description (subject, light, color), highlights symbolism (decay, vanitas), and discusses interpretative aspects like realism and possible erotic undertones.</td>
+                        <td>Balanced structure, detailed visual and symbolic description, coherent art-historical framing.</td>
+                        <td>Lacks contextualization (historical/biographical) and deeper theoretical perspectives.</td>
                     </tr>
                     <tr>
-                        <td>**Vantaggi**</td>
-                        <td>Migliora la precisione in compiti complessi, rende il ragionamento più trasparente, aiuta nel debugging.</td>
-                        <td>Aumenta la robustezza e l'affidabilità, riduce gli errori dovuti a singole "allucinazioni".</td>
-                        <td>Fornisce contesto aggiuntivo, riduce il bias e le allucinazioni, migliora la qualità delle risposte informate.</td>
-                    </tr>
-                    <tr>
-                        <td>**Svantaggi**</td>
-                        <td>Maggiore lunghezza del prompt, potenzialmente più costoso computazionalmente.</td>
-                        <td>Più costoso in termini di chiamate API (generazione multipla).</td>
-                        <td>Può aumentare la complessità del prompt, richiede validazione della conoscenza generata.</td>
-                    </tr>
-                    <tr>
-                        <td>**Applicazioni nel Progetto**</td>
-                        <td>Estrazione di relazioni complesse (es. identificazione di eventi di restauro con date e partecipanti).</td>
-                        <td>Validazione di fatti estratti o classificazione di oggetti ambigui, confrontando più interpretazioni.</td>
-                        <td>Miglioramento dell'identificazione di entità poco note, prima generando informazioni contestuali su di esse.</td>
+                        <td>Gemini</td>
+                        <td>Very descriptive analysis of subject, pose, technique, and light. Symbolism is discussed (memento mori, Eucharistic wine), and offers multiple interpretative layers.</td>
+                        <td>Strong technical language, symbolic insights, multiple interpretive levels.</td>
+                        <td>Slightly fragmented structure, minimal historical context or authorial background.</td>
                     </tr>
                 </tbody>
             </table>
