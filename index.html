@@ -491,20 +491,16 @@
 
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Exploring Bacchus by Michelangelo Merisi, known as Caravaggio: how much does arco tell us?</h1>
-            <p>Our project is based on enriching the content of the Italian arco database concerning Caravaggio's artwork Bacchus. This painting is part of the Uffizi Gallery in florence, contibuiting, together with the other works of art, to making it one of the most visited museums in the world.</p>
+            <h1>Exploring Bacchus by Caravaggio: how much does arco tell us?</h1>
+            <p>Our project is based on enriching the content of the Italian ArCo database concerning Caravaggio's artwork Bacchus. This painting is part of the Uffizi Gallery in florence, contibuiting, together with the other works of art, to making it one of the most visited museums in the world.</p>
         </div>
         <div class="image-container">
             <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/Caravaggio_-_David_with_the_Head_of_Goliath.jpg" alt="Esempio di opera d'arte per tecniche di prompting">
         </div>
         <div class="hero-text-after-image">
             <p>
-                Questo progetto si propone di esplorare l'efficacia delle tecniche di **Natural Language Processing (NLP)** e **Large Language Models (LLMs)** nell'arricchire le descrizioni e le relazioni presenti nel 
-                **Knowledge Graph di Arco**. L'opera "Bacco" di Caravaggio, con la sua ricchezza di dettagli e il suo 
-                contesto storico-artistico complesso, rappresenta un caso studio ideale per dimostrare come le tecnologie 
-                semantiche possano valorizzare il patrimonio culturale digitale. Attraverso l'analisi e l'integrazione 
-                di nuove informazioni, miriamo a rendere i dati di Arco più completi, interconnessi e semanticamente 
-                ricchi, facilitando nuove forme di ricerca e scoperta per studiosi e appassionati.
+                To find it on ArCo, and note the missing information, that is, gaps, we developed somme SPARQL queries. Then, to add said information, we made use of several LLMs (Large Language Models) using prompting techniqes. We then transformed the outputs obtained into triples that could enrich the ArCo database.
+                Please scroll down for more detailed information about our research.
             </p>
         </div>
         <div class="scroll-indicator">
@@ -515,7 +511,7 @@
     </section>
 
     <section class="queries-section" id="queries">
-        <h2 class="section-title">Query SPARQL per il Bacco di Caravaggio</h2>
+        <h2 class="section-title">Methodology</h2>
         <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
             Esplora le query utilizzate per identificare e analizzare l'opera "Bacco" di Caravaggio
             all'interno del Knowledge Graph di Arco Beni Culturali. Ciascuna query è accompagnata da uno spazio
