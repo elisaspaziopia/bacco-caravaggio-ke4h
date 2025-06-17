@@ -395,7 +395,7 @@ LIMIT 100</textarea>
     <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fsubject+%3Fapparatus%0D%0AWHERE+%7B%0D%0A++%3Fsubject+a-dd%3AhasIconographicOrDecorativeApparatus+%3Fapparatus+.%0D%0A%7D%0D%0ALIMIT+100&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
 </div>
                 
-               <div class="content-box"> Since it retrieves too many results, we decide to narrow down the research only to Historic or Artistic properties.<p><strong>Results: </strong>As a result, not only is the file of the work more complete in terms of content, but also an enrichment of the possibilities of creating queries to query the database. It is suggested, however, for future developments, that the symbolic description be further developed and extended in such a way as to make it more structured.</p>
+               <div class="content-box"> Since it retrieves too many results, we decide to narrow down the research only to Historic or Artistic properties. We also add <i>label</i> to be able to see the name of the property.</i><p><strong>Results: </strong>As a result, not only is the file of the work more complete in terms of content, but also an enrichment of the possibilities of creating queries to query the database. It is suggested, however, for future developments, that the symbolic description be further developed and extended in such a way as to make it more structured.</p>
                </div>
             <!-- Assicurati di includere questi font nella sezione <head> della tua pagina, se non sono già presenti -->
 <!-- <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"> -->
@@ -640,7 +640,9 @@ rdfs:label ?label ;
         }
     }
 </style>
-            <!-- Code Box (now second) -->
+
+                <div class="content-box">In this case, by taking a look at the results, it appears that this property is mostly linked to properties such as pieces of clothing, drawings and memorials. Since this property is widely used among resources that have the same classifications as "Bacchus" by Caravaggio, we decide to ask LLMs to retrieve a triple out of this property, in order to enrich the Knowledge Graph.</div>
+                <!-- Code Box (now second) -->
             <div class="content-box">
                 <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple</a></h2>
                 <div class="code-container">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
