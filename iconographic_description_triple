@@ -1,0 +1,8 @@
+@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+
+ 
+    cd:hasIconographicDescription 
+    """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
