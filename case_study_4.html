@@ -648,28 +648,58 @@ LIMIT 100
         <div class="content-box fade-in">
             <div class="content-box">
                 <h2 class="box-title"><a href="iconographic_decsription_triple.ttl">Triple</a></h2>
-                <div class="code-container">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+                <div class="code-container">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+    
+<https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> 
+    rdf:type a-dd:TechnicalCharacteristic ;
+    rdfs:label "chiaroscuro"@it ;
+    rdfs:label "chiaroscuro"@en ;
+    rdfs:comment "Tecnica pittorica che utilizza forti contrasti tra luce e ombra per creare effetti tridimensionali e drammatici"@it ;
+    rdfs:comment "Painting technique that uses strong contrasts between light and shadow to create three-dimensional and dramatic effects"@en .
+    
+<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176> 
+    a-dd:hasTechnique <https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> .
 
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
-    cd:hasIconographicDescription 
-    """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
+        
+<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176> 
+    a-dd:hasMaterialOrTechnique <https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> .
+
+                    
 </div>
             </div>
         </div>
     </div>
-    <div class="content-box">
+               <div class="content-box">
                 <h2 class="box-title"><a href="iconographic_decsription_triple.ttl">Triple</a></h2>
-                <div class="code-container">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+                <div class="code-container">a-dd:hasPaintingTechnique rdf:type owl:ObjectProperty ;
+    rdfs:label "ha tecnica pittorica"@it ;
+    rdfs:label "has painting technique"@en ;
+    rdfs:comment "Questa proprietà collega un bene culturale a una tecnica pittorica specifica utilizzata nella sua realizzazione"@it ;
+    rdfs:comment "This property connects a cultural property to a specific painting technique used in its creation"@en ;
+    rdfs:domain arco:HistoricOrArtisticProperty ;
+    rdfs:range a-dd:PaintingTechnique ;
+    rdfs:subPropertyOf a-dd:hasTechnique .
+                    
+a-dd:PaintingTechnique rdf:type owl:Class ;
+    rdfs:label "Tecnica Pittorica"@it ;
+    rdfs:label "Painting Technique"@en ;
+    rdfs:comment "Classe che rappresenta le tecniche specifiche utilizzate nella pittura"@it ;
+    rdfs:comment "Class representing specific techniques used in painting"@en ;
+    rdfs:subClassOf a-dd:TechnicalCharacteristic .
+                    
+<https://dati.beniculturali.it/lodview-arco/resource/PaintingTechnique/chiaroscuro> 
+    rdf:type a-dd:PaintingTechnique ;
+    rdfs:label "chiaroscuro"@it ;
+    rdfs:label "chiaroscuro"@en ;
+    rdfs:comment "Tecnica pittorica caratterizzata dall'uso drammatico di contrasti tra zone di luce e ombra per modellare le forme e creare effetti tridimensionali"@it ;
+    rdfs:comment "Painting technique characterized by dramatic use of light-dark contrasts to model forms and create three-dimensional effects"@en ;
+    a-dd:hasHistoricalPeriod "Rinascimento, Barocco"@it ;
+    a-dd:hasNotableArtist "Leonardo da Vinci, Caravaggio, Rembrandt"@en .
 
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
-    cd:hasIconographicDescription 
-    """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
 </div>
             </div>
         </div>
