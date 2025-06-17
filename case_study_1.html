@@ -201,14 +201,18 @@
         }
 
         .content-box {
-            background: var(--card-bg);
-            border-radius: 20px;
+             display: flex;
+            flex-direction: column; /* Always in column */
+            align-items: center; /* Horizontally centers inner elements */
+            gap: 1rem; /* Reduced space between inner elements */
             padding: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
+            background: var(--card-bg); /* Card background */
+            border-radius: 20px; /* Rounded corners */
+            box-shadow: 0 10px 30px var(--shadow); /* Shadow */
+            border: 1px solid rgba(218, 165, 32, 0.2); /* Thin accent color border */
+            position: relative; /* For top bar effect */
+            overflow: hidden; /* Hides initial bar */
+            text-align: center; /* General text alignment in card */
         }
 
         .content-box::before {
