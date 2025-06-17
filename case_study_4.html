@@ -589,19 +589,22 @@ LIMIT 100
                 </div>
 
                 <div class="query-box">
-                    <h3 class="query-box-title">Query 2: Opere con "Committente" specifico</h3>
-                    <textarea id="query2" class="query-textarea">
+                    <h3 class="query-box-title">Query 2: hasTechnique</h3>
+                    <textarea id="query2" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX cd: <https://w3id.org/arco/ontology/context-description/>
-PREFIX l0: <https://w3id.org/italia/onto/l0/>
 
-SELECT ?opera ?nomeCommittente
+# Query alternativa 1: Prova con namespace arco:
+SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel
 WHERE {
-  ?opera cd:hasCommission ?commission .
-  ?commission cd:hasCommittent ?committente .
-  ?committente l0:name ?nomeCommittente .
-  FILTER(CONTAINS(LCASE(STR(?nomeCommittente)), "del monte"))
+  ?historicProperty rdf:type arco:HistoricOrArtisticProperty .
+  ?historicProperty a-dd:hasTechnique ?material .
+  
+  OPTIONAL { ?historicProperty rdfs:label ?label }
+  OPTIONAL { ?material rdfs:label ?materialLabel }
 }
+LIMIT 100
                     </textarea>
                     <button class="action-button" onclick="visualizeQuery(event, 'query2Results', 'query2')">Visualizza Risultati</button>
                     <div id="query2Results" class="query-results"></div>
