@@ -558,8 +558,7 @@
             <h2 class="box-title">Types of techniques</h2>
             <div class="description-container">
                 <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio used to use in his own works. This technique, however, is not mentioned in the record of Caravaggio's Bacchus on ArCo. Browsing the ArCo ontology, we discovered the existence of the Technical Characteristic class, within the Denotative Description ontology. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, hasMaterialOrTechnique, whose value is “canvas/oil painting.” It is not, however, a painting technique.</p>
-                <p class="description-text">We decide to query ArCo about the values of some properties that are part of this class, such as:
-Let's query ArCo to see if chiaroscuro is present as a value of some property:</p>
+                <p class="description-text">In Query 1 we query ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property hasMaterialOrTechnique or hasTechnique and return “chiaroscuro” as the value.</p>
             </div>
         </div>
 
@@ -601,20 +600,29 @@ LIMIT 100
                 </div>
 
                 <div class="query-box">
-                    <h3 class="query-box-title">Query 2: hasTechnique</h3>
+                    <h3 class="query-box-title">Query 2</h3>
                     <textarea id="query2" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-# Query alternativa 1: Prova con namespace arco:
-SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel
+SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel ?technique ?techniqueLabel
 WHERE {
   ?historicProperty rdf:type arco:HistoricOrArtisticProperty .
-  ?historicProperty a-dd:hasTechnique ?material .
+  
+  {
+    ?historicProperty a-dd:hasTechnique ?technique .
+    OPTIONAL { ?technique rdfs:label ?techniqueLabel }
+    FILTER(LCASE(?techniqueLabel) = "chiaroscuro")
+  }
+  UNION
+  {
+    ?historicProperty a-dd:hasMaterialOrTechnique ?material .
+    OPTIONAL { ?material rdfs:label ?materialLabel }
+    FILTER(LCASE(?materialLabel) = "chiaroscuro")
+  }
   
   OPTIONAL { ?historicProperty rdfs:label ?label }
-  OPTIONAL { ?material rdfs:label ?materialLabel }
 }
 LIMIT 100
                     </textarea>
