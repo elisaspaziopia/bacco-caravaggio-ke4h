@@ -556,8 +556,8 @@
         <div class="content-box fade-in">
             <h2 class="box-title">Types of techniques</h2>
             <div class="description-container">
-                <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio used to use in his own works. This technique, however, is not mentioned in the record of Caravaggio's Bacchus on ArCo. Browsing the ArCo ontology, we discovered the existence of the Technical Characteristic class, within the Denotative Description ontology. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, hasMaterialOrTechnique, whose value is "canvas/oil painting." It is not, however, a painting technique.</p>
-                <p class="description-text">In Query 1 we query ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property hasMaterialOrTechnique or hasTechnique and return "chiaroscuro" as the value.</p>
+                <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio widely used in his own works. This technique, however, is not mentioned on ArCo. Browsing the ArCo ontology, we discovered the existence of the <a href="https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic"><i>Technical Characteristic</i></a> class, within the <a href="https://w3id.org/arco/ontology/denotative-description"><i>Denotative Description Ontology</i></a>. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, <i>hasMaterialOrTechnique</i>, whose value is "canvas/oil painting." It is not, however, a painting technique.</p>
+                <p class="description-text">We run Query 1 on the SPARQL endpoint in ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property <i>hasMaterialOrTechnique</i> or <i>hasTechnique</i> and return "chiaroscuro" as the value.</p>
             </div>
         </div>
 
@@ -597,7 +597,7 @@ LIMIT 100
 
                 <div class="query-separator fade-in">
                     <p>This search returns a lot of results, especially in “paper / chiaroscuro,” which is not an appropriate description for Caravaggio's work, yet it informs us that “chiaroscuro” is used in the database.</p>
-                    <p>Consequently, in Query 2 we make a more precise query, restricting the search to values that exactly return “chiaroscuro.”</p>
+                    <p>Consequently, in Query 2 we make a more precise query, restricting the search to values that exactly match “chiaroscuro.”</p>
                 </div>
 
                 <div class="query-box">
@@ -634,19 +634,19 @@ LIMIT 100
         <div class="content-box fade-in">
             <h2 class="box-title">Results</h2>
             <div class="description-container">
-                <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, with the same property with which Caravaggio's Bacchus shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type hasPaintingTechnique. Below are both proposals:</p>
+                <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. Below are both proposals:</p>
                 <p class="description-text"></p>
             </div>
         </div>
 
         <div class="content-box fade-in">
             <div class="content-box">
-                <h2 class="box-title"><a href="iconographic_decsription_triple.ttl">Triple</a></h2>
+                <h2 class="box-title"><a href="iconographic_decsription_triple.ttl">Triple - adding "chiaroscuro" as a type of technique </a></h2>
                 <div class="code-container">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix owl: http://www.w3.org/2002/07/owl# .
     
 <https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> 
     rdf:type a-dd:TechnicalCharacteristic ;
