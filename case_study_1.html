@@ -641,17 +641,44 @@ rdfs:label ?label ;
     }
 </style>
 
-                <div class="content-box">In this case, by taking a look at the results, it appears that this property is mostly linked to properties such as pieces of clothing, drawings and memorials. Since this property is widely used among resources that have the same classifications as "Bacchus" by Caravaggio, we decide to ask LLMs to retrieve a triple out of this property, in order to enrich the Knowledge Graph (click on <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio).</div>
+                <div class="content-box">In this case, by taking a look at the results, it appears that this property is mostly linked to properties such as pieces of clothing, drawings and memorials. Since this property is widely used among resources that have the same classifications as "Bacchus" by Caravaggio, we decide to ask LLMs to retrieve a triple out of this property, in order to enrich the Knowledge Graph (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio).</div>
                 <!-- Code Box (now second) -->
             <div class="content-box">
                 <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple</a></h2>
-                <div class="code-container">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix : <https://example.org/resource/> .
+                <div class="code-container">@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+@prefix : https://example.org/resource/ .
 
-<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
+https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176
+    a arco:HistoricOrArtisticProperty ;
+    a-dd:hasIconographicOrDecorativeApparatus :apparato0900289176 .
+
+:apparato0900289176
+    a a-dd:IconographicOrDecorativeApparatus ;
+    rdfs:label "Apparato iconografico e decorativo dell’opera 0900289176"@it ;
+    a-dd:hasDescription """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. 
+Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire uno stato di ebbrezza. 
+La frutta — la mela bacata, la mela cotogna ammaccata, la pesca mezza marcia — allude alla caducità della bellezza e del piacere terreno. 
+La nudità parziale evoca sensualità carnale, mentre la corona di pampini richiama l’estasi dionisiaca. 
+La luce caravaggesca crea un effetto di presenza fisica quasi tattile."""@it .
+
+</div>
+            </div>
+        </div>
+    </div>
+<div class="content-box">Validation of the query</div>
+
+    <div class="content-box">
+                <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple</a></h2>
+                <div class="code-container">@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+@prefix : https://example.org/resource/ .
+
+https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176
     a arco:HistoricOrArtisticProperty ;
     a-dd:hasIconographicOrDecorativeApparatus :apparato0900289176 .
 
@@ -669,7 +696,7 @@ rdfs:label ?label ;
             </div>
         </div>
     </div>
-
+    
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
