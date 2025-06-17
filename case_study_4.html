@@ -561,7 +561,6 @@
             </div>
         </div>
 
-        <div class="content-box fade-in">
             <div class="query-section">
                 <div class="query-box">
                     <h3 class="query-box-title">Query 1</h3>
@@ -631,7 +630,6 @@ LIMIT 100
                     <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3FhistoricProperty+%3Flabel+%3Fmaterial+%3FmaterialLabel+%3Ftechnique+%3FtechniqueLabel%0D%0AWHERE+%7B%0D%0A++%3FhistoricProperty+rdf%3Atype+arco%3AHistoricOrArtisticProperty+.%0D%0A++%0D%0A++%7B%0D%0A++++%3FhistoricProperty+a-dd%3AhasTechnique+%3Ftechnique+.%0D%0A++++OPTIONAL+%7B+%3Ftechnique+rdfs%3Alabel+%3FtechniqueLabel+%7D%0D%0A++++FILTER%28LCASE%28%3FtechniqueLabel%29+%3D+%22chiaroscuro%22%29%0D%0A++%7D%0D%0A++UNION%0D%0A++%7B%0D%0A++++%3FhistoricProperty+a-dd%3AhasMaterialOrTechnique+%3Fmaterial+.%0D%0A++++OPTIONAL+%7B+%3Fmaterial+rdfs%3Alabel+%3FmaterialLabel+%7D%0D%0A++++FILTER%28LCASE%28%3FmaterialLabel%29+%3D+%22chiaroscuro%22%29%0D%0A++%7D%0D%0A++%0D%0A++OPTIONAL+%7B+%3FhistoricProperty+rdfs%3Alabel+%3Flabel+%7D%0D%0A%7D%0D%0ALIMIT+100%0D%0A++++++++++++++++++++&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
                 </div>
             </div>
-        </div>
 
         <div class="content-box fade-in">
             <h2 class="box-title">Results</h2>
