@@ -644,146 +644,109 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
         </div>
     </div>
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Footer</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background: #2c1810;
-        }
-
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-            color: white;
-        }
-
-        footer {
-            background: #2c1810;
-            color: #d4af37;
-            padding: 2rem 1.5rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            color: #d4af37;
-            font-weight: 600;
-        }
-
-        .footer-column ul {
-            list-style: none;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-column ul li a {
-            color: #d4af37;
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-column ul li a:hover {
-            color: #f4d03f;
-            text-decoration: underline;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #4a3426;
-            padding-top: 1.5rem;
-            text-align: center;
-        }
-
-        .footer-bottom p {
-            color: #d4af37;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-        }
-
-        @media (max-width: 768px) {
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            footer {
-                padding: 1.5rem 1rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="main-content">
-        <h1>Contenuto della pagina</h1>
-        <p>Questo è il contenuto principale della pagina.</p>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>Navigazione Principale</h3>
-                <ul>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/index.html#home">Home</a></li>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/index.html#queries">Query SPARQL</a></li>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/index.html#documentation">Documentazione</a></li>
-                </ul>
+    <!-- Page Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <div class="footer-link-group">
+                <h4>Navigazione Principale</h4>
+                <a href="#home">Home</a>
+                <a href="#queries">Query SPARQL</a>
+                <a href="#documentation">Documentazione</a>
             </div>
-
-            <div class="footer-column">
-                <h3>Approfondimenti</h3>
-                <ul>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/prompting_techniques.html">Prompting Techniques</a></li>
-                </ul>
+            <div class="footer-link-group">
+                <h4>Approfondimenti</h4>
+                <a href="prompting_techniques.html">Prompting Techniques</a>
             </div>
-
-            <div class="footer-column">
-                <h3>Case Studies</h3>
-                <ul>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_1.html">Case Study 1</a></li>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_2.html">Case Study 2</a></li>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_3.html">Case Study 3</a></li>
-                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_4.html">Case Study 4</a></li>
-                </ul>
+            <div class="footer-link-group">
+                <h4>Case Studies</h4>
+                <a href="case_study_1.html">Case Study 1</a>
+                <a href="case_study_2.html">Case Study 2</a>
+                <a href="case_study_3.html">Case Study 3</a>
+                <a href="case_study_4.html">Case Study 4</a>
             </div>
-
-            <div class="footer-column">
-                <h3>Risorse Esterne</h3>
-                <ul>
-                    <li><a href="https://www.cultura.gov.it/arcomi/" target="_blank">Arco MiC</a></li>
-                    <li><a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a></li>
-                </ul>
+            <div class="footer-link-group">
+                <h4>Risorse Esterne</h4>
+                <a href="https://www.cultura.gov.it/arcomi/" target="_blank">Arco MiC</a>
+                <a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p>© 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
-            <p>Realizzato con passione per il patrimonio culturale.</p>
-        </div>
+        <p style="margin-top: 3rem;">&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
+        <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
     </footer>
+   <script>
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const targetElement = document.querySelector(href);
+
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Copy to clipboard function for prompt text
+        function copyPromptText(event, elementId) { // Pass event object
+            const textToCopy = document.getElementById(elementId).textContent;
+            
+            // Create a temporary textarea element to hold the text
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Find the specific button that was clicked
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745'; // Green for success
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = ''; // Revert to original background
+                }, 2000);
+            } catch (err) {
+                console.error('Errore nella copia: ', err);
+                // Fallback for older browsers or if execCommand fails
+                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+            } finally {
+                document.body.removeChild(tempTextArea); // Clean up the temporary element
+            }
+        }
+    </script>
 </body>
 </html>
