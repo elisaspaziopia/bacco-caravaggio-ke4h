@@ -738,27 +738,8 @@ a-dd:PaintingTechnique rdf:type owl:Class ;
         <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
     </footer>
 
-    <script>
-        // Smooth scrolling for internal navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                const targetElement = document.querySelector(href);
-
-                if (targetElement) {
-                    const navbarHeight = document.querySelector('nav').offsetHeight;
-                    const offsetTop = targetElement.offsetTop - navbarHeight;
-
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Fade-in animation on element appearance
+           <script>
+        // Fade-in animation on scroll
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
 
@@ -779,6 +760,25 @@ a-dd:PaintingTechnique rdf:type owl:Class ;
 
             fadeElements.forEach(element => {
                 observer.observe(element);
+            });
+        });
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const targetElement = document.querySelector(href);
+
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
