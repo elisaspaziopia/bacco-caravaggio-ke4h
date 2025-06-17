@@ -330,12 +330,12 @@
             transform: scale(1.05);
         }
 
-        /* Query Grid Specific Styles */
-        .query-grid-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr; /* Two columns */
-            gap: 2rem; /* Space between query boxes */
-            margin-bottom: 3rem; /* Space below the grid */
+        /* Updated Query Layout - Single Column with Text Between */
+        .query-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
         .query-box {
@@ -387,21 +387,27 @@
             background-color: #f8f9fa;
         }
 
-        .query-results {
-            background-color: #e9ecef;
-            border: 1px dashed #ced4da;
-            border-radius: 8px;
-            padding: 1rem;
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6c757d;
-            font-style: italic;
-            margin-top: 1rem;
-            text-align: center;
-            overflow-x: auto;
-            white-space: pre-wrap;
+        /* Text area between queries */
+        .query-separator {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px var(--shadow);
+            border: 1px solid rgba(218, 165, 32, 0.15);
+        }
+
+        .query-separator h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .query-separator p {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 1rem;
         }
 
         /* Footer styles (consistent) */
@@ -499,9 +505,6 @@
             .description-container, .code-container {
                 padding: 1rem;
             }
-            .query-grid-container {
-                grid-template-columns: 1fr; /* Single column on mobile */
-            }
         }
     </style>
 </head>
@@ -557,14 +560,14 @@
         <div class="content-box fade-in">
             <h2 class="box-title">Types of techniques</h2>
             <div class="description-container">
-                <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio used to use in his own works. This technique, however, is not mentioned in the record of Caravaggio's Bacchus on ArCo. Browsing the ArCo ontology, we discovered the existence of the Technical Characteristic class, within the Denotative Description ontology. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, hasMaterialOrTechnique, whose value is “canvas/oil painting.” It is not, however, a painting technique.</p>
-                <p class="description-text">In Query 1 we query ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property hasMaterialOrTechnique or hasTechnique and return “chiaroscuro” as the value.</p>
+                <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio used to use in his own works. This technique, however, is not mentioned in the record of Caravaggio's Bacchus on ArCo. Browsing the ArCo ontology, we discovered the existence of the Technical Characteristic class, within the Denotative Description ontology. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, hasMaterialOrTechnique, whose value is "canvas/oil painting." It is not, however, a painting technique.</p>
+                <p class="description-text">In Query 1 we query ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property hasMaterialOrTechnique or hasTechnique and return "chiaroscuro" as the value.</p>
             </div>
         </div>
 
         <div class="content-box fade-in">
             <h2 class="box-title">Esempi di Query SPARQL su Dati Arricchiti</h2>
-            <div class="query-grid-container">
+            <div class="query-section">
                 <div class="query-box">
                     <h3 class="query-box-title">Query 1</h3>
                     <textarea id="query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
@@ -595,8 +598,14 @@ WHERE {
 }
 LIMIT 100
                     </textarea>
-                    <button class="action-button" onclick="visualizeQuery(event, 'query1Results', 'query1')">Visualizza Risultati</button>
-                    <div id="query1Results" class="query-results"></div>
+                    <a href="https://dati.cultura.gov.it/sparql" target="_blank" class="action-button">View results in ArCo</a>
+                </div>
+
+                <div class="query-separator fade-in">
+                    <h3>Query Comparison and Results</h3>
+                    <p>The first query uses a broad search with CONTAINS, which would find any technique or material label containing the word "chiaroscuro" as a substring. This approach is useful for discovering variations and related terms.</p>
+                    <p>The second query uses an exact match with the equals operator, searching specifically for items labeled exactly as "chiaroscuro". This provides more precise results but might miss variations in terminology.</p>
+                    <p>Both queries demonstrate different approaches to searching for the chiaroscuro technique within the ArCo knowledge graph, showing how the same semantic concept can be queried with varying degrees of precision.</p>
                 </div>
 
                 <div class="query-box">
@@ -626,43 +635,7 @@ WHERE {
 }
 LIMIT 100
                     </textarea>
-                    <button class="action-button" onclick="visualizeQuery(event, 'query2Results', 'query2')">Visualizza Risultati</button>
-                    <div id="query2Results" class="query-results"></div>
-                </div>
-
-                <div class="query-box">
-                    <h3 class="query-box-title">Query 3: Opere con "Chiaroscuro" e Anno</h3>
-                    <textarea id="query3" class="query-textarea">
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX ex: <http://example.org/ontology/>
-PREFIX time: <http://www.w3.org/2006/time#>
-
-SELECT ?opera ?descrizioneTecnica ?annoInizio
-WHERE {
-  ?opera ex:hasTechnicalInnovation ?tecnica .
-  ?tecnica rdfs:label "Chiaroscuro caravaggesco"@it .
-  OPTIONAL { ?opera time:hasBeginning ?annoInizio . } # Assuming you have dating
-}
-                    </textarea>
-                    <button class="action-button" onclick="visualizeQuery(event, 'query3Results', 'query3')">Visualizza Risultati</button>
-                    <div id="query3Results" class="query-results"></div>
-                </div>
-
-                <div class="query-box">
-                    <h3 class="query-box-title">Query 4: Allegorie e Tema Filosofico</h3>
-                    <textarea id="query4" class="query-textarea">
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-
-SELECT ?opera ?temaFilosofico
-WHERE {
-  ?opera arco:hasAllegoricalMeaning ?allegoria .
-  ?allegoria arco:philosophicalTheme ?temaFilosofico .
-  FILTER(CONTAINS(LCASE(STR(?temaFilosofico)), "mortalità"))
-}
-                    </textarea>
-                    <button class="action-button" onclick="visualizeQuery(event, 'query4Results', 'query4')">Visualizza Risultati</button>
-                    <div id="query4Results" class="query-results"></div>
+                    <a href="https://dati.cultura.gov.it/sparql" target="_blank" class="action-button">View results in ArCo</a>
                 </div>
             </div>
         </div>
@@ -758,60 +731,6 @@ WHERE {
                 observer.observe(element);
             });
         });
-
-        // Function to visualize query results (placeholder for now)
-        function visualizeQuery(event, resultsElementId, queryTextareaId) {
-            const queryTextarea = document.getElementById(queryTextareaId);
-            const resultsDiv = document.getElementById(resultsElementId);
-            const button = event.target;
-            const originalButtonText = button.textContent;
-
-            // Clear previous results
-            resultsDiv.textContent = '';
-            resultsDiv.innerHTML = `<span style="font-style: italic; color: #6c757d;">Eseguendo la query...</span>`;
-
-
-            button.textContent = 'Caricamento...';
-            button.disabled = true; // Disable button during "loading"
-
-            setTimeout(() => {
-                // In a real application, you'd send this query to a SPARQL endpoint
-                // and parse the JSON/XML results to display them here.
-                const simulatedResults = `Risultati simulati per:\n\n${queryTextarea.value.substring(0, 100)}...\n\nQuery completata con successo! (Simulato)`;
-                resultsDiv.textContent = simulatedResults;
-                button.textContent = originalButtonText;
-                button.disabled = false;
-            }, 1500); // Simulate network delay
-        }
-
-        // Copy to clipboard function for prompt text/query text
-        function copyPromptText(event, elementId) {
-            const textToCopy = document.getElementById(elementId).textContent || document.getElementById(elementId).value; // Get text from div or textarea
-
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = textToCopy;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-
-            try {
-                document.execCommand('copy');
-                const button = event.target;
-                const originalText = button.textContent;
-                button.textContent = 'Copiato!';
-                button.style.background = '#28a745';
-
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = '';
-                }, 2000);
-            } catch (err) {
-                console.error('Errore nella copia: ', err);
-                // Fallback using alert (as per instructions for iframe limitations)
-                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
-            } finally {
-                document.body.removeChild(tempTextArea);
-            }
-        }
     </script>
 </body>
 </html>
