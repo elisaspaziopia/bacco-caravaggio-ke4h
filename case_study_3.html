@@ -681,12 +681,15 @@ WHERE {
             <div class="content-box fade-in">
                 <h2 class="box-title">Esempio di Triple RDF da Analisi CoT</h2>
                 <div class="code-container">
-                    <pre class="code-block"># Link artwork to alternative dating
+                    <pre class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix a-cd: <https://w3id.org/arco/ontology/context-description/> .
+@prefix l0: <https://w3id.org/italia/onto/l0/> .
+    
 <http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
     a-cd:hasAlternativeDating 
     <https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> .
-
-# Alternative dating entity
+        
 <https://w3id.org/arco/resource/AlternativeDating/0900281214-1589> 
     rdf:type a-cd:AlternativeDating ;
     rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
