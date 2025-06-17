@@ -167,6 +167,51 @@
             margin: 0 auto;
         }
 
+            /* Navigation between case studies (top navigation block) */
+        .case-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1rem 2rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .case-nav-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .case-nav-button:hover {
+            background: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .case-nav-button.disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .case-nav-info {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-align: center;
+        }
+
         /* Case study container - general wrapper for case study content blocks */
         .case-study-container {
             display: flex;
