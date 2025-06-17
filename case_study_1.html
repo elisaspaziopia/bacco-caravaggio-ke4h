@@ -651,7 +651,31 @@ http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/09
     </footer>
 
     <script>
-        // Smooth scrolling for navigation
+        // Fade-in animation on scroll
+        document.addEventListener('DOMContentLoaded', () => {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -669,6 +693,37 @@ http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/09
                 }
             });
         });
+
+        // Copy to clipboard function for prompt text
+        function copyPromptText(event, elementId) { // Pass event object
+            const textToCopy = document.getElementById(elementId).textContent;
+            
+            // Create a temporary textarea element to hold the text
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            
+            try {
+                document.execCommand('copy');
+                // Find the specific button that was clicked
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745'; // Green for success
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = ''; // Revert to original background
+                }, 2000);
+            } catch (err) {
+                console.error('Errore nella copia: ', err);
+                // Fallback for older browsers or if execCommand fails
+                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+            } finally {
+                document.body.removeChild(tempTextArea); // Clean up the temporary element
+            }
+        }
     </script>
 </body>
 </html>
