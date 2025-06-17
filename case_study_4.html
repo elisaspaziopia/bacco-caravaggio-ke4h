@@ -567,20 +567,32 @@ Let's query ArCo to see if chiaroscuro is present as a value of some property:</
             <h2 class="box-title">Esempi di Query SPARQL su Dati Arricchiti</h2>
             <div class="query-grid-container">
                 <div class="query-box">
-                    <h3 class="query-box-title">Query 1: hasMaterialOrTechnique</h3>
+                    <h3 class="query-box-title">Query 1</h3>
                     <textarea id="query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-# Query alternativa 1: Prova con namespace arco:
-SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel
+SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel ?technique ?techniqueLabel
 WHERE {
   ?historicProperty rdf:type arco:HistoricOrArtisticProperty .
-  ?historicProperty a-dd:hasMaterialOrTechnique ?material .
+  
+  # Cercare sia materiali che tecniche
+  {
+    ?historicProperty a-dd:hasTechnique ?technique .
+    OPTIONAL { ?technique rdfs:label ?techniqueLabel }
+    # Filtrare per "chiaroscuro" nelle tecniche
+    FILTER(CONTAINS(LCASE(?techniqueLabel), "chiaroscuro"))
+  }
+  UNION
+  {
+    ?historicProperty a-dd:hasMaterialOrTechnique ?material .
+    OPTIONAL { ?material rdfs:label ?materialLabel }
+    # Filtrare per "chiaroscuro" nei materiali/tecniche
+    FILTER(CONTAINS(LCASE(?materialLabel), "chiaroscuro"))
+  }
   
   OPTIONAL { ?historicProperty rdfs:label ?label }
-  OPTIONAL { ?material rdfs:label ?materialLabel }
 }
 LIMIT 100
                     </textarea>
