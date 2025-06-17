@@ -537,8 +537,8 @@
 
     <div class="main-content">
         <div class="case-study-header">
-            <h1 class="case-study-title">Case Study 4: Interrogazione Avanzata del Knowledge Graph</h1>
-            <p class="case-study-subtitle">Esplorazione delle capacità di querying su dati arricchiti con SPARQL e visualizzazione dei risultati.</p>
+            <h1 class="case-study-title">The Chiaroscuro Technique - Case Study 4</h1>
+            <p class="case-study-subtitle">How we added "chiaroscuro" as a value and propose to extend the Denotative Description Ontology.</p>
         </div>
 
         <div class="case-nav">
@@ -555,10 +555,11 @@
         </div>
 
         <div class="content-box fade-in">
-            <h2 class="box-title">Introduzione all'Interrogazione di Dati Arricchiti</h2>
+            <h2 class="box-title">Types of techniques</h2>
             <div class="description-container">
-                <p class="description-text">Dopo aver arricchito il Knowledge Graph di ArCo con descrizioni iconografiche, contesto storico e analisi approfondite tramite tecniche di prompting avanzate, il passo successivo è dimostrare come queste nuove informazioni possano essere interrogate in modo efficace. Questo caso studio si concentra sulla costruzione e sull'esecuzione di query SPARQL complesse che sfruttano i dati aggiunti.</p>
-                <p class="description-text">L'obiettivo è illustrare come l'arricchimento semantico non solo migliori la completezza delle descrizioni, ma apra anche nuove possibilità per l'analisi e la scoperta all'interno del patrimonio culturale.</p>
+                <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio used to use in his own works. This technique, however, is not mentioned in the record of Caravaggio's Bacchus on ArCo. Browsing the ArCo ontology, we discovered the existence of the Technical Characteristic class, within the Denotative Description ontology. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, hasMaterialOrTechnique, whose value is “canvas/oil painting.” It is not, however, a painting technique.</p>
+                <p class="description-text">We decide to query ArCo about the values of some properties that are part of this class, such as:
+Let's query ArCo to see if chiaroscuro is present as a value of some property:</p>
             </div>
         </div>
 
