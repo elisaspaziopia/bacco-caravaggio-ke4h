@@ -644,198 +644,146 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
         </div>
     </div>
 
-<!-- HTML Footer -->
-<footer class="site-footer">
-    <div class="footer-content">
-        <div class="footer-section">
-            <h3>Navigazione Principale</h3>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="query-sparql.html">Query SPARQL</a></li>
-                <li><a href="documentazione.html">Documentazione</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-section">
-            <h3>Approfondimenti</h3>
-            <ul>
-                <li><a href="prompting-techniques.html">Prompting Techniques</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-section">
-            <h3>Case Studies</h3>
-            <ul>
-                <li><a href="case-study-1.html">Case Study 1</a></li>
-                <li><a href="case-study-2.html">Case Study 2</a></li>
-                <li><a href="case-study-3.html">Case Study 3</a></li>
-                <li><a href="case-study-4.html">Case Study 4</a></li>
-            </ul>
-        </div>
-        
-        <div class="footer-section">
-            <h3>Risorse Esterne</h3>
-            <ul>
-                <li><a href="https://arco.mic.gov.it" target="_blank">Arco MiC</a></li>
-                <li><a href="#" target="_blank">GitHub Repository</a></li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
-        <p>Realizzato con passione per il patrimonio culturale.</p>
-    </div>
-</footer>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- CSS per il Footer -->
-<style>
-.site-footer {
-    background-color: #2C1810;
-    color: #F5F5DC;
-    padding: 40px 0 20px 0;
-    margin-top: 50px;
-}
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: #2c1810;
+        }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    padding: 0 20px;
-}
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            color: white;
+        }
 
-.footer-section h3 {
-    color: #DAA520;
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    font-weight: bold;
-}
+        footer {
+            background: #2c1810;
+            color: #d4af37;
+            padding: 2rem 1.5rem;
+        }
 
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
 
-.footer-section ul li {
-    margin-bottom: 12px;
-}
+        .footer-column h3 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #d4af37;
+            font-weight: 600;
+        }
 
-.footer-section ul li a {
-    color: #F5F5DC;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-size: 0.95em;
-}
+        .footer-column ul {
+            list-style: none;
+        }
 
-.footer-section ul li a:hover {
-    color: #DAA520;
-}
+        .footer-column ul li {
+            margin-bottom: 0.5rem;
+        }
 
-.footer-bottom {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #8B4513;
-}
+        .footer-column ul li a {
+            color: #d4af37;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
 
-.footer-bottom p {
-    margin: 5px 0;
-    font-size: 0.9em;
-    color: #F5F5DC;
-}
+        .footer-column ul li a:hover {
+            color: #f4d03f;
+            text-decoration: underline;
+        }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .footer-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 30px;
-    }
-}
+        .footer-bottom {
+            border-top: 1px solid #4a3426;
+            padding-top: 1.5rem;
+            text-align: center;
+        }
 
-@media (max-width: 480px) {
-    .footer-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-}
-</style>
-    <script>
-        // Fade-in animation on scroll
-        document.addEventListener('DOMContentLoaded', () => {
-            const fadeElements = document.querySelectorAll('.fade-in');
+        .footer-bottom p {
+            color: #d4af37;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
 
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                const targetElement = document.querySelector(href);
-
-                if (targetElement) {
-                    const navbarHeight = document.querySelector('nav').offsetHeight;
-                    const offsetTop = targetElement.offsetTop - navbarHeight;
-
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Copy to clipboard function for prompt text
-        function copyPromptText(event, elementId) { // Pass event object
-            const textToCopy = document.getElementById(elementId).textContent;
+        @media (max-width: 768px) {
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
             
-            // Create a temporary textarea element to hold the text
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = textToCopy;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            
-            try {
-                document.execCommand('copy');
-                // Find the specific button that was clicked
-                const button = event.target;
-                const originalText = button.textContent;
-                button.textContent = 'Copiato!';
-                button.style.background = '#28a745'; // Green for success
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = ''; // Revert to original background
-                }, 2000);
-            } catch (err) {
-                console.error('Errore nella copia: ', err);
-                // Fallback for older browsers or if execCommand fails
-                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
-            } finally {
-                document.body.removeChild(tempTextArea); // Clean up the temporary element
+            footer {
+                padding: 1.5rem 1rem;
             }
         }
-    </script>
+    </style>
+</head>
+<body>
+    <div class="main-content">
+        <h1>Contenuto della pagina</h1>
+        <p>Questo è il contenuto principale della pagina.</p>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Navigazione Principale</h3>
+                <ul>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/index.html#home">Home</a></li>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/index.html#queries">Query SPARQL</a></li>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/index.html#documentation">Documentazione</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Approfondimenti</h3>
+                <ul>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/prompting_techniques.html">Prompting Techniques</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Case Studies</h3>
+                <ul>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_1.html">Case Study 1</a></li>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_2.html">Case Study 2</a></li>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_3.html">Case Study 3</a></li>
+                    <li><a href="https://elisaspaziopia.github.io/bacco-caravaggio-ke4h/case_study_4.html">Case Study 4</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Risorse Esterne</h3>
+                <ul>
+                    <li><a href="https://www.cultura.gov.it/arcomi/" target="_blank">Arco MiC</a></li>
+                    <li><a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
+            <p>Realizzato con passione per il patrimonio culturale.</p>
+        </div>
+    </footer>
 </body>
 </html>
