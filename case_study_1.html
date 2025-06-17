@@ -353,6 +353,22 @@
                     <p><strong>Results: </strong>As a result, not only is the file of the work more complete in terms of content, but also an enrichment of the possibilities of creating queries to query the database. It is suggested, however, for future developments, that the symbolic description be further developed and extended in such a way as to make it more structured.</p>
                 </div>
             </div>
+             <div class="content-box fade-in">
+                <h3 class="box-title">Query 1</h3>
+                <textarea id="homeQuery1" class="query-textarea">
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+
+SELECT DISTINCT ?opera ?label
+WHERE {
+  ?opera a arco:HistoricOrArtisticProperty ;
+         rdfs:label ?label .
+  FILTER(REGEX(?label, "bacco", "i"))
+}
+</textarea>
+                <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fopera+%3Flabel%0D%0AWHERE+%7B%0D%0A++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+++++++++rdfs%3Alabel+%3Flabel+.%0D%0A++FILTER%28REGEX%28%3Flabel%2C+%22bacco%22%2C+%22i%22%29%29%0D%0A%7D&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results on ArCo</a>
+                <div id="homeQuery1Results" class="query-results"></div>
+            </div>
 
             <!-- Code Box (now second) -->
             <div class="content-box">
