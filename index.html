@@ -32,6 +32,7 @@
             color: var(--text-dark); /* Default text color */
             line-height: 1.6; /* Line height for better readability */
             font-size: 0.95rem; /* Reduced base font size */
+            padding-top: 80px; /* Ensures content is below fixed navbar */
         }
 
         /* Styles for the fixed header (navigation) */
@@ -64,6 +65,11 @@
             color: var(--accent-color); /* Accent color */
         }
 
+        .logo a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
         /* Navigation menu */
         .nav-menu {
             display: flex; /* Flexbox for menu items */
@@ -79,7 +85,7 @@
         /* Navigation link */
         .nav-link {
             color: var(--text-light); /* Light text color */
-            text-decoration: none; /* Removes underline */
+            text-decoration: none;
             font-weight: 500; /* Font weight */
             padding: 0.4rem 0.8rem; /* Slightly reduced inner padding */
             border-radius: 8px; /* Rounded corners */
@@ -101,7 +107,7 @@
             background: var(--primary-color); /* Dark background */
             min-width: 180px; /* Reduced minimum width */
             box-shadow: 0 10px 30px var(--shadow); /* Shadow */
-            border-radius: 12px; /* Rounded corners */
+            border-radius: 12px;
             opacity: 0; /* Transparent by default */
             visibility: hidden; /* Hidden for accessibility */
             transform: translateY(-10px); /* Slightly shifted up */
@@ -121,10 +127,10 @@
         .dropdown-item {
             padding: 0.6rem 1.2rem; /* Reduced inner padding */
             color: var(--text-light); /* Light text color */
-            text-decoration: none; /* Removes underline */
+            text-decoration: none;
             display: block; /* Each link takes its own line */
             transition: all 0.3s ease; /* Transition on hover */
-            border-radius: 8px; /* Rounded corners */
+            border-radius: 8px;
             margin: 0.2rem; /* Reduced margin between items */
         }
 
@@ -132,6 +138,13 @@
         .dropdown-item:hover {
             background: rgba(218, 165, 32, 0.2); /* Slightly transparent background on hover */
             color: var(--accent-color); /* Changes color on hover */
+        }
+
+        /* Active dropdown item for the current page */
+        .dropdown-item.active {
+            background: rgba(218, 165, 32, 0.3);
+            color: var(--accent-color);
+            font-weight: 600;
         }
 
         /* Hero section (main introduction) */
@@ -238,17 +251,17 @@
             color: var(--primary-color);
         }
 
-        /* Vertical layout for queries (default for small screens) */
-        .query-layout-vertical {
+        /* Vertical layout for content boxes (default for small screens) */
+        .content-layout-vertical { /* Renamed from query-layout-vertical to be more generic */
             display: flex;
             flex-direction: column;
-            gap: 3rem; /* Reduced vertical space between queries */
+            gap: 3rem; /* Reduced vertical space between content boxes */
         }
 
-        /* Container for each individual query */
-        .query-item {
+        /* Container for each individual content block (now generic, used for queries too) */
+        .content-box {
             display: flex;
-            flex-direction: column; /* Always in column, even on desktop */
+            flex-direction: column; /* Always in column */
             align-items: center; /* Horizontally centers inner elements */
             gap: 1rem; /* Reduced space between inner elements */
             padding: 2rem;
@@ -261,8 +274,8 @@
             text-align: center; /* General text alignment in card */
         }
 
-        /* Animated top bar effect on hover over query box */
-        .query-item::before {
+        /* Animated top bar effect on hover over content box */
+        .content-box::before {
             content: '';
             position: absolute;
             top: 0;
@@ -274,80 +287,116 @@
         }
 
         /* Show bar on hover */
-        .query-item:hover::before {
+        .content-box:hover::before {
             left: 0; /* Moves bar into view */
         }
 
-        /* Styles for individual query titles */
-        .query-title {
-            font-family: 'Playfair Display', serif; /* Font for query titles */
-            font-size: 1.3rem; /* Further reduced */
+        /* Styles for content box titles (used for query titles as well) */
+        .box-title {
+            font-family: 'Playfair Display', serif; /* Font for titles */
+            font-size: 1.5rem; /* Standard title size for content boxes */
             color: var(--primary-color);
-            margin-bottom: 0.8rem; /* Space below title and above code */
+            margin-bottom: 1.5rem;
             font-weight: 700;
+            text-align: left; /* Align to left within the box */
+            width: 100%; /* Take full width for alignment */
         }
 
-        /* Code container to ensure full width in card and reduce max-width */
-        .query-code-container {
-            width: 100%;
-            max-width: 650px; /* Reduced max-width of code block */
-            padding-right: 0; /* Removes extra padding */
-        }
-
-        /* Styles for query code block */
-        .query-code {
-            background: #f8f9fa; /* Light background for code */
-            border: 1px solid #e9ecef; /* Thin border */
-            border-radius: 8px; /* Rounded corners */
-            padding: 0.7rem; /* Reduced padding */
-            font-family: 'Courier New', monospace; /* Monospace font for code */
-            font-size: 0.8rem; /* Further reduced */
-            color: var(--text-dark);
-            white-space: pre-wrap; /* Preserves formatting and wraps lines */
-            width: 100%; /* Takes full available width */
-            overflow-x: auto; /* Allows horizontal scrolling for long lines */
-            text-align: left; /* Aligns code text to the left */
-        }
-
-        /* New box for description and button */
-        .query-description-box {
+        /* Description container inside content-box */
+        .description-container {
             background: var(--background-light); /* Slightly different background for the box */
             border: 1px solid rgba(218, 165, 32, 0.1);
             border-radius: 12px;
-            padding: 1.2rem; /* Reduced padding */
-            margin-top: 0.8rem; /* Reduced space after code */
-            max-width: 80%; /* Reduced max-width of description */
-            text-align: left; /* Aligns description text to the left */
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Subtle inner shadow */
-        }
-
-        /* Styles for query description inside its box */
-        .query-description-box .query-description {
-            color: #444; /* Slightly darker text color for readability */
-            margin-bottom: 1rem; /* Reduced space between description and button */
+            padding: 1.5rem;
+            color: #444;
             line-height: 1.6;
-            font-size: 0.9rem; /* Further reduced */
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+            text-align: left; /* Align description text to left */
+            margin-bottom: 1.5rem; /* Space between description and code/button */
+            width: 100%; /* Take full width */
+            max-width: 100%; /* Ensure it expands */
         }
 
-        /* Styles for "View Results" buttons */
-        .view-results {
-            background: var(--secondary-color); /* Secondary color */
-            color: white; /* White text */
-            padding: 0.5rem 1rem; /* Reduced */
+        /* Styles for description text inside its container */
+        .description-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 0; /* No bottom margin, as container provides padding */
+        }
+
+        .description-text strong {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .description-text em {
+            color: var(--secondary-color);
+            font-style: italic;
+        }
+
+        /* Textarea for queries */
+        .query-textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            resize: vertical;
+            background-color: #f8f9fa;
+            color: var(--text-dark);
+        }
+
+        /* Results display for queries (hidden for now) */
+        .query-results {
+            display: none; /* Initially hide the results div */
+            background-color: #e9ecef;
+            border: 1px dashed #ced4da;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 50px; /* Ensure some height even if empty */
+            align-items: center; /* Use align-items for vertical centering */
+            justify-content: center; /* Use justify-content for horizontal centering */
+            color: #6c757d;
+            font-style: italic;
+            margin-top: 1rem;
+            text-align: center;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            width: 100%; /* Take full width */
+        }
+
+        /* Action button (e.g., Copy Prompt, View Results) */
+        .action-button {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
             border: none;
-            border-radius: 20px; /* Very rounded corners */
+            border-radius: 20px;
             font-weight: 500;
-            cursor: pointer; /* Indicates clickable */
-            transition: all 0.3s ease; /* Transition for hover */
-            text-decoration: none; /* Removes underline */
-            display: inline-block; /* To apply padding and transformations */
-            font-size: 0.9rem; /* Reduced */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 0.9rem;
+            margin-top: 1rem;
         }
 
-        /* Hover effect for buttons */
-        .view-results:hover {
-            background: var(--primary-color); /* Darker background on hover */
-            transform: scale(1.05); /* Slight enlargement */
+        .action-button:hover {
+            background: var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        /* Styles for text inserted between content boxes */
+        .content-separator-text { /* Renamed from query-separator-text */
+            text-align: center;
+            max-width: 800px;
+            margin: 2rem auto; /* Reduced top and bottom space */
+            color: var(--text-dark);
+            font-size: 1rem;
+            line-height: 1.6;
         }
 
         /* Animations */
@@ -408,34 +457,14 @@
                 width: 90%;
             }
 
-            /* Query items are already in column by default, so no changes needed here */
-            .query-details, .query-code-container, .query-description-box {
-                padding-right: 0; /* Removes extra padding on mobile */
-                width: 100%; /* Takes full available width */
-                max-width: 100%; /* Ensures description box expands */
+            /* Content boxes are already in column by default on small screens */
+            .content-box {
+                padding: 1.5rem;
             }
-        }
-
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-light); /* Light color for contrast */
-            animation: bounce 2s infinite; /* Bounce animation */
-        }
-
-        /* Bounce animation for scroll indicator */
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-5px);
+            .description-container, .query-textarea, .query-results {
+                padding: 1rem;
+                width: 100%; /* Ensure full width on mobile */
+                max-width: 100%; /* Ensure it expands */
             }
         }
 
@@ -488,26 +517,18 @@
         .footer-link-group a {
             margin-bottom: 0.5rem;
         }
-
-        /* Style for text inserted between queries */
-        .query-separator-text {
-            text-align: center;
-            max-width: 800px;
-            margin: 2rem auto; /* Reduced top and bottom space */
-            color: var(--text-dark);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
     </style>
 </head>
 <body>
     <!-- Fixed Navbar -->
     <nav>
         <div class="nav-container">
-            <div class="logo">Arco KG Enhancement</div>
+            <div class="logo">
+                <a href="index.html">Arco KG Enhancement</a>
+            </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#home" class="nav-link active">Home</a>
                 </li>
                 <li class="nav-item">
                     <a href="#queries" class="nav-link">Query SPARQL</a>
@@ -536,7 +557,7 @@
             <p>Our project is based on enriching the content of the Italian ArCo database concerning Caravaggio's artwork Bacchus. This painting is part of the Uffizi Gallery in Florence, contributing, together with the other works of art, to making it one of the most visited museums in the world.</p>
         </div>
         <div class="image-container">
-            <!-- Replace this URL with the definitive Bacchus image if you want to load from an external source. -->
+            <!-- Image of Caravaggio's Bacchus -->
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg" alt="[Image of Caravaggio's Bacchus]">
         </div>
         <div class="hero-text-after-image">
@@ -556,24 +577,29 @@
     <!-- Methodology and Queries Section -->
     <section class="queries-section" id="queries">
         <h2 class="section-title">Methodology</h2>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto; color: #666; font-size: 1.1rem; margin-bottom: 3rem;">
+        <p class="content-separator-text" style="margin-bottom: 3rem;">
             First, after choosing the subject to search on ArCo, we used these queries, already containing the main SPARQL keywords.
         </p>
         
-        <div class="query-layout-vertical">
-            <!-- Query Item 1: Title above code, description in separate box below -->
-            <div class="query-item fade-in">
-                <h3 class="query-title">Query 1</h3>
-                <div class="query-code-container">
-                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
-PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
-PREFIX dc: &lt;http://purl.org/dc/elements/1.1/&gt;
-PREFIX foaf: &lt;http://xmlns.com/foaf/0.1/&gt;
- 
+        <div class="content-layout-vertical">
+            <!-- Query Item 1: Transformed to look like Case Study 4 query box -->
+            <div class="content-box fade-in">
+                <h3 class="box-title">Query 1: Opere di Caravaggio con "Bacco"</h3>
+                <div class="description-container">
+                    <p class="description-text">
+                        Questa query cerca tutte le proprietà storico-artistiche nel dataset ArCo che contengono "Bacco" nel titolo o nella label e sono associate a "Caravaggio" come autore, fornendo un punto di partenza per l'esplorazione.
+                    </p>
+                </div>
+                <textarea id="homeQuery1" class="query-textarea">
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+
 SELECT DISTINCT ?opera ?titolo ?autoreLabel
 WHERE {
   ?opera a arco:HistoricOrArtisticProperty .
- 
+
   {
     ?opera rdfs:label ?titolo .
     FILTER(REGEX(LCASE(STR(?titolo)), "bacco", "i"))
@@ -582,7 +608,7 @@ WHERE {
     ?opera dc:title ?titolo .
     FILTER(REGEX(LCASE(STR(?titolo)), "bacco", "i"))
   }
- 
+
   OPTIONAL {
     {
       ?opera dc:creator ?autore .
@@ -597,28 +623,28 @@ WHERE {
   }
 }
 ORDER BY ?titolo
-LIMIT 200</div>
-                </div>
-                <div class="query-description-box">
-                    <p class="query-description">
-                        
-                    </p>
-                    <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">View results on ArCo</a>
-                </div>
+LIMIT 200</textarea>
+                <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="action-button">View results on ArCo</a>
+                <div id="homeQuery1Results" class="query-results"></div>
             </div>
 
             <!-- Space for text between query 1 and 2 -->
-            <p class="query-separator-text">
-              We thus obtained several results, so to narrow the field, we generated a new query:
+            <p class="content-separator-text">
+                We thus obtained several results, so to narrow the field, we generated a new query:
             </p>
 
-            <!-- Query Item 2: Title above code, description in separate box below -->
-            <div class="query-item fade-in">
-                <h3 class="query-title">Query 2</h3>
-                <div class="query-code-container">
-                    <div class="query-code">PREFIX arco: &lt;https://w3id.org/arco/ontology/arco/&gt;
-PREFIX schema: &lt;http://schema.org/&gt;
-PREFIX rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+            <!-- Query Item 2: Transformed to look like Case Study 4 query box -->
+            <div class="content-box fade-in">
+                <h3 class="box-title">Query 2: Dettagli Tecnici del "Bacco"</h3>
+                <div class="description-container">
+                    <p class="description-text">
+                        Questa query estrae dettagli specifici sull'opera "Bacco", come il materiale, le dimensioni, la tecnica pittorica e l'ubicazione, dimostrando come si possono recuperare informazioni concrete legate all'oggetto d'arte.
+                    </p>
+                </div>
+                <textarea id="homeQuery2" class="query-textarea">
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX schema: <http://schema.org/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?opera ?materiale ?dimensioni ?tecnica ?ubicazioneNome WHERE {
   ?opera arco:hasTitle ?titolo ;
@@ -632,39 +658,31 @@ SELECT ?opera ?materiale ?dimensioni ?tecnica ?ubicazioneNome WHERE {
   OPTIONAL { ?ubicazione rdfs:label ?ubicazioneNome . }
   FILTER(contains(lcase(?titolo), "bacco"))
 }
-LIMIT 200</div>
-                </div>
-                <div class="query-description-box">
-                    <p class="query-description">
-                      
-                    </p>
-                    <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="view-results">View results on ArCo</a>
-                </div>
+LIMIT 200</textarea>
+                <a href="https://www.cultura.gov.it/arcomi/" target="_blank" class="action-button">View results on ArCo</a>
+                <div id="homeQuery2Results" class="query-results"></div>
             </div>
             
-            <!-- Query 3 was removed as requested in a previous step -->
+            <!-- Original text block after queries -->
+            <p class="content-separator-text" style="margin-top: 2rem;">
+                Now, thanks to this query we unexpectedly received only four results – actually, two, but in both the English and Italian versions –, from which we chose to work on
+                <a href="https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176</a>, "Bacco (dipinto) di Merisi Michelangelo detto Caravaggio (sec. XVI)"@it.
+                <br><br>
+                So, we opened it and realised that there were some gaps, and we used three prompting techniques on different LLMs to enrich the Knowledge Graph. We worked using both English and Italian, since ArCo is an Italian database and not all the information is translated into English, so we wanted the prompts and the outputs to be in Italian. We decided to include this information:
+            </p>
+
+            <!-- Case Study Buttons Container -->
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0; padding: 1rem;">
+                <a href="case_study_1.html" class="action-button" style="margin: 0.3rem;">Iconographic Description</a>
+                <a href="case_study_2.html" class="action-button" style="margin: 0.3rem;">Commission</a>
+                <a href="case_study_3.html" class="action-button" style="margin: 0.3rem;">Alternative Dating</a>
+                <a href="case_study_4.html" class="action-button" style="margin: 0.3rem;">The Chiaroscuro Technique</a>
+                <a href="case_study_5.html" class="action-button" style="margin: 0.3rem;">"Young Sick Bacchus" by Caravaggio</a>
+            </div>
+
+            <p class="content-separator-text" style="margin-top: 0;">In conclusion, we compared the outputs from each of the used LLMs and transformed them into RDF triples, using ArCo's vocabulary.</p>
         </div>
     </section>
-
-    <!-- Space after the last query for consistency -->
-  <!-- Space after the last query for consistency -->
-<div class="query-separator-text" style="margin-top: 2rem;">
-   <p>Now, thanks to this query we unexpectedly received only four results – actually, two, but in both the English and Italian versions –, from which we chose to work on
-<a href="https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176" target="_blank" style="color: var(--secondary-color); text-decoration: underline;">https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176</a>, "Bacco (dipinto) di Merisi Michelangelo detto Caravaggio (sec. XVI)"@it.</p>
-
-<p>So, we opened it and realised that there were some gaps, and we used three prompting techniques on different LLMs to enrich the Knowledge Graph. We worked using both English and Italian, since ArCo is an Italian database and not all the information is translated into English, so we wanted the prompts and the outputs to be in Italian. We decided to include this information:</p>
-
-        <!-- Case Study Buttons Container -->
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin: 2rem 0; padding: 1rem;">
-            <a href="case_study_1.html" class="view-results" style="margin: 0.3rem;">Iconographic Description</a>
-            <a href="case_study_2.html" class="view-results" style="margin: 0.3rem;">Commission</a>
-            <a href="case_study_3.html" class="view-results" style="margin: 0.3rem;">Alternative Dating</a>
-            <a href="case_study_4.html" class="view-results" style="margin: 0.3rem;">The Chiaroscuro Technique</a>
-            <a href="case_study_5.html" class="view-results" style="margin: 0.3rem;">"Young Sick Bacchus" by Caravaggio</a>
-        </div>
-
-        <p>In conclusion, we compared the outputs from each of the used LLMs and transformed them into RDF triples, using ArCo's vocabulary.</p>
-</div>
 
     <!-- Page Footer -->
     <footer class="footer">
@@ -741,6 +759,39 @@ LIMIT 200</div>
                 observer.observe(element); // Starts observing each 'fade-in' element
             });
         });
+
+        // The visualizeQuery function is no longer needed for these buttons,
+        // as they now directly link to ArCo.
+        // If you need it for other parts of your site (e.g., case studies), keep it there.
+
+        // Copy to clipboard function for prompt text/query text
+        function copyPromptText(event, elementId) {
+            const textToCopy = document.getElementById(elementId).textContent || document.getElementById(elementId).value; // Get text from div or textarea
+
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = textToCopy;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+
+            try {
+                document.execCommand('copy');
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copiato!';
+                button.style.background = '#28a745';
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Errore nella copia: ', err);
+                // Fallback using alert (as per instructions for iframe limitations)
+                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+            } finally {
+                document.body.removeChild(tempTextArea);
+            }
+        }
     </script>
 </body>
 </html>
