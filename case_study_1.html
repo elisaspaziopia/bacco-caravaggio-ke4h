@@ -645,14 +645,26 @@ rdfs:label ?label ;
                 <!-- Code Box (now second) -->
             <div class="content-box">
                 <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple</a></h2>
-                <div class="code-container">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+                <div class="code-container">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix : <https://example.org/resource/> .
 
-http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214 
-    cd:hasIconographicDescription 
-    """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
+<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
+    a arco:HistoricOrArtisticProperty ;
+    a-dd:hasIconographicOrDecorativeApparatus :apparato0900289176 .
+
+:apparato0900289176
+    a a-dd:IconographicOrDecorativeApparatus ;
+    rdfs:label "Apparato iconografico e decorativo dell’opera 0900289176"@it ;
+    a-dd:includesIconographicDescription :descrizione0900289176 .
+
+:descrizione0900289176
+    a a-dd:IconographicDescription ;
+    rdfs:label "Descrizione iconografica"@it ;
+    a-dd:hasInterpretationText """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
+
 </div>
             </div>
         </div>
