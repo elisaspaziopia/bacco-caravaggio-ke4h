@@ -567,16 +567,22 @@ Let's query ArCo to see if chiaroscuro is present as a value of some property:</
             <h2 class="box-title">Esempi di Query SPARQL su Dati Arricchiti</h2>
             <div class="query-grid-container">
                 <div class="query-box">
-                    <h3 class="query-box-title">Query 1: Simbolismo del "Vino"</h3>
-                    <textarea id="query1" class="query-textarea">
+                    <h3 class="query-box-title">Query 1: hasMaterialOrTechnique</h3>
+                    <textarea id="query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX cd: <https://w3id.org/arco/ontology/context-description/>
 
-SELECT ?opera ?descrizioneIconografica
+# Query alternativa 1: Prova con namespace arco:
+SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel
 WHERE {
-  ?opera cd:hasIconographicDescription ?descrizioneIconografica .
-  FILTER(CONTAINS(LCASE(STR(?descrizioneIconografica)), "vino"))
+  ?historicProperty rdf:type arco:HistoricOrArtisticProperty .
+  ?historicProperty a-dd:hasMaterialOrTechnique ?material .
+  
+  OPTIONAL { ?historicProperty rdfs:label ?label }
+  OPTIONAL { ?material rdfs:label ?materialLabel }
 }
+LIMIT 100
                     </textarea>
                     <button class="action-button" onclick="visualizeQuery(event, 'query1Results', 'query1')">Visualizza Risultati</button>
                     <div id="query1Results" class="query-results"></div>
