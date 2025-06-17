@@ -641,59 +641,55 @@ LIMIT 100
 
         <div class="content-box fade-in">
             <div class="content-box">
-                <h2 class="box-title"><a href="iconographic_decsription_triple.ttl">Triple - adding "chiaroscuro" as a type of technique </a></h2>
+                <h2 class="box-title">Triple - adding "chiaroscuro" as Datatypeproperty and as object property</h2>
                 <div class="code-container">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
-@prefix owl: http://www.w3.org/2002/07/owl# .
-    
-<https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> 
-    rdf:type a-dd:TechnicalCharacteristic ;
-    rdfs:label "chiaroscuro"@it ;
-    rdfs:label "chiaroscuro"@en ;
-    rdfs:comment "Tecnica pittorica che utilizza forti contrasti tra luce e ombra per creare effetti tridimensionali e drammatici"@it ;
-    rdfs:comment "Painting technique that uses strong contrasts between light and shadow to create three-dimensional and dramatic effects"@en .
-    
-<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176> 
-    a-dd:hasTechnique <https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-        
-<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176> 
-    a-dd:hasMaterialOrTechnique <https://dati.beniculturali.it/lodview-arco/resource/TechnicalCharacteristic/chiaroscuro> .
+<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
+    arco:hasMaterialOrTechnique "chiaroscuro"@it .
 
+
+
+    @prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix arco-res: <https://w3id.org/arco/resource/MaterialOrTechnique/> .
+
+<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
+    arco:hasMaterialOrTechnique arco-res:Chiaroscuro .
                     
 </div>
             </div>
         </div>
     </div>
                <div class="content-box">
-                <h2 class="box-title"><a href="iconographic_decsription_triple.ttl">Triple</a></h2>
-                <div class="code-container">a-dd:hasPaintingTechnique rdf:type owl:ObjectProperty ;
-    rdfs:label "ha tecnica pittorica"@it ;
-    rdfs:label "has painting technique"@en ;
-    rdfs:comment "Questa proprietà collega un bene culturale a una tecnica pittorica specifica utilizzata nella sua realizzazione"@it ;
-    rdfs:comment "This property connects a cultural property to a specific painting technique used in its creation"@en ;
-    rdfs:domain arco:HistoricOrArtisticProperty ;
-    rdfs:range a-dd:PaintingTechnique ;
-    rdfs:subPropertyOf a-dd:hasTechnique .
-                    
-a-dd:PaintingTechnique rdf:type owl:Class ;
-    rdfs:label "Tecnica Pittorica"@it ;
-    rdfs:label "Painting Technique"@en ;
-    rdfs:comment "Classe che rappresenta le tecniche specifiche utilizzate nella pittura"@it ;
-    rdfs:comment "Class representing specific techniques used in painting"@en ;
-    rdfs:subClassOf a-dd:TechnicalCharacteristic .
-                    
-<https://dati.beniculturali.it/lodview-arco/resource/PaintingTechnique/chiaroscuro> 
-    rdf:type a-dd:PaintingTechnique ;
-    rdfs:label "chiaroscuro"@it ;
-    rdfs:label "chiaroscuro"@en ;
-    rdfs:comment "Tecnica pittorica caratterizzata dall'uso drammatico di contrasti tra zone di luce e ombra per modellare le forme e creare effetti tridimensionali"@it ;
-    rdfs:comment "Painting technique characterized by dramatic use of light-dark contrasts to model forms and create three-dimensional effects"@en ;
-    a-dd:hasHistoricalPeriod "Rinascimento, Barocco"@it ;
-    a-dd:hasNotableArtist "Leonardo da Vinci, Caravaggio, Rembrandt"@en .
+                <h2 class="box-title">hasPaintingTechnique as Datatypeproperty and as object property</h2>
+                <div class="code-container">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: http://www.w3.org/2002/07/owl# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
 
+a-dd:hasPaintingTechnique
+    a owl:DatatypeProperty ;
+    rdfs:label "has painting technique"@en ;
+    rdfs:label "ha tecnica pittorica"@it ;
+    rdfs:comment "La tecnica pittorica utilizzata nella realizzazione di un'opera (es. olio su tela, tempera, affresco)."@it ;
+    rdfs:domain a-dd:TechnicalCharacteristic ;
+    rdfs:range xsd:string .
+
+
+
+    @prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix owl: http://www.w3.org/2002/07/owl# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+
+a-dd:hasPaintingTechnique
+    a owl:ObjectProperty ;
+    rdfs:label "has painting technique"@en ;
+    rdfs:label "ha tecnica pittorica"@it ;
+    rdfs:comment "Collega una caratteristica tecnica a una tecnica pittorica specifica rappresentata come risorsa controllata."@it ;
+    rdfs:domain a-dd:TechnicalCharacteristic ;
+    rdfs:range a-dd:PaintingTechnique .
 </div>
             </div>
         </div>
