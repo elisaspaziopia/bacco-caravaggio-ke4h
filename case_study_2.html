@@ -647,33 +647,6 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
             </div>
         </div>
     </div>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-links">
-            <div class="footer-link-group">
-                <h4>Navigazione Principale</h4>
-                <a href="index.html#home">Home</a>
-                <a href="index.html#queries">Query SPARQL</a>
-                <a href="#documentation">Documentazione</a>
-            </div>
-            <div class="footer-link-group">
-                <h4>Approfondimenti</h4>
-                <a href="prompting_techniques.html">Prompting Techniques</a>
-            </div>
-            <div class="footer-link-group">
-                <h4>Case Studies</h4>
-                <a href="case_study_1.html">Case Study 1</a>
-                <a href="case_study_2.html">Case Study 2</a>
-                <a href="case_study_3.html" class="active">Case Study 3</a>
-                <a href="case_study_4.html">Case Study 4</a>
-            </div>
-            <div class="footer-link-group">
-                <h4>Risorse Esterne</h4>
-                <a href="https://www.cultura.gov.it/arcomi/" target="_blank">Arco MiC</a>
-                <a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a>
-            </div>
-        </div>
         <p style="margin-top: 3rem;">&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
         <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
     </footer>
@@ -700,6 +673,25 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
 
             fadeElements.forEach(element => {
                 observer.observe(element);
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const targetElement = document.querySelector(href);
+
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
