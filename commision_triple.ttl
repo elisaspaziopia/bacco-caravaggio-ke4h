@@ -1,0 +1,26 @@
+@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+@prefix TI: https://w3id.org/italia/onto/TI/ .
+@prefix l0: https://w3id.org/italia/onto/l0/ .
+                        
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    cd:hasCommission 
+    <https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> .
+        
+<https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte> 
+    rdf:type cd:Commission ;
+    rdfs:label "Committenza del Cardinale Del Monte per Bacco"@it ;
+    l0:name "Committenza del Cardinale Del Monte per Bacco"@it ;
+    cd:hasCommittent <https://w3id.org/arco/resource/Agent/cardinale-del-monte> ;
+    cd:hasCircumstance <https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> ;
+    TI:atTime <https://w3id.org/arco/resource/TimeInterval/1608> .
+        
+<https://w3id.org/arco/resource/Agent/cardinale-del-monte> 
+    rdf:type cd:Agent ;
+    rdfs:label "Cardinale Francesco Maria Del Monte"@it .
+    
+<https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608> 
+    rdf:type cd:Circumstance ;
+    rdfs:label "Donazione a Ferdinando I de' Medici per le nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
