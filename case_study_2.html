@@ -515,11 +515,9 @@
             <div class="content-box fade-in">
                 <h2 class="box-title">Commission Gap</h2>
                 <div class="description-container">
-                    <p><strong>Identifying the gap:</strong>Looking at Caravaggio's Bacchus on ArCo and, especially, at the contents of the property <a href="https://w3id.org/arco/ontology/context-description/historicalInformation"><i>HistoricalInformation</i>HistoricalInformation</a>, we realize that the work was commissioned by Francesco Maria del Monte. We searched thorough the ArCo ontology and discovered the class <a href="https://w3id.org/arco/ontology/context-description/Commission">Commission</a> within the Context Description Ontology.</p>
+                    <p><strong>Identifying the gap:</strong> Looking at Caravaggio's Bacchus on ArCo and, especially, at the contents of the property <a href="https://w3id.org/arco/ontology/context-description/historicalInformation"><i>HistoricalInformation</i></a>, we realize that the work was commissioned by Francesco Maria del Monte. We searched thorough the ArCo ontology and discovered the class <a href="https://w3id.org/arco/ontology/context-description/Commission">Commission</a> within the <a href="https://w3id.org/arco/ontology/context-description"><i>Context Description Ontology</i></a>.</p>
 
-                    <p><strong>Methodology:</strong>We decided to run a query in order to understand how data is linked through this class.</p>
-
-                    <p><strong>Results:</strong>As a result, this information is now present as structured data within ArCo, making it more easily usable.</p>
+                    <p><strong>Methodology:</strong> We decided to run a query in order to understand how data is linked through this class.</p>
                 </div>
             </div>
 <!DOCTYPE html>
@@ -684,7 +682,9 @@ LIMIT 100</textarea>
     </div>
 </body>
 </html>
-<div class="content-box fade-in>The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs to translate this content into a triple.</div>
+
+     The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs to translate this content into a triple.
+           
             <!-- Code Box (now second) -->
             <div class="content-box fade-in">
                <h2 class="box-title"><a href="https://github.com/elisaspaziopia/bacco-caravaggio-ke4h/blob/main/commision_triple.ttl">Triple</a></h2>
