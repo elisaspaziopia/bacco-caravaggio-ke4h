@@ -96,11 +96,11 @@ arco-core:TimeSpan/Movement_1596
 
             <!-- Code Box -->
             <div class="content-box fade-in">
-                <h2 class="box-title">Example RDF Triple from CoT Analysis</h2>
+                <h2 class="box-title">Triple</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix arco-core: <https://w3id.org/arco/core/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+                    <pre class="code-block">@prefix arco-core: https://w3id.org/arco/core/ .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
 
 arco-core:CulturalProperty/Bacchus_by_Caravaggio
     arco-core:hasDating arco-core:Dating/Initial_Dating_1589 .
@@ -125,9 +125,9 @@ arco-core:Dating/Initial_Dating_1589
         </div>
         
         <div class="content-box fade-in">
-            <p class="description-text">The triple has few issues, for instance, it does not find the "Bacchus" by Caravaggio's URI and even though we asked to generate the triple according to ArCo Ontology, it used a different Ontology. For this reason we decide to try again, suggesting to LLMs that a class, namely Alternative Dating, does exist on ArCo:</p>
+            <p class="description-text">The triple has few issues, for instance, it does not find the "Bacchus" by Caravaggio's URI and also uses another property, that is not the one we have found.</p>
             <div class="content-box fade-in">
-                <h2 class="box-title">Example RDF Triple from CoT Analysis</h2>
+                <h2 class="box-title">Triple✅</h2>
                 <div class="code-container">
                     <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
@@ -142,12 +142,13 @@ https://w3id.org/arco/resource/AlternativeDating/0900281214-1589
     rdf:type a-cd:AlternativeDating ;
     rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
     l0:name "Datazione alternativa del Bacco al 1589"@it ;
-    a-cd:hasDatingDescription "prima datazione al 1589"@it .
+    rdfs:comment "prima datazione al 1589, poi superata"@it .
                     </pre>
                 </div>
             </div> 
         </div>
     </div>
+    <div class="content-box fade-in"><p class="description-text"><strong>Results:</strong> enriching the Caravaggio's Bacchus resource with the property a-cd:hasAlternativeDating provides a structured and semantically explicit way to represent outdated or alternative chronological interpretations. This approach offers significant advantages over embedding such information as plain text within a general HistoricalInformation property. Using a dedicated property and class (e.g., a-cd:AlternativeDating) allows machines to identify and process this specific type of information. It becomes queryable via SPARQL, reusable in other systems, and interoperable across datasets.</p></div>
 
     <!-- Footer -->
     <footer class="footer">
