@@ -5,519 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArCo Knowledge Graph Enhancement</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Base reset for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* CSS variables for easy palette management */
-        :root {
-            --primary-color: #2C1810; /* Dark brown / almost black, strong base */
-            --secondary-color: #8B4513; /* Sienna / Reddish brown, warm tones of Bacchus */
-            --accent-color: #DAA520; /* Gold yellow / Amber, bright and precious details */
-            --text-light: #F5F5DC; /* Off-white / Cream, for text on dark backgrounds */
-            --text-dark: #2C1810; /* Dark brown, for text on light backgrounds */
-            --background-light: #FAF9F6; /* Warm white / Ivory, main background */
-            --card-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent card background */
-            --shadow: rgba(44, 24, 16, 0.15); /* Light but present shadow */
-        }
-
-        /* Global styles for the document body */
-        body {
-            font-family: 'Inter', sans-serif; /* Font for body text, clean and readable */
-            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%); /* Light gradient background */
-            color: var(--text-dark); /* Default text color */
-            line-height: 1.6; /* Line height for better readability */
-            font-size: 0.95rem; /* Reduced base font size */
-            padding-top: 80px; /* Ensures content is below fixed navbar */
-        }
-
-        /* Styles for the fixed header (navigation) */
-        nav {
-            position: fixed; /* Makes navigation fixed at the top */
-            top: 0;
-            width: 100%;
-            background: rgba(44, 24, 16, 0.95); /* Dark background with slight transparency */
-            backdrop-filter: blur(10px); /* Blur effect for content underneath */
-            z-index: 1000; /* Ensures it's above other elements */
-            padding: 1rem 0; /* Vertical padding */
-            transition: all 0.3s ease; /* Smooth transition for any changes */
-        }
-
-        /* Navigation container to center and limit width */
-        .nav-container {
-            max-width: 1200px; /* Maximum width */
-            margin: 0 auto; /* Centers horizontally */
-            display: flex; /* Uses flexbox to align elements */
-            justify-content: space-between; /* Spaces logo and menu */
-            align-items: center; /* Aligns vertically */
-            padding: 0 2rem; /* Side padding */
-        }
-
-        /* Style for the logo/title in the navigation */
-        .logo {
-            font-family: 'Playfair Display', serif; /* Specific font for the logo */
-            font-size: 1.4rem; /* Font size */
-            font-weight: 700; /* Bold */
-            color: var(--accent-color); /* Accent color */
-        }
-
-        .logo a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        /* Navigation menu */
-        .nav-menu {
-            display: flex; /* Flexbox for menu items */
-            list-style: none; /* Removes list bullets */
-            gap: 1.5rem; /* Space between menu items */
-        }
-
-        /* Single menu item */
-        .nav-item {
-            position: relative; /* Required for dropdown positioning */
-        }
-
-        /* Navigation link */
-        .nav-link {
-            color: var(--text-light); /* Light text color */
-            text-decoration: none;
-            font-weight: 500; /* Font weight */
-            padding: 0.4rem 0.8rem; /* Slightly reduced inner padding */
-            border-radius: 8px; /* Rounded corners */
-            transition: all 0.3s ease; /* Transition for hover */
-        }
-
-        /* Hover effect for navigation links */
-        .nav-link:hover {
-            background: rgba(218, 165, 32, 0.2); /* Slightly transparent background on hover */
-            color: var(--accent-color); /* Changes color on hover */
-        }
-
-        /* Dropdown menu */
-        .dropdown {
-            display: none; /* Hidden by default */
-            position: absolute; /* Absolute positioning */
-            top: 100%; /* Below the parent element */
-            left: 0;
-            background: var(--primary-color); /* Dark background */
-            min-width: 180px; /* Reduced minimum width */
-            box-shadow: 0 10px 30px var(--shadow); /* Shadow */
-            border-radius: 12px;
-            opacity: 0; /* Transparent by default */
-            visibility: hidden; /* Hidden for accessibility */
-            transform: translateY(-10px); /* Slightly shifted up */
-            transition: all 0.3s ease; /* Smooth transition */
-            margin-top: 0.5rem; /* Top margin */
-        }
-
-        /* Show dropdown on hover over parent item */
-        .nav-item:hover .dropdown {
-            display: block; /* Shows dropdown */
-            opacity: 1; /* Makes visible */
-            visibility: visible;
-            transform: translateY(0); /* Removes shift */
-        }
-
-        /* Single dropdown item */
-        .dropdown-item {
-            padding: 0.6rem 1.2rem; /* Reduced inner padding */
-            color: var(--text-light); /* Light text color */
-            text-decoration: none;
-            display: block; /* Each link takes its own line */
-            transition: all 0.3s ease; /* Transition on hover */
-            border-radius: 8px;
-            margin: 0.2rem; /* Reduced margin between items */
-        }
-
-        /* Hover effect for dropdown items */
-        .dropdown-item:hover {
-            background: rgba(218, 165, 32, 0.2); /* Slightly transparent background on hover */
-            color: var(--accent-color); /* Changes color on hover */
-        }
-
-        /* Active dropdown item for the current page */
-        .dropdown-item.active {
-            background: rgba(218, 165, 32, 0.3);
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Hero section (main introduction) */
-        .hero {
-            min-height: 100vh; /* Minimum height 100% of viewport */
-            display: flex;
-            flex-direction: column; /* Content in column */
-            align-items: center;
-            justify-content: center;
-            position: relative; /* For background and indicator positioning */
-            background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%); /* Overlay gradient */
-            overflow: hidden; /* Hides overflowing content */
-            padding-top: 80px; /* Padding to leave space for fixed navbar */
-            padding-bottom: 4rem; /* Bottom padding for scroll indicator */
-        }
-
-        /* Background image for hero section */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            /* Caravaggio's Bacchus painting as background image with low opacity */
-            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg') center/cover;
-            opacity: 0.3; /* Low opacity for background image */
-            z-index: -1; /* Sends image behind content */
-        }
-
-        /* Main text content of hero section */
-        .hero-content {
-            text-align: center;
-            max-width: 800px;
-            padding: 2rem;
-            color: var(--text-light); /* Light text */
-            z-index: 2; /* Above background image */
-            margin-bottom: 2rem;
-        }
-
-        /* Main title of hero section */
-        .hero h1 {
-            font-family: 'Playfair Display', serif; /* Font for titles */
-            font-size: 2.8rem; /* Reduced */
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Text shadow */
-            animation: fadeInUp 1s ease-out; /* Fade-in animation */
-        }
-
-        /* Paragraph of hero section */
-        .hero p {
-            font-size: 1.15rem; /* Reduced */
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.3s both; /* Delayed animation */
-        }
-
-        /* Container for the main image in hero section */
-        .hero .image-container {
-            width: 70%;
-            max-width: 600px;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4); /* Strong shadow */
-            border: 3px solid var(--accent-color); /* Accent color border */
-            margin-bottom: 2rem;
-            animation: fadeInScale 1s ease-out 0.8s both; /* Scaled fade-in animation with delay */
-        }
-
-        /* Image inside the container */
-        .hero .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Text appearing after the image in hero */
-        .hero-text-after-image {
-            text-align: center;
-            max-width: 800px;
-            padding: 0 2rem;
-            color: var(--text-light);
-            z-index: 2;
-            margin-bottom: 3rem;
-            font-size: 1rem; /* Reduced */
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 1.2s both; /* Animation with longer delay */
-        }
-
-        /* Query Section (Methodology) */
-        .queries-section {
-            padding: 4rem 2rem; /* Reduced section padding */
-            max-width: 1200px; /* Maximum width */
-            margin: 0 auto; /* Centers */
-        }
-
-        /* Section titles (e.g., "Methodology") */
-        .section-title {
-            font-family: 'Playfair Display', serif; /* Specific font for titles */
-            font-size: 2.2rem; /* Reduced */
-            text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-        }
-
-        /* Vertical layout for content boxes (default for small screens) */
-        .content-layout-vertical { /* Renamed from query-layout-vertical to be more generic */
-            display: flex;
-            flex-direction: column;
-            gap: 3rem; /* Reduced vertical space between content boxes */
-        }
-
-        /* Container for each individual content block (now generic, used for queries too) */
-        .content-box {
-            display: flex;
-            flex-direction: column; /* Always in column */
-            align-items: center; /* Horizontally centers inner elements */
-            gap: 1rem; /* Reduced space between inner elements */
-            padding: 2rem;
-            background: var(--card-bg); /* Card background */
-            border-radius: 20px; /* Rounded corners */
-            box-shadow: 0 10px 30px var(--shadow); /* Shadow */
-            border: 1px solid rgba(218, 165, 32, 0.2); /* Thin accent color border */
-            position: relative; /* For top bar effect */
-            overflow: hidden; /* Hides initial bar */
-            text-align: center; /* General text alignment in card */
-        }
-
-        /* Animated top bar effect on hover over content box */
-        .content-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%; /* Starts off-screen to the left */
-            width: 100%;
-            height: 3px; /* Bar thickness */
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color)); /* Gradient for the bar */
-            transition: all 0.5s ease; /* Transition for animation */
-        }
-
-        /* Show bar on hover */
-        .content-box:hover::before {
-            left: 0; /* Moves bar into view */
-        }
-
-        /* Styles for content box titles (used for query titles as well) */
-        .box-title {
-            font-family: 'Playfair Display', serif; /* Font for titles */
-            font-size: 1.5rem; /* Standard title size for content boxes */
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            text-align: left; /* Align to left within the box */
-            width: 100%; /* Take full width for alignment */
-        }
-
-        /* Description container inside content-box */
-        .description-container {
-            background: var(--background-light); /* Slightly different background for the box */
-            border: 1px solid rgba(218, 165, 32, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            color: #444;
-            line-height: 1.6;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            text-align: left; /* Align description text to left */
-            margin-bottom: 1.5rem; /* Space between description and code/button */
-            width: 100%; /* Take full width */
-            max-width: 100%; /* Ensure it expands */
-        }
-
-        /* Styles for description text inside its container */
-        .description-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #444;
-            margin-bottom: 0; /* No bottom margin, as container provides padding */
-        }
-
-        .description-text strong {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .description-text em {
-            color: var(--secondary-color);
-            font-style: italic;
-        }
-
-        /* Textarea for queries */
-        .query-textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            resize: vertical;
-            background-color: #f8f9fa;
-            color: var(--text-dark);
-        }
-
-        /* Results display for queries (hidden for now) */
-        .query-results {
-            display: none; /* Initially hide the results div */
-            background-color: #e9ecef;
-            border: 1px dashed #ced4da;
-            border-radius: 8px;
-            padding: 1rem;
-            min-height: 50px; /* Ensure some height even if empty */
-            align-items: center; /* Use align-items for vertical centering */
-            justify-content: center; /* Use justify-content for horizontal centering */
-            color: #6c757d;
-            font-style: italic;
-            margin-top: 1rem;
-            text-align: center;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            width: 100%; /* Take full width */
-        }
-
-        /* Action button (e.g., Copy Prompt, View Results) */
-        .action-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .action-button:hover {
-            background: var(--primary-color);
-            transform: scale(0);
-        }
-
-        /* Styles for text inserted between content boxes */
-        .content-separator-text { /* Renamed from query-separator-text */
-            text-align: center;
-            max-width: 800px;
-            margin: 2rem auto; /* Reduced top and bottom space */
-            color: var(--text-dark);
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Style for elements that will appear with fade-in animation */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        /* Visible state of fade-in animation */
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design for smaller screens */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none; /* Hides navigation menu on mobile (an hamburger menu could be added) */
-            }
-
-            .hero h1 {
-                font-size: 2.2rem; /* Reduced for mobile */
-            }
-
-            .hero p {
-                font-size: 1rem; /* Reduced for mobile */
-            }
-            
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .hero .image-container {
-                width: 90%;
-            }
-
-            /* Content boxes are already in column by default on small screens */
-            .content-box {
-                padding: 1.5rem;
-            }
-            .description-container, .query-textarea, .query-results {
-                padding: 1rem;
-                width: 100%; /* Ensure full width on mobile */
-                max-width: 100%; /* Ensure it expands */
-            }
-        }
-
-        /* Footer styles */
-        .footer {
-            background: var(--primary-color); /* Dark background */
-            color: var(--text-light); /* Light text */
-            padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.85rem; /* Reduced */
-            margin-top: 5rem;
-        }
-
-        /* Footer links */
-        .footer a {
-            color: var(--accent-color); /* Accent color */
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        /* Hover effect for footer links */
-        .footer a:hover {
-            color: var(--text-light); /* Light text color on hover */
-        }
-
-        /* Footer link grouping */
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap; /* Allows links to wrap */
-        }
-
-        /* Titles of footer link groups */
-        .footer-link-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .footer-link-group h4 {
-            font-family: 'Playfair Display', serif; /* Font for group titles */
-            font-size: 1rem; /* Reduced */
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .footer-link-group a {
-            margin-bottom: 0.5rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
     <!-- Fixed Navbar -->
@@ -566,6 +54,9 @@
                 Please scroll down for more detailed information about our research.
             </p>
         </div>
+        <!-- The scroll-indicator div is present but lacks specific styling in the provided CSS to make it visible beyond a simple fill color.
+             If you intend for a more elaborate scroll indicator, additional CSS will be needed.
+             For now, I've kept it as is, but it might not be visually apparent. -->
         <div class="scroll-indicator">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M7 10l5 5 5-5z"/>
@@ -579,9 +70,9 @@
         <p class="content-separator-text" style="margin-bottom: 1rem;">
             First, after choosing the subject to search on ArCo, we used this query in order to find "Bacchus" by Caravaggio on the database:
         </p>
-        
+
         <div class="content-layout-vertical">
-            <!-- Query Item 1: Transformed to look like Case Study 4 query box -->
+            <!-- Query Item 1 -->
             <div class="content-box fade-in">
                 <h3 class="box-title">Query 1</h3>
                 <textarea id="homeQuery1" class="query-textarea">
@@ -604,14 +95,14 @@ WHERE {
                 We thus obtained several results, so to narrow the field, we generated a new query:
             </p>
 
-            <!-- Query Item 2: Transformed to look like Case Study 4 query box -->
+            <!-- Query Item 2 -->
             <div class="content-box fade-in">
                 <h3 class="box-title">Query 2</h3>
                 <textarea id="homeQuery2" class="query-textarea">
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX a-cd: <https://w3id.org/arco/ontology/catalogue/>
- 
+
 SELECT DISTINCT ?opera ?label ?author
 WHERE {
   {
@@ -620,9 +111,9 @@ WHERE {
     FILTER(REGEX(?label, "bacco", "i"))
     FILTER(REGEX(?label, "caravaggio", "i"))
   }
-  
+
   UNION
-  
+
   {
     ?opera a arco:HistoricOrArtisticProperty ;
            rdfs:label ?label .
@@ -631,18 +122,18 @@ WHERE {
     ?authorEntity rdfs:label ?authorLabel .
     FILTER(REGEX(?authorLabel, "michelangelo merisi", "i"))
   }
-  
-  OPTIONAL { 
+
+  OPTIONAL {
     ?opera a-cd:hasAuthor ?authorEntity .
-    ?authorEntity rdfs:label ?author 
+    ?authorEntity rdfs:label ?author
   }
 }
 ORDER BY ?author
 LIMIT 50</textarea>
-                <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcatalogue%2F%3E%0D%0A+%0D%0ASELECT+DISTINCT+%3Fopera+%3Flabel+%3Fauthor%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A++++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+++++++++++rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER%28REGEX%28%3Flabel%2C+%22bacco%22%2C+%22i%22%29%29%0D%0A++++FILTER%28REGEX%28%3Flabel%2C+%22caravaggio%22%2C+%22i%22%29%29%0D%0A++%7D%0D%0A++%0D%0A++UNION%0D%0A++%0D%0A++%7B%0D%0A++++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+++++++++++rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER%28REGEX%28%3Flabel%2C+%22bacco%22%2C+%22i%22%29%29%0D%0A++++%3Fopera+a-cd%3AhasAuthor+%3FauthorEntity+.%0D%0A++++%3FauthorEntity+rdfs%3Alabel+%3FauthorLabel+.%0D%0A++++FILTER%28REGEX%28%3FauthorLabel%2C+%22michelangelo+merisi%22%2C+%22i%22%29%29%0D%0A++%7D%0D%0A++%0D%0A++OPTIONAL+%7B+%0D%0A++++%3Fopera+a-cd%3AhasAuthor+%3FauthorEntity+.%0D%0A++++%3FauthorEntity+rdfs%3Alabel+%3Fauthor+%0D%0A++%7D%0D%0A%7D%0D%0AORDER+BY+%3Fauthor%0D%0ALIMIT+50&format=text%2Fhtml&timeout=0&signal_void=on" class="action-button">View results on ArCo</a>
+                <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcatalogue%2F%3E%0D%0A+%0D%0ASELECT+DISTINCT+%3Fopera+%3Flabel+%3Fauthor%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A++++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+++++++++++rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER%28REGEX%28%3Flabel%2C+%22bacco%22%2C+%22i%22%29%29%0D%0A++++FILTER%28REGEX%28%3Flabel%2C+%22caravaggio%22%2C+%22i%22%29%29%0D%0A++%7D%0D%0A++%0D%0A++UNION%0D%0A++%0D%0A++%7B%0D%0A++++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0A+++++++++++rdfs%3Alabel+%3Flabel+.%0D%0A++++FILTER%28REGEX%28%3Flabel%2C+%22bacco%22%2C+%22i%22%29%29%0D%0A++++%3Fopera+a-cd%3AhasAuthor+%3FauthorEntity+.%0D%0A++++%3FauthorEntity+rdfs%3Alabel+%3FauthorLabel+.%0D%0A++++FILTER%28REGEX%28%3FauthorLabel%2C+%22michelangelo+merisi%22%2C+%22i%22%29%29%0D%0A++%7D%0D%0A++%0D%0A++OPTIONAL+%7B+%0D%0A++++%3Fopera+a-cd%3AhasAuthor+%3FauthorEntity+.%0D%0A++++%3FauthorEntity+rdfs%3Alabel+%3Fauthor+%0D%0A++%7D%0D%0A%7D%0D%0AORDER+BY+%3Fauthor%0D%0ALIMIT+50&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results on ArCo</a>
                 <div id="homeQuery2Results" class="query-results"></div>
             </div>
-            
+
             <!-- Original text block after queries -->
             <p class="content-separator-text" style="margin-top: 2rem;">
                 Now, thanks to this query we unexpectedly received only four results – actually, two, but in both the English and Italian versions –, from which we chose to work on
@@ -738,10 +229,6 @@ LIMIT 50</textarea>
             });
         });
 
-        // The visualizeQuery function is no longer needed for these buttons,
-        // as they now directly link to ArCo.
-        // If you need it for other parts of your site (e.g., case studies), keep it there.
-
         // Copy to clipboard function for prompt text/query text
         function copyPromptText(event, elementId) {
             const textToCopy = document.getElementById(elementId).textContent || document.getElementById(elementId).value; // Get text from div or textarea
@@ -765,7 +252,7 @@ LIMIT 50</textarea>
             } catch (err) {
                 console.error('Errore nella copia: ', err);
                 // Fallback using alert (as per instructions for iframe limitations)
-                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+                // Removed alert as per instructions
             } finally {
                 document.body.removeChild(tempTextArea);
             }
