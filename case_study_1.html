@@ -65,7 +65,7 @@
                     <p class="description-text"><strong>Identifying the gap: </strong>After examining the information sheet for Caravaggio's Bacchus on ArCo, we realized that although there is a description aimed at identifying the elements within the painting (by means of the <a href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/elements11/description/"><i>dc:description</i></a> and <a href="https://dati.beniculturali.it/lodview-arco/ontology/core/description.html"><i>core:description</i></a> properties), a symbolic interpretation is missing. This is an important aspect, often sought after when analyzing works of this kind.</p>
                     <p class="description-text"><strong>Methodology: </strong>Unlike the properties mentioned above, we thought <a href="https://dati.beniculturali.it/lodview-arco-onto/ontology/denotative-description/hasIconographicOrDecorativeApparatus.html"><i>hasIconographicOrDecorativeApparatus</i></a> property, being part of the <a href="https://dati.beniculturali.it/lodview-arco-onto/ontology/denotative-description/IconographicOrDecorativeApparatus.html"><i>Iconographic or Decorative Apparatus</i></a> class (<a href="https://dati.beniculturali.it/lode/extract?url=https://raw.githubusercontent.com/ICCD-MiBACT/ArCo/master/ArCo-release/ontologie/denotative-description/denotative-description.owl">Denotative Description Ontology</a>), could be the most suitable for the purpose of deepening the symbolic description of a cultural property. We wanted to understand the function of this property: taking a look at other resources that are linked to it is one of the best ways to choose wheter that property can be helpful to enrich a Knowledge Graph (in our case with the information extracted from LLMs). We decided to run the following query: </p>
                 </div>
-</div>
+
                 <!-- Query 1 for Case Study 1 -->
                 <div class="query-box">
                     <h3 class="box-title">Query 1</h3>
@@ -78,72 +78,81 @@ WHERE {
 LIMIT 100</textarea>
                     <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fsubject+%3Fapparatus%0D%0AWHERE+%7B%0D%0A++%3Fsubject+a-dd%3AhasIconographicOrDecorativeApparatus+%3Fapparatus+.%0D%0A%7D%0D%0ALIMIT+100&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
                 </div>
+            </div>
 
-                <div class="content-box">
-                    <p class="description-text">Since it retrieves too many results, we decide to narrow down the research only to Historic or Artistic properties. We also add <i>label</i> to be able to see the name of the property.</p>
-                </div>
+            <div class="content-box fade-in">
+                <h2 class="box-title">Triple</h2>
+                <div class="code-container">
+                    <pre class="code-block">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-                <!-- Query 2 for Case Study 1 -->
-                <div class="query-box">
-                    <h3 class="box-title">Query 2</h3>
-                    <textarea id="cs1Query2" class="query-textarea">PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
-PREFIX arco: <https://w3id.org/arco/ontology/arco/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-SELECT DISTINCT ?opera ?label
-WHERE {
-  ?opera a arco:HistoricOrArtisticProperty ;
-    rdfs:label ?label ;
-    a-dd:hasIconographicOrDecorativeApparatus ?apparatus .
-}</textarea>
-                    <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fopera+%3Flabel%0D%0AWHERE+%7B%0D%0A++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0Ardfs%3Alabel+%3Flabel+%3B%0D%0A+++++++++a-dd%3AhasIconographicOrDecorativeApparatus+%3Fapparatus+.%0D%0A%7D&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
-                </div>
-
-                <div class="content-box">
-                    <p class="description-text">In this case, by taking a look at the results, it appears that this property is mostly linked to resources such as pieces of clothing, drawings and memorials. Since this property is widely used among resources that have the same classification as "Bacchus" by Caravaggio, we decide to ask LLMs (ChatGPT) to retrieve a triple out of this property, in order to enrich the Knowledge Graph (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio).</p>
-                </div>
-
-                <!-- Code Box -->
-                <div class="content-box">
-                    <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple✅</a></h2>
-                    <div class="code-container">
-<pre class="code-block">@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix xsd: http://www.w3.org/2001/XMLSchema# .
-@prefix : https://example.org/resource/ .
-
-https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214>
     a arco:HistoricOrArtisticProperty ;
-    a-dd:hasIconographicOrDecorativeApparatus :apparato0900289176 .
+    rdfs:label "Bacco"@it ;
+    a-dd:hasIconographicOrDecorativeApparatus <https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-bacco-iconographic-description> .
 
-:apparato0900289176
+<https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-bacco-iconographic-description>
     a a-dd:IconographicOrDecorativeApparatus ;
-    rdfs:label "Apparato iconografico e decorativo 1 dell’opera 0900289176"@it ;
-    a-dd:includesIconographicDescription :descrizione0900289176 .
-
-:descrizione0900289176
-    a a-dd:IconographicDescription ;
-    rdfs:label "Descrizione iconografica"@it ;
-    a-dd:hasInterpretationText """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .
-</pre>
-                    </div>
-                </div>
-
-                <div class="content-box">
-                    <p class="description-text"><strong>Validation:</strong> After providing a set of instructions on how to generate the query—such as specifying the URI and the property we wanted to use—the LLM returned a result that was highly relevant and consistent with the ArCo ontology: the structure it used correctly follows ArCo’s modeling principles, for instance, the cultural property is first linked to an instance of a-dd:IconographicOrDecorativeApparatus, which then carries the descriptive content via core:hasDescription. This ensures semantic clarity and consistency within the ontology.</i></p>
-                    <p class="description-text"><strong>Result:</strong> Working hand in hand with artificial intelligence and providing it with more data related to existing resources on ArCo and the classes already present in its ontology makes it easier to achieve appropriate results. By adding this triple to ArCo, we achieved a more structured and semantically rich representation of the artwork’s iconographic and decorative apparatus. This enhancement improves data clarity, enables more precise queries, and facilitates interoperability within the ArCo knowledge graph. Furthermore, it allows for modular descriptions that can be easily extended or linked to other resources, supporting deeper analysis and richer interpretations.</p>
+    rdfs:label "Apparato Iconografico del Bacco di Caravaggio"@it ;
+    a-dd:denotesThematicContent "Il dipinto raffigura Bacco, dio del vino, in una posa languida e sensuale, con elementi che richiamano il piacere e l'ebrezza. Il giovane, con una ghirlanda di foglie di vite e grappoli d'uva tra i capelli, tiene in mano un calice di vino traboccante. Accanto a lui, una brocca di vino e un cesto di frutta bacata simboleggiano la caducità e la vanitas."@it ;
+    a-dd:hasAssociatedSymbolicMeaning "Il Bacco di Caravaggio è ricco di significati simbolici. Il dio del vino rappresenta l'ebrezza e il piacere sensoriale, ma la presenza della frutta bacata e del volto malinconico suggerisce anche un'interpretazione sulla transitorietà della bellezza e sulla fugacità dei piaceri terreni (vanitas). La rappresentazione realistica e non idealizzata del dio introduce un elemento di umanità e vulnerabilità, tipico della poetica caravaggesca."@it ;
+    a-dd:hasFormalDescription "La composizione è dominata dalla figura di Bacco, ritratto a mezzo busto, con un drappo che gli copre parzialmente il corpo, rivelando una spalla. La luce, proveniente da sinistra, illumina in modo drammatico la figura, creando forti contrasti chiaroscurali che esaltano la volumetria e la fisicità del soggetto. La tecnica pittorica di Caravaggio si distingue per il naturalismo crudo e la resa dettagliata dei particolari, come i grappoli d'uva e la frutta."@it .</pre>
                 </div>
             </div>
-        
+            <!-- Hidden element to hold the actual prompt text for copying -->
+            <div id="promptForDescription" style="display:none;">
+                "Assumi il ruolo di un esperto storico dell'arte specializzato nel Barocco italiano, in particolare nell'opera di Caravaggio.
+                Analizza il dipinto 'Bacco' (1595-1597) di Caravaggio, fornendo una descrizione iconografica dettagliata e un'interpretazione del suo significato simbolico.
+                Il tuo output deve includere:
+                1.  **Descrizione Iconografica:** Dettaglia gli elementi visibili nel dipinto (personaggi, oggetti, sfondo) e la loro disposizione.
+                2.  **Significato Simbolico Associato:** Spiega le possibili interpretazioni simboliche degli elementi iconografici e del tema generale dell'opera. Quali messaggi o concetti intendeva veicolare l'artista o erano comunemente associati a tali elementi nel contesto dell'epoca?
+                3.  **Descrizione Formale:** Analizza gli aspetti stilistici e tecnici (es. uso della luce, colore, composizione, naturalismo) e come questi contribuiscono all'iconografia e al messaggio dell'opera.
+                Formattare la risposta in un testo chiaro e strutturato, adatto per l'arricchimento di un Knowledge Graph, con enfasi sui nomi propri, concetti chiave e relazioni.
+                "
+            </div>
+            <div class="content-box fade-in">
+                <p class="description-text"><strong>Validation: </strong>After validating the triple, we have found that it is not well-structured for the ArCo Knowledge Graph (KG) and does not comply with the ontology rules. The generated triples should leverage existing properties and classes within ArCo's `denotative-description` ontology for better integration and consistency. Additionally, the use of literal values for `denotesThematicContent`, `hasAssociatedSymbolicMeaning`, and `hasFormalDescription` is not ideal for structured data and limits semantic interoperability. Instead, these descriptions should be represented as separate resources (instances of `IconographicOrDecorativeApparatus`) and linked to the main cultural property using appropriate properties, while the details of the apparatus should be modeled using specific properties like `a-dd:hasDescription` or `a-dd:hasIconographicDescription` if available, or if not, using `rdfs:label` or `l0:name` with appropriate language tags for the descriptive text.</p>
+            </div>
+            <div class="content-box fade-in">
+                <h2 class="box-title">Triple✅</h2>
+                <div class="code-container">
+                    <pre class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
+@prefix l0: <https://w3id.org/italia/onto/l0/> .
 
-        <!-- Footer -->
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214>
+    a arco:HistoricOrArtisticProperty ;
+    rdfs:label "Bacco"@it ;
+    a-dd:hasIconographicOrDecorativeApparatus <https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-apparato-iconografico> .
+
+<https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-apparato-iconografico>
+    a a-dd:IconographicOrDecorativeApparatus ;
+    l0:name "Apparato Iconografico e Simbolico del Bacco di Caravaggio"@it ;
+    a-dd:hasDenotativeDescription "Il dipinto raffigura Bacco, dio del vino, in una posa languida e sensuale, con elementi che richiamano il piacere e l'ebrezza. Il giovane, con una ghirlanda di foglie di vite e grappoli d'uva tra i capelli, tiene in mano un calice di vino traboccante. Accanto a lui, una brocca di vino e un cesto di frutta bacata simboleggiano la caducità e la vanitas."@it ;
+    a-dd:hasSymbolicDescription "Il Bacco di Caravaggio è ricco di significati simbolici. Il dio del vino rappresenta l'ebrezza e il piacere sensoriale, ma la presenza della frutta bacata e del volto malinconico suggerisce anche un'interpretazione sulla transitorietà della bellezza e sulla fugacità dei piaceri terreni (vanitas). La rappresentazione realistica e non idealizzata del dio introduce un elemento di umanità e vulnerabilità, tipico della poetica caravaggesca."@it ;
+    a-dd:hasFormalAnalysis "La composizione è dominata dalla figura di Bacco, ritratto a mezzo busto, con un drappo che gli copre parzialmente il corpo, rivelando una spalla. La luce, proveniente da sinistra, illumina in modo drammatico la figura, creando forti contrasti chiaroscurali che esaltano la volumetria e la fisicità del soggetto. La tecnica pittorica di Caravaggio si distingue per il naturalismo crudo e la resa dettagliata dei particolari, come i grappoli d'uva e la frutta."@it .
+                    </pre>
+                </div>
+            </div>
+            <div class="content-box fade-in">
+                <p class="description-text"><strong>Results: </strong>The revised triple is more aligned with the ArCo ontology, particularly within the `denotative-description` module. Instead of using custom properties as suggested by the LLM, we leveraged `l0:name` for the main label and introduced `a-dd:hasDenotativeDescription`, `a-dd:hasSymbolicDescription`, and `a-dd:hasFormalAnalysis` to encapsulate the rich descriptive content provided by the LLM. This approach ensures that the iconographic and symbolic analyses are properly structured as properties of the `IconographicOrDecorativeApparatus` instance, maintaining the integrity and semantic consistency of the Knowledge Graph.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
             <div class="footer-link-group">
                 <h4>Navigazione Principale</h4>
                 <a href="index.html#home">Home</a>
                 <a href="index.html#queries">Query SPARQL</a>
+                <a href="index.html#evaluation">Valutazione</a>
+                <a href="index.html#documentation">Documentazione</a>
             </div>
             <div class="footer-link-group">
                 <h4>Approfondimenti</h4>
@@ -151,8 +160,8 @@ https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0
             </div>
             <div class="footer-link-group">
                 <h4>Case Studies</h4>
-                <a href="case_study_1.html">Case Study 1</a>
-                <a href="case_study_2.html" class="active">Case Study 2</a>
+                <a href="case_study_1.html" class="active">Case Study 1</a>
+                <a href="case_study_2.html">Case Study 2</a>
                 <a href="case_study_3.html">Case Study 3</a>
                 <a href="case_study_4.html">Case Study 4</a>
             </div>
@@ -167,54 +176,54 @@ https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0
     </footer>
 
     <script>
-        // Smooth scrolling for internal navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault(); // Prevents default link behavior
-                const href = this.getAttribute('href'); // Gets section ID
-                const targetElement = document.querySelector(href); // Finds target element
-
-                if (targetElement) {
-                    // Calculates scroll position, subtracting fixed navbar height
-                    const navbarHeight = document.querySelector('nav').offsetHeight;
-                    const offsetTop = targetElement.offsetTop - navbarHeight;
-
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth' // Smooth scroll
-                    });
-                }
-            });
-        });
-
-        // Fade-in animation on element appearance with Intersection Observer
+        // Fade-in animation on scroll
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
 
             const observerOptions = {
-                root: null, // Refers to the viewport
+                root: null,
                 rootMargin: '0px',
-                threshold: 0.1 // Element is 10% visible
+                threshold: 0.1
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible'); // Adds 'visible' class
-                        observer.unobserve(entry.target); // Stops observing after animation
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
 
             fadeElements.forEach(element => {
-                observer.observe(element); // Starts observing each 'fade-in' element
+                observer.observe(element);
             });
         });
 
-        // Copy to clipboard function for prompt text/query text
-        function copyPromptText(event, elementId) {
-            const textToCopy = document.getElementById(elementId).textContent || document.getElementById(elementId).value; // Get text from div or textarea
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const href = this.getAttribute('href');
+                const targetElement = document.querySelector(href);
 
+                if (targetElement) {
+                    const navbarHeight = document.querySelector('nav').offsetHeight;
+                    const offsetTop = targetElement.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Copy to clipboard function for prompt text
+        function copyPromptText(event, elementId) { // Pass event object
+            const textToCopy = document.getElementById(elementId).textContent;
+
+            // Create a temporary textarea element to hold the text
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = textToCopy;
             document.body.appendChild(tempTextArea);
@@ -222,20 +231,21 @@ https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0
 
             try {
                 document.execCommand('copy');
+                // Find the specific button that was clicked
                 const button = event.target;
                 const originalText = button.textContent;
                 button.textContent = 'Copiato!';
-                button.style.background = '#28a745';
+                button.style.background = '#28a745'; // Green for success
 
                 setTimeout(() => {
                     button.textContent = originalText;
-                    button.style.background = '';
+                    button.style.background = ''; // Revert to original background
                 }, 2000);
             } catch (err) {
                 console.error('Errore nella copia: ', err);
                 // Removed alert as per instructions
             } finally {
-                document.body.removeChild(tempTextArea);
+                document.body.removeChild(tempTextArea); // Clean up the temporary element
             }
         }
     </script>
