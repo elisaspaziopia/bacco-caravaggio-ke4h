@@ -99,27 +99,29 @@ rdfs:label ?label ;
         <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fopera+%3Flabel%0D%0AWHERE+%7B%0D%0A++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0Ardfs%3Alabel+%3Flabel+%3B%0D%0A+++++++++a-dd%3AhasIconographicOrDecorativeApparatus+%3Fapparatus+.%0D%0A%7D&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
     </div>
 </div>
-    
+    <div class="content-box fade-in">In this case, by taking a look at the results, it appears that this property is mostly linked to resources such as pieces of clothing, drawings and memorials. Since this property is widely used among resources that have the same classification as "Bacchus" by Caravaggio, we decide to ask LLMs (ChatGPT) to retrieve a triple out of this property, in order to enrich the Knowledge Graph (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio).</div>
                     
             <div class="content-box fade-in">
-                <h2 class="box-title">Triple</h2>
+                <h2 class="box-title">Triple✅</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+                    <pre class="code-block">@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+@prefix : https://example.org/resource/ .
 
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214>
+https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176
     a arco:HistoricOrArtisticProperty ;
-    rdfs:label "Bacco"@it ;
-    a-dd:hasIconographicOrDecorativeApparatus <https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-bacco-iconographic-description> .
+    a-dd:hasIconographicOrDecorativeApparatus :apparato0900289176 .
 
-<https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-bacco-iconographic-description>
+:apparato0900289176
     a a-dd:IconographicOrDecorativeApparatus ;
-    rdfs:label "Apparato Iconografico del Bacco di Caravaggio"@it ;
-    a-dd:denotesThematicContent "Il dipinto raffigura Bacco, dio del vino, in una posa languida e sensuale, con elementi che richiamano il piacere e l'ebrezza. Il giovane, con una ghirlanda di foglie di vite e grappoli d'uva tra i capelli, tiene in mano un calice di vino traboccante. Accanto a lui, una brocca di vino e un cesto di frutta bacata simboleggiano la caducità e la vanitas."@it ;
-    a-dd:hasAssociatedSymbolicMeaning "Il Bacco di Caravaggio è ricco di significati simbolici. Il dio del vino rappresenta l'ebrezza e il piacere sensoriale, ma la presenza della frutta bacata e del volto malinconico suggerisce anche un'interpretazione sulla transitorietà della bellezza e sulla fugacità dei piaceri terreni (vanitas). La rappresentazione realistica e non idealizzata del dio introduce un elemento di umanità e vulnerabilità, tipico della poetica caravaggesca."@it ;
-    a-dd:hasFormalDescription "La composizione è dominata dalla figura di Bacco, ritratto a mezzo busto, con un drappo che gli copre parzialmente il corpo, rivelando una spalla. La luce, proveniente da sinistra, illumina in modo drammatico la figura, creando forti contrasti chiaroscurali che esaltano la volumetria e la fisicità del soggetto. La tecnica pittorica di Caravaggio si distingue per il naturalismo crudo e la resa dettagliata dei particolari, come i grappoli d'uva e la frutta."@it .</pre>
+    rdfs:label "Apparato iconografico e decorativo 1 dell’opera 0900289176"@it ;
+    a-dd:includesIconographicDescription :descrizione0900289176 .
+
+:descrizione0900289176
+    a a-dd:IconographicDescription ;
+    rdfs:label "Descrizione iconografica"@it ;
+    a-dd:hasInterpretationText """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile."""@it .</pre>
                 </div>
             </div>
             <!-- Hidden element to hold the actual prompt text for copying -->
@@ -134,33 +136,9 @@ rdfs:label ?label ;
                 "
             </div>
             <div class="content-box fade-in">
-                <p class="description-text"><strong>Validation: </strong>After validating the triple, we have found that it is not well-structured for the ArCo Knowledge Graph (KG) and does not comply with the ontology rules. The generated triples should leverage existing properties and classes within ArCo's `denotative-description` ontology for better integration and consistency. Additionally, the use of literal values for `denotesThematicContent`, `hasAssociatedSymbolicMeaning`, and `hasFormalDescription` is not ideal for structured data and limits semantic interoperability. Instead, these descriptions should be represented as separate resources (instances of `IconographicOrDecorativeApparatus`) and linked to the main cultural property using appropriate properties, while the details of the apparatus should be modeled using specific properties like `a-dd:hasDescription` or `a-dd:hasIconographicDescription` if available, or if not, using `rdfs:label` or `l0:name` with appropriate language tags for the descriptive text.</p>
-            </div>
-            <div class="content-box fade-in">
-                <h2 class="box-title">Triple✅</h2>
-                <div class="code-container">
-                    <pre class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix a-dd: <https://w3id.org/arco/ontology/denotative-description/> .
-@prefix l0: <https://w3id.org/italia/onto/l0/> .
-
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214>
-    a arco:HistoricOrArtisticProperty ;
-    rdfs:label "Bacco"@it ;
-    a-dd:hasIconographicOrDecorativeApparatus <https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-apparato-iconografico> .
-
-<https://w3id.org/arco/resource/IconographicOrDecorativeApparatus/0900281214-apparato-iconografico>
-    a a-dd:IconographicOrDecorativeApparatus ;
-    l0:name "Apparato Iconografico e Simbolico del Bacco di Caravaggio"@it ;
-    a-dd:hasDenotativeDescription "Il dipinto raffigura Bacco, dio del vino, in una posa languida e sensuale, con elementi che richiamano il piacere e l'ebrezza. Il giovane, con una ghirlanda di foglie di vite e grappoli d'uva tra i capelli, tiene in mano un calice di vino traboccante. Accanto a lui, una brocca di vino e un cesto di frutta bacata simboleggiano la caducità e la vanitas."@it ;
-    a-dd:hasSymbolicDescription "Il Bacco di Caravaggio è ricco di significati simbolici. Il dio del vino rappresenta l'ebrezza e il piacere sensoriale, ma la presenza della frutta bacata e del volto malinconico suggerisce anche un'interpretazione sulla transitorietà della bellezza e sulla fugacità dei piaceri terreni (vanitas). La rappresentazione realistica e non idealizzata del dio introduce un elemento di umanità e vulnerabilità, tipico della poetica caravaggesca."@it ;
-    a-dd:hasFormalAnalysis "La composizione è dominata dalla figura di Bacco, ritratto a mezzo busto, con un drappo che gli copre parzialmente il corpo, rivelando una spalla. La luce, proveniente da sinistra, illumina in modo drammatico la figura, creando forti contrasti chiaroscurali che esaltano la volumetria e la fisicità del soggetto. La tecnica pittorica di Caravaggio si distingue per il naturalismo crudo e la resa dettagliata dei particolari, come i grappoli d'uva e la frutta."@it .
-                    </pre>
-                </div>
-            </div>
-            <div class="content-box fade-in">
-                <p class="description-text"><strong>Results: </strong>The revised triple is more aligned with the ArCo ontology, particularly within the `denotative-description` module. Instead of using custom properties as suggested by the LLM, we leveraged `l0:name` for the main label and introduced `a-dd:hasDenotativeDescription`, `a-dd:hasSymbolicDescription`, and `a-dd:hasFormalAnalysis` to encapsulate the rich descriptive content provided by the LLM. This approach ensures that the iconographic and symbolic analyses are properly structured as properties of the `IconographicOrDecorativeApparatus` instance, maintaining the integrity and semantic consistency of the Knowledge Graph.</p>
+                <p class="description-text"><strong>Validation:</strong> After providing a set of instructions on how to generate the query—such as specifying the URI and the property we wanted to use—the LLM returned a result that was highly relevant and consistent with the ArCo ontology: the structure it used correctly follows ArCo’s modeling principles, for instance, the cultural property is first linked to an instance of a-dd:IconographicOrDecorativeApparatus, which then carries the descriptive content via core:hasDescription. This ensures semantic clarity and consistency within the ontology.</i>
+    <p></p><p><strong> Result:</strong> Working hand in hand with artificial intelligence and providing it with more data related to existing resources on ArCo and the classes already present in its ontology makes it easier to achieve appropriate results.
+By adding this triple to ArCo, we achieved a more structured and semantically rich representation of the artwork’s iconographic and decorative apparatus. This enhancement improves data clarity, enables more precise queries, and facilitates interoperability within the ArCo knowledge graph. Furthermore, it allows for modular descriptions that can be easily extended or linked to other resources, supporting deeper analysis and richer interpretations.</p>
             </div>
         </div>
     </div>
