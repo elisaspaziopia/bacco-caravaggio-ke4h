@@ -5,514 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Study 4 - Arco Knowledge Graph Enhancement</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Base reset for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* CSS variables for easy palette management */
-        :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            padding-top: 80px; /* Ensures content is below fixed navbar */
-        }
-
-        /* Fixed header styles */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .logo a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--primary-color);
-            min-width: 180px;
-            box-shadow: 0 10px 30px var(--shadow);
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .nav-item:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            padding: 0.6rem 1.2rem;
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            margin: 0.2rem;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        /* Active dropdown item for the current page */
-        .dropdown-item.active {
-            background: rgba(218, 165, 32, 0.3);
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Main content area (container for all sections) */
-        .main-content {
-            padding-bottom: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        /* Header section (for main title and subtitle) */
-        .case-study-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding: 2rem 0; /* Padding within the header itself */
-        }
-
-        .case-study-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .case-study-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Navigation between case studies (top navigation block) */
-        .case-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 2rem;
-            background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .case-nav-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .case-nav-button:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        .case-nav-button.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .case-nav-info {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* General content section (wrapper for content boxes) */
-        .content-section {
-            margin-bottom: 4rem;
-            display: flex; /* Use flexbox for direct child arrangement */
-            flex-direction: column;
-            gap: 2rem; /* Space between the main content blocks */
-        }
-
-        /* Standard content box (for description and code blocks) */
-        .content-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
-            /* margin-bottom: 2rem; Removed as parent .content-section handles gaps */
-        }
-
-        .content-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
-        }
-
-        .content-box:hover::before {
-            left: 0;
-        }
-
-        .box-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            text-align: left;
-        }
-
-        /* Description container inside content-box */
-        .description-container {
-            background: var(--background-light);
-            border: 1px solid rgba(218, 165, 32, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            color: #444;
-            line-height: 1.6;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            text-align: left;
-            margin-bottom: 1.5rem; /* Space between description and code/button */
-        }
-
-        .description-text { /* For paragraphs inside description-container */
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #444;
-            margin-bottom: 1rem;
-        }
-
-        .description-text strong {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .description-text em {
-            color: var(--secondary-color);
-            font-style: italic;
-        }
-
-        /* Code container inside content-box */
-        .code-container {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 1.5rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            white-space: pre-wrap;
-            overflow-x: auto;
-            line-height: 1.4;
-            margin-top: 1.5rem; /* Space if code is below description */
-        }
-
-        /* Highlight boxes for important info (used within descriptions) */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(139, 69, 19, 0.1) 100%);
-            border-left: 4px solid var(--accent-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-        }
-
-        /* Action button (e.g., Copy Prompt, View Results) */
-        .action-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.9rem;
-            margin-top: 1rem;
-        }
-
-        .action-button:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        /* Updated Query Layout - Single Column with Text Between */
-        .query-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .query-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .query-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
-        }
-
-        .query-box:hover::before {
-            left: 0;
-        }
-
-        .query-box-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-align: left;
-        }
-
-        .query-textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            resize: vertical;
-            background-color: #f8f9fa;
-        }
-
-        /* Text area between queries */
-        .query-separator {
-            background: var(--card-bg);
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.15);
-        }
-
-        .query-separator h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-weight: 600;
-        }
-
-        .query-separator p {
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 1rem;
-        }
-
-        /* Footer styles (consistent) */
-        .footer {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: 5rem;
-        }
-
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--text-light);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .footer-link-group h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .footer-link-group a {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .case-study-title {
-                font-size: 2rem;
-            }
-
-            .case-nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .main-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .content-box {
-                padding: 1.5rem;
-            }
-            .description-container, .code-container {
-                padding: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
+    <!-- Fixed Navbar -->
     <nav>
         <div class="nav-container">
             <div class="logo">
-                <a href="index.html">Arco KG Enhancement</a>
+                <a href="index.html">ArCo KG Enhancement</a>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
@@ -537,7 +37,8 @@
         </div>
     </nav>
 
-    <div class="main-content">
+    <!-- Main Content -->
+    <div class="case-study-container">
         <div class="case-study-header">
             <h1 class="case-study-title">The Chiaroscuro Technique - Case Study 4</h1>
             <p class="case-study-subtitle">How we added "chiaroscuro" as a value and propose to extend the Denotative Description Ontology.</p>
@@ -551,20 +52,24 @@
                 <strong>Case Study 4 of 4</strong><br>
                 Interrogazione Avanzata
             </div>
+            <button class="case-nav-button disabled">
+                Successivo →
+            </button>
         </div>
 
-        <div class="content-box fade-in">
-            <h2 class="box-title">Types of techniques</h2>
-            <div class="description-container">
-                <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio widely used in his own works. This technique, however, is not mentioned on ArCo. Browsing the ArCo ontology, we discovered the existence of the <a href="https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic"><i>Technical Characteristic</i></a> class, within the <a href="https://w3id.org/arco/ontology/denotative-description"><i>Denotative Description Ontology</i></a>. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, <i>hasMaterialOrTechnique</i>, whose value is "canvas/oil painting." It is not, however, a painting technique.</p>
-                <p class="description-text">We run Query 1 on the SPARQL endpoint in ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property <i>hasMaterialOrTechnique</i> or <i>hasTechnique</i> and return "chiaroscuro" as the value.</p>
+        <div class="content-section">
+            <div class="content-box fade-in">
+                <h2 class="box-title">Types of techniques</h2>
+                <div class="description-container">
+                    <p class="description-text">After questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio widely used in his own works. This technique, however, is not mentioned on ArCo. Browsing the ArCo ontology, we discovered the existence of the <a href="https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic"><i>Technical Characteristic</i></a> class, within the <a href="https://w3id.org/arco/ontology/denotative-description"><i>Denotative Description Ontology</i></a>. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, <i>hasMaterialOrTechnique</i>, whose value is "canvas/oil painting." It is not, however, a painting technique.</p>
+                    <p class="description-text">We run Query 1 on the SPARQL endpoint in ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property <i>hasMaterialOrTechnique</i> or <i>hasTechnique</i> and return "chiaroscuro" as the value.</p>
+                </div>
             </div>
-        </div>
 
             <div class="query-section">
                 <div class="query-box">
-                    <h3 class="query-box-title">Query 1</h3>
-                    <textarea id="query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+                    <h3 class="box-title">Query 1</h3>
+                    <textarea id="cs4Query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -572,7 +77,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel ?technique ?techniqueLabel
 WHERE {
   ?historicProperty rdf:type arco:HistoricOrArtisticProperty .
-  
+
   # Cercare sia materiali che tecniche
   {
     ?historicProperty a-dd:hasTechnique ?technique .
@@ -587,7 +92,7 @@ WHERE {
     # Filtrare per "chiaroscuro" nei materiali/tecniche
     FILTER(CONTAINS(LCASE(?materialLabel), "chiaroscuro"))
   }
-  
+
   OPTIONAL { ?historicProperty rdfs:label ?label }
 }
 LIMIT 100
@@ -596,13 +101,13 @@ LIMIT 100
                 </div>
 
                 <div class="query-separator fade-in">
-                    <p>This search returns a lot of results, especially in “paper / chiaroscuro,” which is not an appropriate description for Caravaggio's work, yet it informs us that “chiaroscuro” is used in the database.</p>
-                    <p>Consequently, in Query 2 we make a more precise query, restricting the search to values that exactly match “chiaroscuro.”</p>
+                    <p class="description-text">This search returns a lot of results, especially in “paper / chiaroscuro,” which is not an appropriate description for Caravaggio's work, yet it informs us that “chiaroscuro” is used in the database.</p>
+                    <p class="description-text">Consequently, in Query 2 we make a more precise query, restricting the search to values that exactly match “chiaroscuro.”</p>
                 </div>
 
                 <div class="query-box">
-                    <h3 class="query-box-title">Query 2</h3>
-                    <textarea id="query2" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+                    <h3 class="box-title">Query 2</h3>
+                    <textarea id="cs4Query2" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -610,7 +115,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT DISTINCT ?historicProperty ?label ?material ?materialLabel ?technique ?techniqueLabel
 WHERE {
   ?historicProperty rdf:type arco:HistoricOrArtisticProperty .
-  
+
   {
     ?historicProperty a-dd:hasTechnique ?technique .
     OPTIONAL { ?technique rdfs:label ?techniqueLabel }
@@ -622,27 +127,27 @@ WHERE {
     OPTIONAL { ?material rdfs:label ?materialLabel }
     FILTER(LCASE(?materialLabel) = "chiaroscuro")
   }
-  
+
   OPTIONAL { ?historicProperty rdfs:label ?label }
 }
 LIMIT 100
                     </textarea>
-                    <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3FhistoricProperty+%3Flabel+%3Fmaterial+%3FmaterialLabel+%3Ftechnique+%3FtechniqueLabel%0D%0AWHERE+%7B%0D%0A++%3FhistoricProperty+rdf%3Atype+arco%3AHistoricOrArtisticProperty+.%0D%0A++%0D%0A++%7B%0D%0A++++%3FhistoricProperty+a-dd%3AhasTechnique+%3Ftechnique+.%0D%0A++++OPTIONAL+%7B+%3Ftechnique+rdfs%3Alabel+%3FtechniqueLabel+%7D%0D%0A++++FILTER%28LCASE%28%3FtechniqueLabel%29+%3D+%22chiaroscuro%22%29%0D%0A++%7D%0D%0A++UNION%0D%0A++%7B%0D%0A++++%3FhistoricProperty+a-dd%3AhasMaterialOrTechnique+%3Fmaterial+.%0D%0A++++OPTIONAL+%7B+%3Fmaterial+rdfs%3Alabel+%3FmaterialLabel+%7D%0D%0A++++FILTER%28LCASE%28%3FmaterialLabel%29+%3D+%22chiaroscuro%22%29%0D%0A++%7D%0D%0A++%0D%0A++OPTIONAL+%7B+%3FhistoricProperty+rdfs%3Alabel+%3Flabel+%7D%0D%0A%7D%0D%0ALIMIT+100%0D%0A++++++++++++++++++++&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
+                    <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3FhistoricProperty+%3Flabel+%3Fmaterial+%3FmaterialLabel+%3Ftechnique+%3FtechniqueLabel%0D%0AWHERE+%7B%0D%0A++%3FhistoricProperty+rdf%3Atype+arco%3AHistoricOrArtisticProperty+.%0D%0A++%0D%0A++%7B%0D%0A++++%3FhistoricProperty+a-dd%3AhasTechnique+%3Ftechnique+.%0D%0A++++OPTIONAL+%7B+%3Ftechnique+rdfs%3Alabel+%3FtechniqueLabel+%7D%0D%0A++++FILTER%28LCASE%28%3FtechniqueLabel%29+%3D+%22chiaroscuro%22%29%0D%0A++%7D%0D%0A++UNION%0D%0A++%7B%0D%0A++++%3FhistoricProperty+a-dd%3AhasMaterialOrTechnique+%3Fmaterial+.%0D%0A++++OPTIONAL+%7B+%3Fmaterial+rdfs%3Alabel+%3FmaterialLabel+%7D%0D%0A++++FILTER%28LCASE%28%3FmaterialLabel%29+%3D+%22chiaroscuro%22%29%0D%0A++%7D%0D%0A++%0D%0A++OPTIONAL+%7B+%3FhistoricProperty+rdfs%3Alabel+%3Flabel+%7D%0D%0A%7D%0D%0ALIMIT+100%0D%0A++++++++++++++++++++&format=text%2Fhtml&timeout=0&signal_void=on" class="action-button">View results in ArCo</a>
                 </div>
             </div>
 
-        <div class="content-box fade-in">
-            <h2 class="box-title">Results</h2>
-            <div class="description-container">
-                <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. Below are both proposals:</p>
-                <p class="description-text"></p>
+            <div class="content-box fade-in">
+                <h2 class="box-title">Results</h2>
+                <div class="description-container">
+                    <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. Below are both proposals:</p>
+                    <p class="description-text"></p>
+                </div>
             </div>
-        </div>
 
-        <div class="content-box fade-in">
-            <div class="content-box">
+            <div class="content-box fade-in">
                 <h2 class="box-title">Triple - adding "chiaroscuro" as Datatypeproperty and as object property</h2>
-                <div class="code-container">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+                <div class="code-container">
+                    <pre class="code-block">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 <https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
@@ -655,17 +160,17 @@ LIMIT 100
 
 <https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
     arco:hasMaterialOrTechnique arco-res:Chiaroscuro .
-                    
-</div>
+                    </pre>
+                </div>
             </div>
-        </div>
-    </div>
-               <div class="content-box">
+
+            <div class="content-box fade-in">
                 <h2 class="box-title">hasPaintingTechnique as Datatypeproperty and as object property</h2>
-                <div class="code-container">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+                <div class="code-container">
+                    <pre class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: http://www.w3.org/2002/07/owl# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: http://www.w3.org/2001/XMLSchema#> .
 @prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
 
 a-dd:hasPaintingTechnique
@@ -678,9 +183,9 @@ a-dd:hasPaintingTechnique
 
 
 
-    @prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+    @prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: http://www.w3.org/2002/07/owl# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema#> .
 @prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
 
 a-dd:hasPaintingTechnique
@@ -690,62 +195,17 @@ a-dd:hasPaintingTechnique
     rdfs:comment "Collega una caratteristica tecnica a una tecnica pittorica specifica rappresentata come risorsa controllata."@it ;
     rdfs:domain a-dd:TechnicalCharacteristic ;
     rdfs:range a-dd:PaintingTechnique .
-</div>
+                    </pre>
+                </div>
             </div>
         </div>
     </div>
-<!DOCTYPE html>
-<html>
-<head>
-    <!-- I tuoi altri elementi head -->
-    <style>
- .navigation-buttons {
-    display: flex;
-    justify-content: flex-end; /* Allinea il contenuto a destra */
-    margin: 20px 0;
-    padding: 0 20px; /* Aggiunge un po' di spazio dai bordi */
-}
 
-.nav-button {
-    background-color: #8B4513; /* Marrone sella */
-    color: white;
-    padding: 12px 20px;
-    text-decoration: none;
-    border-radius: 25px; /* Bordi molto arrotondati */
-    font-weight: bold;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px; /* Spazio tra testo e emoji */
-    box-shadow: 0 2px 4px rgba(139, 69, 19, 0.2); /* Ombra leggera */
-}
-
-.nav-button:hover {
-    background-color: #6B3410; /* Marrone più scuro al hover */
-    transform: translateY(-2px); /* Leggero effetto di sollevamento */
-    box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3); /* Ombra più pronunciata */
-}
-
-.nav-button span {
-    font-size: 1.1em;
-}
-    </style>
-</head>
-<body>
-    <!-- Il tuo contenuto della pagina -->
-    
     <!-- Navigation Buttons -->
     <div class="navigation-buttons">
         <a href="index.html" class="nav-button">
             Torna alla Home <span>🏠</span>
         </a>
-    </div>
-</body>
-</html>
-        </div>
-    </div>
-            </div>
-        </div>
     </div>
 
     <footer class="footer">
@@ -772,7 +232,7 @@ a-dd:hasPaintingTechnique
                 <a href="https://github.com/tuo-user/tuo-repo" target="_blank">GitHub Repository</a>
             </div>
         </div>
-        
+
         <p style="margin-top: 3rem;">&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
         <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
     </footer>
@@ -820,7 +280,9 @@ a-dd:hasPaintingTechnique
                 observer.observe(element);
             });
         });
-    </script>
 
+        // The copyPromptText function is removed from this page as it doesn't seem to be used by any elements.
+        // If needed, it can be re-added from a common JavaScript file or specifically for elements on this page.
+    </script>
 </body>
 </html>
