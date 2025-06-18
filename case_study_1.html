@@ -85,12 +85,22 @@ LIMIT 100</textarea>
 <div class="content-box fade-in">Since it retrieves too many results, we decide to narrow down the research only to Historic or Artistic properties. We also add <i>label</i> to be able to see the name of the property.</div>
             <div class="content-box fade-in">
                 <div class="query-box">
-                    <h3 class="box-title">Query 2</h3></textarea>
+                    <h3 class="box-title">Query 2</h3>
+                    <textarea id="cs2Query2" class="query-textarea">PREFIX a-dd: <https://w3id.org/arco/ontology/denotative-description/>
+PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT DISTINCT ?opera ?label
+WHERE {
+  ?opera a arco:HistoricOrArtisticProperty ;
+rdfs:label ?label ;
+         a-dd:hasIconographicOrDecorativeApparatus ?apparatus .
+}</textarea>
         <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-dd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fdenotative-description%2F%3E%0D%0APREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fopera+%3Flabel%0D%0AWHERE+%7B%0D%0A++%3Fopera+a+arco%3AHistoricOrArtisticProperty+%3B%0D%0Ardfs%3Alabel+%3Flabel+%3B%0D%0A+++++++++a-dd%3AhasIconographicOrDecorativeApparatus+%3Fapparatus+.%0D%0A%7D&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
     </div>
 </div>
     
-                    <textarea id="csQuery2 class="query-textarea">
+                    
             <div class="content-box fade-in">
                 <h2 class="box-title">Triple</h2>
                 <div class="code-container">
