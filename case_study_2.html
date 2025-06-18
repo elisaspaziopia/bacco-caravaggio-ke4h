@@ -683,38 +683,100 @@ LIMIT 100</textarea>
 </body>
 </html>
 
-<div class="content-box fade-in"> The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs to translate this content into a triple.</div>
+<div class="content-box fade-in"> The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs to translate this content into a triple without, just specifing that we want it to be suitable to ArCo. </div>
            
             <!-- Code Box (now second) -->
             <div class="content-box fade-in">
-               <h2 class="box-title"><a href="https://github.com/elisaspaziopia/bacco-caravaggio-ke4h/blob/main/commision_triple.ttl">Triple</a></h2>
+               <h2 class="box-title">Triple</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+                    <pre class="code-block">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix a-cd: https://w3id.org/arco/ontology/context-description/ .
+@prefix a-loc: https://w3id.org/arco/ontology/location/ .
+@prefix cis: http://dati.beniculturali.it/cis/ .
+@prefix foaf: http://xmlns.com/foaf/0.1/ .
+@prefix dcterms: http://purl.org/dc/terms/ .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix cd: https://w3id.org/arco/ontology/context-description/ .
-@prefix TI: https://w3id.org/italia/onto/TI/ .
-@prefix l0: https://w3id.org/italia/onto/l0/ .
-                        
-http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214 
-    cd:hasCommission 
-    https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte .
-        
-https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte 
-    rdf:type cd:Commission ;
-    rdfs:label "Committenza del Cardinale Del Monte per Bacco"@it ;
-    l0:name "Committenza del Cardinale Del Monte per Bacco"@it ;
-    cd:hasCommittent https://w3id.org/arco/resource/Agent/cardinale-del-monte ;
-    cd:hasCircumstance https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608 ;
-    TI:atTime https://w3id.org/arco/resource/TimeInterval/1608 .
-        
-https://w3id.org/arco/resource/Agent/cardinale-del-monte 
-    rdf:type cd:Agent ;
-    rdfs:label "Cardinale Francesco Maria Del Monte"@it .
-    
-https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608 
-    rdf:type cd:Circumstance ;
-    rdfs:label "Donazione a Ferdinando I de' Medici per le nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
+@prefix xsd: http://www.w3.org/2001/XMLSchema# .
+
+:bacchus_caravaggio a arco:HistoricOrArtisticProperty ;
+    rdfs:label "Bacco"@it, "Bacchus"@en ;
+    arco:hasAuthor :caravaggio ;
+    arco:hasCreationTimeInterval :creation_period_1595_1597 ;
+    arco:hasCulturalPropertySpecification :artwork_specification .
+
+:caravaggio a foaf:Person ;
+    rdfs:label "Michelangelo Merisi detto Caravaggio"@it ;
+    foaf:name "Caravaggio" .
+
+:creation_period_1595_1597 a arco:TimeInterval ;
+    arco:hasStartTime "1595"^^xsd:gYear ;
+    arco:hasEndTime "1597"^^xsd:gYear ;
+    rdfs:label "Periodo di realizzazione 1595-1597"@it .
+
+:artwork_specification a arco:ArtisticOrHistoricPropertySpecification ;
+    arco:hasSubject :bacchus_subject .
+
+:bacchus_subject a a-cd:Subject ;
+    rdfs:label "Bacco"@it .
+
+:protection_context a a-cd:HistoricalContext ;
+    rdfs:label "Protezione del cardinale Francesco Maria del Monte"@it ;
+    a-cd:hasContextDescription "Caravaggio si trovava sotto la protezione del cardinale Francesco Maria del Monte durante i suoi primi anni romani di formazione artistica"@it ;
+    a-cd:relatesToTimeInterval :creation_period_1595_1597 .
+
+:bacchus_caravaggio arco:hasContext :protection_context .
+
+:cardinal_del_monte a foaf:Person ;
+    rdfs:label "Francesco Maria del Monte"@it ;
+    foaf:title "Cardinale"@it .
+
+:protection_context a-cd:involvesAgent :cardinal_del_monte .
+
+:commission_context a a-cd:CommissionContext ;
+    rdfs:label "Commissione del cardinale Del Monte"@it ;
+    a-cd:hasCommissioner :cardinal_del_monte ;
+    a-cd:hasCommissionPurpose :diplomatic_gift_purpose .
+
+:bacchus_caravaggio arco:hasContext :commission_context .
+
+:diplomatic_gift_purpose a a-cd:Purpose ;
+    rdfs:label "Dono diplomatico per le nozze di Cosimo II de' Medici"@it ;
+    a-cd:hasDescription "Donato a Ferdinando I de' Medici in occasione delle nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
+
+:ferdinando_medici a foaf:Person ;
+    rdfs:label "Ferdinando I de' Medici"@it ;
+    foaf:title "Granduca di Toscana"@it .
+
+:cosimo_medici a foaf:Person ;
+    rdfs:label "Cosimo II de' Medici"@it ;
+    foaf:title "Granduca di Toscana"@it .
+
+:cosimo_wedding a a-cd:Event ;
+    rdfs:label "Nozze di Cosimo II de' Medici"@it ;
+    a-cd:hasDate "1608"^^xsd:gYear ;
+    a-cd:involvesAgent :cosimo_medici .
+
+:gift_transaction a a-cd:PropertyTransfer ;
+    rdfs:label "Dono dell'opera"@it ;
+    a-cd:hasTransferrer :cardinal_del_monte ;
+    a-cd:hasTransferee :ferdinando_medici ;
+    a-cd:transfersProperty :bacchus_caravaggio ;
+    a-cd:hasTransferPurpose :diplomatic_gift_purpose ;
+    a-cd:hasDate "1608"^^xsd:gYear ;
+    a-cd:relatesToEvent :cosimo_wedding .
+
+:roma a a-loc:Place ;
+    rdfs:label "Roma"@it .
+
+:firenze a a-loc:Place ;
+    rdfs:label "Firenze"@it .
+
+:diplomatic_relationship a a-cd:PoliticalRelationship ;
+    rdfs:label "Rapporti diplomatici Roma-Firenze"@it ;
+    a-cd:involvesPlace :roma, :firenze ;
+    a-cd:hasObjective "Rinsaldare i rapporti tra Roma e Firenze"@it .
+
+:gift_transaction a-cd:hasContext :diplomatic_relationship .
                     </pre>
                 </div>
             </div>
