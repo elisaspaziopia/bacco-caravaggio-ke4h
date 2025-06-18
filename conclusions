@@ -1,1 +1,42 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArCo Knowledge Graph Enhancement</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <!-- Fixed Navbar -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">ArCo KG Enhancement</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#queries" class="nav-link">Query SPARQL</a>
+                </li>
+                <li class="nav-item">
+                    <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Case Studies</a>
+                    <div class="dropdown">
+                        <a href="case_study_1.html" class="dropdown-item">Case Study 1</a>
+                        <a href="case_study_2.html" class="dropdown-item">Case Study 2</a>
+                        <a href="case_study_3.html" class="dropdown-item">Case Study 3</a>
+                        <a href="case_study_4.html" class="dropdown-item">Case Study 4</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
 
