@@ -98,7 +98,20 @@ arco-core:TimeSpan/Movement_1596
             <div class="content-box fade-in">
                 <h2 class="box-title">Example RDF Triple from CoT Analysis</h2>
                 <div class="code-container">
-                    <pre class="code-block">
+                    <pre class="code-block">@prefix arco-core: <https://w3id.org/arco/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+arco-core:CulturalProperty/Bacchus_by_Caravaggio
+    arco-core:hasDating arco-core:Dating/Initial_Dating_1589 .
+
+arco-core:Dating/Initial_Dating_1589
+    a arco-core:Dating ;
+    rdfs:label "Initial Dating 1589"@en ;
+    arco-core:hasDate "1589"^^xsd:gYear ;
+    arco-core:hasDatingType arco-core:DatingType/Estimated ;
+    arco-core:hasNote "This dating was later revised"@en .
+
                     </pre>
                 </div>
             </div>
