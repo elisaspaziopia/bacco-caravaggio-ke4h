@@ -62,7 +62,7 @@
                 <h2 class="box-title">Types of techniques</h2>
                 <div class="description-container">
                     <p class="description-text"><strong>Identifying the gap:</strong>after questioning the LLMs about the work Bacchus by Caravaggio, it resulted that this painting was painted with the chiaroscuro technique. This is a technique that Caravaggio widely used in his own works. This technique, however, is not mentioned on ArCo. </p>
-                    <p class="description-text">Methodology: browsing the ArCo ontology, we discovered the existence of the <a href="https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic"><i>Technical Characteristic</i></a> class, within the <a href="https://w3id.org/arco/ontology/denotative-description"><i>Denotative Description Ontology</i></a>. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, <i>hasMaterialOrTechnique</i>, whose value is "canvas/oil painting." It is not, however, a painting technique. We decide to run Query 1 on the SPARQL endpoint in ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property <i>hasMaterialOrTechnique</i> or <i>hasTechnique</i> and return "chiaroscuro" as the value.</p>
+                    <p class="description-text"><strong>Methodology:</strong> browsing the ArCo ontology, we discovered the existence of the <a href="https://w3id.org/arco/ontology/denotative-description/TechnicalCharacteristic"><i>Technical Characteristic</i></a> class, within the <a href="https://w3id.org/arco/ontology/denotative-description"><i>Denotative Description Ontology</i></a>. It is good to note that the work, within its tab, has a link to the one property that is part of this class, namely, <i>hasMaterialOrTechnique</i>, whose value is "canvas/oil painting." It is not, however, a painting technique. We decide to run Query 1 on the SPARQL endpoint in ArCo to see whether entities of type HistoricOrArtisticProperty are characterized by the property <i>hasMaterialOrTechnique</i> or <i>hasTechnique</i> and return "chiaroscuro" as the value.</p>
                 </div>
             </div>
 
@@ -137,9 +137,8 @@ LIMIT 100
             </div>
 
             <div class="content-box fade-in">
-                <h2 class="box-title">Results</h2>
                 <div class="description-container">
-                    <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. Below are both proposals:</p>
+                    <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. We asked LLMs (Gemini) to generate a triple:</p>
                     <p class="description-text"></p>
                 </div>
             </div>
@@ -147,19 +146,21 @@ LIMIT 100
             <div class="content-box fade-in">
                 <h2 class="box-title">Triple - adding "chiaroscuro" as Datatypeproperty and as object property</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+@prefix arco-res: https://w3id.org/arco/resource/ .
 
-<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
-    arco:hasMaterialOrTechnique "chiaroscuro"@it .
+<https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176>
+    arco:hasMaterialOrTechnique arco-res:TechnicalCharacteristic/chiaroscuro .
 
+arco-res:TechnicalCharacteristic/chiaroscuro
+    a a-dd:TechnicalCharacteristic ;
+    rdfs:label "Chiaroscuro"@en ;
+    rdfs:label "Chiaroscuro (tecnica pittorica)"@it ;
+    rdfs:comment "La tecnica pittorica del chiaroscuro, caratterizzata dall'uso di forti contrasti tra luci e ombre per ottenere effetti di volume e drammaticità."@it .
 
-
-    @prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix arco-res: <https://w3id.org/arco/resource/MaterialOrTechnique/> .
-
-<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
-    arco:hasMaterialOrTechnique arco-res:Chiaroscuro .
                     </pre>
                 </div>
             </div>
