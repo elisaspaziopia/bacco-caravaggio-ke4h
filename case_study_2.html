@@ -5,459 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Study 2 - Arco Knowledge Graph Enhancement</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Base reset for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* CSS variables for easy palette management */
-        :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
-        }
-
-        /* Global styles for the document body */
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            padding-top: 80px; /* Ensures content is below fixed navbar */
-        }
-
-        /* Fixed header styles */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .logo a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--primary-color);
-            min-width: 180px;
-            box-shadow: 0 10px 30px var(--shadow);
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .nav-item:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            padding: 0.6rem 1.2rem;
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            margin: 0.2rem;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        /* Active dropdown item */
-        .dropdown-item.active {
-            background: rgba(218, 165, 32, 0.3);
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Main content area */
-        .main-content {
-            padding-bottom: 4rem; /* Padding at the bottom of the main content */
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-  
-        /* Header section (for main title and subtitle) */
-        .case-study-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding: 2rem 0; /* Padding within the header itself */
-        }
-
-        .case-study-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .case-study-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-            /* Navigation between case studies (top navigation block) */
-        .case-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 2rem;
-            background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .case-nav-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .case-nav-button:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        .case-nav-button.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .case-nav-info {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            text-align: center;
-        }
-
-        /* Case study container - general wrapper for case study content blocks */
-        .case-study-container {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem; /* Space between content boxes */
-        }
-
-        /* Content box for description and code */
-        .content-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Animated top bar effect on hover for content boxes */
-        .content-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
-        }
-
-        .content-box:hover::before {
-            left: 0;
-        }
-
-        /* Title inside content box */
-        .box-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            text-align: left; /* Align box titles to the left */
-        }
-
-        /* Container for code block */
-        .code-container {
-            width: 100%;
-            /* max-width: 800px; */ /* Removed max-width to allow full responsiveness */
-            padding-right: 0;
-        }
-
-        /* Actual code block styling */
-        .code-block {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 1.5rem; /* Increased padding */
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem; /* Adjusted font size */
-            color: var(--text-dark);
-            white-space: pre-wrap;
-            width: 100%;
-            overflow-x: auto;
-            text-align: left;
-            line-height: 1.4;
-        }
-
-        /* Description box styling */
-        .description-container {
-            background: var(--background-light);
-            border: 1px solid rgba(218, 165, 32, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            color: #444;
-            line-height: 1.6;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            text-align: left;
-            margin-bottom: 1.5rem; /* Space between description and code within the content-box */
-        }
-
-        /* Action button (e.g., Copy Prompt) */
-        .action-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.9rem;
-            margin-top: 1rem; /* Space above button */
-        }
-
-        .action-button:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-          /* Footer */
-        .footer {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: 5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .footer-link-group h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .footer-link-group a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-link-group a:hover {
-            color: var(--text-light);
-        }
-
-        /* Navigation between case studies */
-         .case-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 2rem;
-            background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .case-nav-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .case-nav-button:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        .case-nav-button.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .case-nav-info {
-            text-align: center;
-            color: var(--primary-color); /* Changed color for better visibility */
-            font-weight: 600; /* Made it bolder */
-            font-family: 'Playfair Display', serif; /* Consistent font */
-            font-size: 1.1rem;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .nav-container {
-                padding: 0 1rem;
-            }
-
-            .main-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .page-title {
-                font-size: 2rem;
-            }
-
-            .case-nav {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .case-nav-button {
-                width: 100%;
-                text-align: center;
-            }
-
-            .description-container, .code-block {
-                padding: 1rem; /* Adjust padding for smaller screens */
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
     <!-- Fixed Navbar -->
@@ -489,7 +37,7 @@
         </div>
     </nav>
 
-    <!-- Case Study Content -->
+    <!-- Main Content -->
     <div class="case-study-container">
         <!-- Header -->
         <div class="case-study-header">
@@ -504,169 +52,26 @@
             <a href="case_study_1.html" class="case-nav-button">← Case Study 1</a>
             <div class="case-nav-info">
                 <strong>Case Study 2 of 4</strong><br>
-            
             </div>
             <a href="case_study_3.html" class="case-nav-button">Case Study 3 →</a>
         </div>
 
         <!-- Content Section -->
-        <div class="case-study-container">
+        <div class="content-section">
             <!-- Description Box (now first) -->
             <div class="content-box fade-in">
                 <h2 class="box-title">Commission Gap</h2>
                 <div class="description-container">
-                    <p><strong>Identifying the gap:</strong> Looking at Caravaggio's Bacchus on ArCo and, especially, at the contents of the property <a href="https://w3id.org/arco/ontology/context-description/historicalInformation"><i>HistoricalInformation</i></a>, we realize that the work was commissioned by Francesco Maria del Monte. We searched thorough the ArCo ontology and discovered the class <a href="https://w3id.org/arco/ontology/context-description/Commission">Commission</a> within the <a href="https://w3id.org/arco/ontology/context-description"><i>Context Description Ontology</i></a>.</p>
-
-                    <p><strong>Methodology:</strong> We decided to run a query in order to understand how data is linked through this class.</p>
+                    <p class="description-text"><strong>Identifying the gap:</strong> Looking at Caravaggio's Bacchus on ArCo and, especially, at the contents of the property <a href="https://w3id.org/arco/ontology/context-description/historicalInformation"><i>HistoricalInformation</i></a>, we realize that the work was commissioned by Francesco Maria del Monte. We searched thorough the ArCo ontology and discovered the class <a href="https://w3id.org/arco/ontology/context-description/Commission">Commission</a> within the <a href="https://w3id.org/arco/ontology/context-description"><i>Context Description Ontology</i></a>.</p>
+                    <p class="description-text"><strong>Methodology:</strong> We decided to run a query in order to understand how data is linked through this class.</p>
                 </div>
             </div>
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box Query Estrazione</title>
-    <!-- Includi i font necessari per mantenere la stessa estetica -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Variabili CSS per la palette di colori */
-        :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
-        }
 
-        /* Stili base per il corpo (necessari per i font e il colore del testo) */
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            background-color: var(--background-light); /* Solo per visualizzazione standalone */
-            padding: 20px; /* Aggiunto un piccolo padding per visualizzazione */
-        }
-
-        /* Stili per il contenitore principale, se vuoi centrare o limitare la larghezza */
-        .case-study-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem; /* Ridotto il padding per questo snippet */
-        }
-
-        /* Stili specifici per la sezione delle query (se vuoi contenere più query box) */
-        .query-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        /* Stili del box di query */
-        .query-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        /* Effetto bordo superiore animato al passaggio del mouse */
-        .query-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
-        }
-
-        .query-box:hover::before {
-            left: 0;
-        }
-
-        /* Stili del titolo del box query */
-        .query-box-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-align: left;
-        }
-
-        /* Stili della textarea per la query */
-        .query-textarea {
-            width: 100%;
-        min-height: 150px;
-        padding: 1rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-family: 'Courier New', monospace; /* Font monospaziato per il codice */
-        font-size: 0.85rem;
-        resize: vertical; /* Permette all'utente di ridimensionare verticalmente */
-        background-color: #f8f9fa;
-        color: var(--text-dark); /* Assicura il colore del testo */
-        }
-
-        /* Stili del pulsante "View results in ArCo" */
-        .action-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block; /* Per allineamento e padding */
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            align-self: flex-start; /* Allinea il pulsante a sinistra all'interno del flex container */
-        }
-
-        .action-button:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .query-box {
-                padding: 1.5rem;
-            }
-            .query-box-title {
-                font-size: 1.2rem;
-            }
-            .query-textarea {
-                font-size: 0.8rem;
-                padding: 0.8rem;
-            }
-            .action-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="case-study-container">
-        <!-- Il box della query estratto -->
-        <div class="content-box fade-in><div class="query-box">
-            <h3 class="query-box-title">Query 1</h3>
-            <textarea id="query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
+            <!-- Query Box 1 for Case Study 2 -->
+            <div class="content-box fade-in">
+                <div class="query-box">
+                    <h3 class="box-title">Query 1</h3>
+                    <textarea id="cs2Query1" class="query-textarea">PREFIX arco: <https://w3id.org/arco/ontology/arco/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
@@ -677,17 +82,17 @@ WHERE {
   OPTIONAL { ?commissione rdfs:label ?label . }
 }
 LIMIT 100</textarea>
-            <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fcommissione+%3Flabel%0D%0AWHERE+%7B%0D%0A++%3Fcommissione+rdf%3Atype+a-cd%3ACommission+.%0D%0A++OPTIONAL+%7B+%3Fcommissione+rdfs%3Alabel+%3Flabel+.+%7D%0D%0A%7D%0D%0ALIMIT+100&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
-        </div>
-    </div>
-</body>
-</html>
+                    <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+arco%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Farco%2F%3E%0D%0APREFIX+rdfs%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2000%2F01%2Frdf-schema%23%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0APREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fcommissione+%3Flabel%0D%0AWHERE+%7B%0D%0A++%3Fcommissione+rdf%3Atype+a-cd%3ACommission+.%0D%0A++OPTIONAL+%7B+%3Fcommissione+rdfs%3Alabel+%3Flabel+.+%7D%0D%0A%7D%0D%0ALIMIT+100&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
+                </div>
+            </div>
 
-<div class="content-box fade-in"> The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs (Claude) to translate this content into a triple without, just specifing that we want it to be suitable to ArCo. </div>
-           
+            <div class="content-box fade-in">
+                <p class="description-text">The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs (Claude) to translate this content into a triple without, just specifing that we want it to be suitable to ArCo.</p>
+            </div>
+
             <!-- Code Box (now second) -->
             <div class="content-box fade-in">
-               <h2 class="box-title">Triple</h2>
+                <h2 class="box-title">Triple</h2>
                 <div class="code-container">
                     <pre class="code-block">@prefix arco: https://w3id.org/arco/ontology/arco/ .
 @prefix a-cd: https://w3id.org/arco/ontology/context-description/ .
@@ -805,58 +210,56 @@ LIMIT 100</textarea>
                 "
             </div>
         </div>
-    </div>
-<div class="content-box fade-in"><strong>Validation:</strong> We have found several issue related to this triple such as the use of custom properties and the use of properties that relate to Ontologies that are not included into ArCo. Having studied the ArCo Ontology, we propose the following triple:</div>
-    <div class="content-box fade-in">
-               <h2 class="box-title">Triple✅</h2>
-                <div class="code-container">
-                    <pre class="code-block"> @prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+
+        <div class="content-box fade-in">
+            <p class="description-text"><strong>Validation:</strong> We have found several issue related to this triple such as the use of custom properties and the use of properties that relate to Ontologies that are not included into ArCo. Having studied the ArCo Ontology, we propose the following triple:</p>
+        </div>
+
+        <div class="content-box fade-in">
+            <h2 class="box-title">Triple✅</h2>
+            <div class="code-container">
+                <pre class="code-block"> @prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
 @prefix arco: https://w3id.org/arco/ontology/arco/ .
 @prefix cd: https://w3id.org/arco/ontology/context-description/ .
 @prefix TI: https://w3id.org/italia/onto/TI/ .
 @prefix l0: https://w3id.org/italia/onto/l0/ .
-                        
-http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214 
-    cd:hasCommission 
+
+http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214
+    cd:hasCommission
     https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte .
-        
-https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte 
+
+https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte
     rdf:type cd:Commission ;
     rdfs:label "Committenza 1 del bene 0900281214"@it ;
     l0:name "Committenza 1 del bene 0900281214"@it ;
     cd:hasCommittent https://w3id.org/arco/resource/Agent/cardinale-del-monte ;
     cd:hasCircumstance https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608 ;
     TI:atTime https://w3id.org/arco/resource/TimeInterval/1608 .
-        
-https://w3id.org/arco/resource/Agent/cardinale-del-monte 
+
+https://w3id.org/arco/resource/Agent/cardinale-del-monte
     rdf:type cd:Agent ;
     rdfs:label "Cardinale Francesco Maria Del Monte"@it .
-    
-https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608 
+
+https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
     rdf:type cd:Circumstance ;
     rdfs:label "Donazione a Ferdinando I de' Medici per le nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze"@it .
-
-
-                    </pre>
-                </div>
+                </pre>
             </div>
-    <div class="content-box fade-in"><strong>Results: </strong>We reduced the triple and followed the structure that is usually used for resource that have this feature. We added "Bacchus" by Caravaggio's URI and created resources that are linked through property. We ad names and labels to make data human-readable. We used ontologies out of the core ArCo namespaces (namely <i>10</i> and <i>TI</i>) because they are tipically employed in ArCo to model the class <i>Commission</i>.</div>
-    
-        
-        
-        
-        
-        
-        
-        
-        <!-- Page Footer -->
+        </div>
+
+        <div class="content-box fade-in">
+            <p class="description-text"><strong>Results: </strong>We reduced the triple and followed the structure that is usually used for resource that have this feature. We added "Bacchus" by Caravaggio's URI and created resources that are linked through property. We ad names and labels to make data human-readable. We used ontologies out of the core ArCo namespaces (namely <i>10</i> and <i>TI</i>) because they are tipically employed in ArCo to model the class <i>Commission</i>.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
             <div class="footer-link-group">
                 <h4>Navigazione Principale</h4>
-                <a href="#home">Home</a>
-                <a href="#queries">Query SPARQL</a>
+                <a href="index.html#home">Home</a>
+                <a href="index.html#queries">Query SPARQL</a>
             </div>
             <div class="footer-link-group">
                 <h4>Approfondimenti</h4>
@@ -865,7 +268,7 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
             <div class="footer-link-group">
                 <h4>Case Studies</h4>
                 <a href="case_study_1.html">Case Study 1</a>
-                <a href="case_study_2.html">Case Study 2</a>
+                <a href="case_study_2.html" class="active">Case Study 2</a>
                 <a href="case_study_3.html">Case Study 3</a>
                 <a href="case_study_4.html">Case Study 4</a>
             </div>
@@ -878,7 +281,8 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
         <p style="margin-top: 3rem;">&copy; 2025 Arco Knowledge Graph Enhancement. Tutti i diritti riservati.</p>
         <p style="margin-top: 0.5rem;">Realizzato con passione per il patrimonio culturale.</p>
     </footer>
-   <script>
+
+    <script>
         // Fade-in animation on scroll
         document.addEventListener('DOMContentLoaded', () => {
             const fadeElements = document.querySelectorAll('.fade-in');
@@ -925,13 +329,13 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
         // Copy to clipboard function for prompt text
         function copyPromptText(event, elementId) { // Pass event object
             const textToCopy = document.getElementById(elementId).textContent;
-            
+
             // Create a temporary textarea element to hold the text
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = textToCopy;
             document.body.appendChild(tempTextArea);
             tempTextArea.select();
-            
+
             try {
                 document.execCommand('copy');
                 // Find the specific button that was clicked
@@ -939,15 +343,14 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
                 const originalText = button.textContent;
                 button.textContent = 'Copiato!';
                 button.style.background = '#28a745'; // Green for success
-                
+
                 setTimeout(() => {
                     button.textContent = originalText;
                     button.style.background = ''; // Revert to original background
                 }, 2000);
             } catch (err) {
                 console.error('Errore nella copia: ', err);
-                // Fallback for older browsers or if execCommand fails
-                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+                // Removed alert as per instructions
             } finally {
                 document.body.removeChild(tempTextArea); // Clean up the temporary element
             }
