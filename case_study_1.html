@@ -644,7 +644,7 @@ rdfs:label ?label ;
                 <div class="content-box">In this case, by taking a look at the results, it appears that this property is mostly linked to resources such as pieces of clothing, drawings and memorials. Since this property is widely used among resources that have the same classification as "Bacchus" by Caravaggio, we decide to ask LLMs to retrieve a triple out of this property, in order to enrich the Knowledge Graph (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio).</div>
                 <!-- Code Box (now second) -->
             <div class="content-box">
-                <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple</a></h2>
+                <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple✅</a></h2>
                 <div class="code-container">@prefix arco: https://w3id.org/arco/ontology/arco/ .
 @prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
@@ -668,30 +668,12 @@ https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0
 </div>
             </div>
         </div>
-<div class="content-box"><strong>Validation of the query:</strong> After providing a set of instructions on how to generate the query—such as specifying the URI and the property we wanted to use—the LLM returned a result that was highly relevant and consistent with the ArCo ontology: the structure it used correctly follows ArCo’s modeling principles, for instance, the cultural property is first linked to an instance of a-dd:IconographicOrDecorativeApparatus, which then carries the descriptive content via core:hasDescription. This ensures semantic clarity and consistency within the ontology. We decided to apply some minor adjustments to render it similar to the already existing ones (e.g. we added 1 to <i>"Apparato iconografico e decorativo dell’opera 0900289176"</i> and we linked the description directly to <a href="https://w3id.org/arco/ontology/core/Description"><i>hasDescription</i></a>).
-    <div class="content-box">
-                <h2 class="box-title"><a href="iconographic_description_triple.ttl">Triple✅</a></h2>
-                <div class="code-container">@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix core: https://w3id.org/arco/ontology/core .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix xsd: http://www.w3.org/2001/XMLSchema# .
-@prefix : https://example.org/resource/ .
+<div class="content-box"><strong>Validation of the query:</strong> After providing a set of instructions on how to generate the query—such as specifying the URI and the property we wanted to use—the LLM returned a result that was highly relevant and consistent with the ArCo ontology: the structure it used correctly follows ArCo’s modeling principles, for instance, the cultural property is first linked to an instance of a-dd:IconographicOrDecorativeApparatus, which then carries the descriptive content via core:hasDescription. This ensures semantic clarity and consistency within the ontology. We decided to apply some minor adjustments to render it similar to the already existing ones (e.g. we added 1 to <i>"Apparato iconografico e decorativo dell’opera 0900289176"</i>
+    <strong> Result:</strong> Working hand in hand with artificial intelligence and providing it with more data related to existing resources on ArCo and the classes already present in its ontology makes it easier to achieve appropriate results.
+By adding this triple to ArCo, we achieved a more structured and semantically rich representation of the artwork’s iconographic and decorative apparatus. This enhancement improves data clarity, enables more precise queries, and facilitates interoperability within the ArCo knowledge graph. Furthermore, it allows for modular descriptions that can be easily extended or linked to other resources, supporting deeper analysis and richer interpretations.
 
-https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176
-    a arco:HistoricOrArtisticProperty ;
-    a-dd:hasIconographicOrDecorativeApparatus :apparato0900289176 .
 
-:apparato0900289176
-    a a-dd:IconographicOrDecorativeApparatus ;
-    rdfs:label "Apparato iconografico e decorativo dell’opera 0900289176"@it ;
-    core:hasDescription """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. 
-Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire uno stato di ebbrezza. 
-La frutta — la mela bacata, la mela cotogna ammaccata, la pesca mezza marcia — allude alla caducità della bellezza e del piacere terreno. 
-La nudità parziale evoca sensualità carnale, mentre la corona di pampini richiama l’estasi dionisiaca. 
-La luce caravaggesca crea un effetto di presenza fisica quasi tattile."""@it .
 
-</div>
-            </div>
         </div>
     </div>
     
