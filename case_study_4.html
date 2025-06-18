@@ -158,36 +158,14 @@ arco-res:CulturalProperty/BaccoCaravaggio arco:hasCulturalPropertyFeature arco-r
 
     <div class="content-box fade-in"><div class="description-container"><strong>Validation:</strong> this query has some issues such as the fact that it did not find the URI either for "Bacchus" by Caravaggio or for "chiaroscuro". It retrieved a custom property, namely, <i>hasCulturalPropertyFeature</i>.</div></div>
             <div class="content-box fade-in">
-                <h2 class="box-title">hasPaintingTechnique as Datatypeproperty and as object property</h2>
+                <h2 class="box-title">Triple</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix owl: http://www.w3.org/2002/07/owl# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: http://www.w3.org/2001/XMLSchema#> .
-@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
+                    <pre class="code-block">@prefix arco: https://w3id.org/arco/ .
+@prefix arco-dd: https://w3id.org/arco/ontology/denotative-description/ .
 
-a-dd:hasPaintingTechnique
-    a owl:DatatypeProperty ;
-    rdfs:label "has painting technique"@en ;
-    rdfs:label "ha tecnica pittorica"@it ;
-    rdfs:comment "La tecnica pittorica utilizzata nella realizzazione di un'opera (es. olio su tela, tempera, affresco)."@it ;
-    rdfs:domain a-dd:TechnicalCharacteristic ;
-    rdfs:range xsd:string .
+arco:resource/HistoricOrArtisticProperty/0900289176 arco-dd:hasMaterialOrTechnique arco:resource/TechnicalCharacteristic/tela-pittura-a-olio .
 
-
-
-    @prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix owl: http://www.w3.org/2002/07/owl# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema#> .
-@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
-
-a-dd:hasPaintingTechnique
-    a owl:ObjectProperty ;
-    rdfs:label "has painting technique"@en ;
-    rdfs:label "ha tecnica pittorica"@it ;
-    rdfs:comment "Collega una caratteristica tecnica a una tecnica pittorica specifica rappresentata come risorsa controllata."@it ;
-    rdfs:domain a-dd:TechnicalCharacteristic ;
-    rdfs:range a-dd:PaintingTechnique .
+arco:resource/HistoricOrArtisticProperty/0900289176 arco-dd:hasMaterialOrTechnique arco:resource/TechnicalCharacteristic/chiaroscuro .
                     </pre>
                 </div>
             </div>
