@@ -5,420 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Case Study 3 - Arco Knowledge Graph Enhancement</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Base reset for all elements */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        /* CSS variables for easy palette management */
-        :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            padding-top: 80px; /* Ensures content is below fixed navbar */
-        }
-
-           /* Fixed header styles */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        /* Navigation styles */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .logo a {
-            color: var(--accent-color);
-            text-decoration: none;
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 1.5rem;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        .dropdown {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--primary-color);
-            min-width: 180px;
-            box-shadow: 0 10px 30px var(--shadow);
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .nav-item:hover .dropdown {
-            display: block;
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            padding: 0.6rem 1.2rem;
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            margin: 0.2rem;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        /* Active dropdown item for the current page */
-        .dropdown-item.active {
-            background: rgba(218, 165, 32, 0.3);
-            color: var(--accent-color);
-            font-weight: 600;
-        }
-
-        /* Main content area */
-        .main-content {
-            /* Removed padding-top here to rely solely on body's padding-top and header's internal padding */
-            padding-bottom: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
-        }
-
-        /* Header section */
-        .case-study-header {
-            text-align: center;
-            margin-bottom: 4rem;
-            padding: 2rem 0; /* Padding within the header itself */
-        }
-
-        .case-study-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .case-study-subtitle {
-            font-size: 1.2rem;
-            color: #666;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Navigation between case studies */
-        .case-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding: 1rem 2rem;
-            background: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .nav-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-button:hover {
-            background: var(--primary-color);
-            transform: translateY(-2px);
-        }
-
-        .nav-button.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .case-nav-info {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            font-weight: 600;
-            text-align: center; /* Center the text within the info box */
-        }
-
-        /* Content boxes */
-        .content-section {
-            margin-bottom: 4rem;
-        }
-
-        .content-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .content-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
-        }
-
-        .content-box:hover::before {
-            left: 0;
-        }
-
-        .box-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 700;
-            text-align: left; /* Align box titles to the left */
-        }
-
-        .code-container {
-            background: #f8f9fa;
-            border: 1px solid #e9ecef;
-            border-radius: 12px;
-            padding: 1.5rem;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            white-space: pre-wrap;
-            overflow-x: auto;
-            line-height: 1.4;
-        }
-
-        .description-container { /* New class for description box styling */
-            background: var(--background-light);
-            border: 1px solid rgba(218, 165, 32, 0.1);
-            border-radius: 12px;
-            padding: 1.5rem;
-            color: #444;
-            line-height: 1.6;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
-            text-align: left;
-            margin-bottom: 1.5rem; /* Space between description and action button/next box */
-        }
-
-        .description-text { /* Use for text inside description-container */
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #444;
-            margin-bottom: 1rem; /* Space between paragraphs */
-        }
-
-        .description-text strong {
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .description-text em {
-            color: var(--secondary-color);
-            font-style: italic;
-        }
-
-        /* Highlight boxes for important info */
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(139, 69, 19, 0.1) 100%);
-            border-left: 4px solid var(--accent-color);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
-        }
-
-        /* Action button (e.g., Copy Prompt) */
-        .action-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 0.9rem;
-            margin-top: 1rem; /* Space above button */
-        }
-
-        .action-button:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: 5rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .footer-link-group h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .footer-link-group a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-link-group a:hover {
-            color: var(--text-light);
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-
-            .case-study-title {
-                font-size: 2rem;
-            }
-
-            .case-nav {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .main-content {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
-
-            .content-box {
-                padding: 1.5rem;
-            }
-            .code-container, .description-container {
-                padding: 1rem;
-            }
-        }
-
-        /* Animation for content appearing */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
     <!-- Fixed Navbar -->
@@ -451,7 +38,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="main-content">
+    <div class="case-study-container">
         <!-- Header -->
         <div class="case-study-header">
             <h1 class="case-study-title">Alternative Dating - Case Study 3</h1>
@@ -460,13 +47,13 @@
 
         <!-- Navigation between case studies -->
         <div class="case-nav">
-            <a href="case_study_2.html" class="nav-button">
+            <a href="case_study_2.html" class="case-nav-button">
                 ← Case Study 2
             </a>
             <div class="case-nav-info">
                 <strong>Case Study 3 of 4</strong><br>
             </div>
-            <a href="case_study_4.html" class="nav-button">
+            <a href="case_study_4.html" class="case-nav-button">
                 Case Study 4 →
             </a>
         </div>
@@ -478,194 +65,15 @@
                 <h2 class="box-title">Alternative Dating</h2>
                 <div class="description-container">
                     <p class="description-text"><strong>Identifying the gap:</strong> Looking at the record of Caravaggio's Bacchus on ArCo, we noticed that within the historicalInformation property, a date, now outdated, was given in relation to the creation of the painting.</p>
-
                     <p class="description-text"><strong>Methodology:</strong> Searching within ArCo's ontology, we found the <a href="https://w3id.org/arco/ontology/context-description/AlternativeDatingType"><i>Alternative Dating</i></a> class within the Context Description Ontology.</p>
-
                 </div>
             </div>
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Box Query Estrazione</title>
-    <!-- Includi i font necessari per mantenere la stessa estetica -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Variabili CSS per la palette di colori */
-        :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
-        }
 
-        /* Stili base per il corpo (necessari per i font e il colore del testo) */
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 0.95rem;
-            background-color: var(--background-light); /* Solo per visualizzazione standalone */
-            padding: 20px; /* Aggiunto un piccolo padding per visualizzazione */
-        }
-
-        /* Stili per il contenitore principale, se vuoi centrare o limitare la larghezza */
-        .case-study-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem; /* Ridotto il padding per questo snippet */
-        }
-
-        /* Stili specifici per la sezione delle query (se vuoi contenere più query box) */
-        .query-section {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        /* Stili del box di query */
-        .query-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border: 1px solid rgba(218, 165, 32, 0.2);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-
-            /* --- CONTROLLO DIMENSIONI DEL BOX ESTERNO (query-box) --- */
-            /* Puoi impostare una larghezza fissa (es. 600px) */
-            /* width: 600px; */
-
-            /* O una larghezza percentuale rispetto al contenitore padre.
-               Si consiglia di usarla con un max-width per buona responsività. */
-            width: 80%; /* Esempio: il box occupa l'80% della larghezza disponibile */
-            max-width: 800px; /* Limita la larghezza massima a 800px */
-            min-width: 300px; /* Larghezza minima per evitare che diventi troppo piccolo */
-
-            /* Puoi impostare un'altezza fissa, ma fai attenzione a non tagliare il contenuto */
-            /* height: 500px; */
-
-            /* Consigliato: usare min-height per assicurare un'altezza minima, e lasciare l'altezza dinamica */
-            min-height: 350px; /* Altezza minima del box */
-
-            /* Per permettere all'utente di ridimensionare l'intero box (non solo la textarea) */
-            /* Se attivi resize, assicurati che overflow sia su 'auto' o 'scroll' */
-            /* resize: both; */ /* Permette ridimensionamento orizzontale e verticale da parte dell'utente */
-            /* overflow: auto; */ /* Necessario per vedere le barre di ridimensionamento se resize è attivo */
-            /* ----------------------------------------------------------- */
-        }
-
-        /* Effetto bordo superiore animato al passaggio del mouse */
-        .query-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
-            transition: all 0.5s ease;
-        }
-
-        .query-box:hover::before {
-            left: 0;
-        }
-
-        /* Stili del titolo del box query */
-        .query-box-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            text-align: left;
-        }
-
-        /* Stili della textarea per la query */
-        .query-textarea {
-            width: 100%; /* La textarea occupa il 100% della larghezza del suo contenitore */
-            
-            /* --- CONTROLLO DIMENSIONI DELLA TEXTAREA INTERNA (query-textarea) --- */
-            /* Puoi modificare l'altezza minima della textarea qui */
-            min-height: 150px; /* Altezza minima attuale */
-            /* Per renderla più alta di default, aumenta questo valore, es: min-height: 250px; */
-
-            /* Se vuoi un'altezza fissa: */
-            /* height: 300px; */ /* Attenzione: se il contenuto supera l'altezza, apparirà lo scrollbar */
-            
-            /* La proprietà 'resize' controlla se l'utente può ridimensionare manualmente la textarea */
-            resize: vertical; /* Permette all'utente di ridimensionare solo verticalmente (come da codice originale) */
-            /* Se vuoi disabilitare il ridimensionamento utente: resize: none; */
-            /* Se vuoi ridimensionamento libero: resize: both; */
-            /* ------------------------------------------------------------------ */
-
-            padding: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace; /* Font monospaziato per il codice */
-            font-size: 0.85rem;
-            background-color: #f8f9fa;
-        }
-
-        /* Stili del pulsante "View results in ArCo" */
-        .action-button {
-            background: var(--secondary-color);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block; /* Per allineamento e padding */
-            font-size: 0.9rem;
-            margin-top: 1rem;
-            align-self: flex-start; /* Allinea il pulsante a sinistra all'interno del flex container */
-        }
-
-        .action-button:hover {
-            background: var(--primary-color);
-            transform: scale(1.05);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .query-box {
-                padding: 1.5rem;
-                width: 95%; /* Riduci la larghezza su schermi piccoli */
-                margin: 10px auto; /* Mantieni centrato e con margini */
-            }
-            .query-box-title {
-                font-size: 1.2rem;
-            }
-            .query-textarea {
-                font-size: 0.8rem;
-                padding: 0.8rem;
-            }
-            .action-button {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <div class="case-study-container">
-        <!-- Il box della query estratto -->
-        <div class="content-box">
-            <h3 class="query-box-title">Query 1</h3>
-            <textarea id="query1" class="query-textarea">PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+            <!-- Query Box 1 for Case Study 3 -->
+            <div class="content-box fade-in">
+                <div class="query-box">
+                    <h3 class="box-title">Query 1</h3>
+                    <textarea id="cs3Query1" class="query-textarea">PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 SELECT (EXISTS {
@@ -681,31 +89,33 @@ SELECT (EXISTS {
 WHERE {
 }
 </textarea>
-            <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0A%0D%0ASELECT+%28EXISTS+%7B%0D%0A++%3Finstance+rdf%3Atype+a-cd%3AAlternativeDating+.%0D%0A%7D+AS+%3FhasInstances%29%0D%0A%28EXISTS+%7B%0D%0A++%3Fentity+%3Fproperty+%3Falt+.%0D%0A++%3Falt+rdf%3Atype+a-cd%3AAlternativeDating+.%0D%0A%7D+AS+%3FusedAsObject%29%0D%0A%28EXISTS+%7B%0D%0A++%3Fs+a-cd%3AisAlternativeDatingTypeOf+%3Fo+.%0D%0A%7D+AS+%3FisAlternativeDatingTypeOfUsed%29%0D%0AWHERE+%7B%0D%0A%7D%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
-        </div>
-    </div>
-</body>
-</html>
-<div class="content-box fade-in">This query shows no result: this means that the properties we looked for, even though they are part of the ArCo Ontology, are not used. We still decide to use them to enrich the Knowledge Graph and to serve the purpose of stating the obsolete date. We ask the LLMs to translate the data into RDF data.</div>
-            <!-- Code Box (now second) -->
+                    <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0A%0D%0ASELECT+%28EXISTS+%7B%0D%0A++%3Finstance+rdf%3Atype+a-cd%3AAlternativeDating+.%0D%0A%7D+AS+%3FhasInstances%29%0D%0A%28EXISTS+%7B%0D%0A++%3Fentity+%3Fproperty+%3Falt+.%0D%0A++%3Falt+rdf%3Atype+a-cd%3AAlternativeDating+.%0D%0A%7D+AS+%3FusedAsObject%29%0D%0A%28EXISTS+%7B%0D%0A++%3Fs+a-cd%3AisAlternativeDatingTypeOf+%3Fo+.%0D%0A%7D+AS+%3FisAlternativeDatingTypeOfUsed%29%0D%0AWHERE+%7B%0D%0A%7D%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
+                </div>
+            </div>
+
             <div class="content-box fade-in">
-                <h2 class="box-title">Esempio di Triple RDF da Analisi CoT</h2>
+                <p class="description-text">This query shows no result: this means that the properties we looked for, even though they are part of the ArCo Ontology, are not used. We still decide to use them to enrich the Knowledge Graph and to serve the purpose of stating the obsolete date. We ask the LLMs to translate the data into RDF data.</p>
+            </div>
+
+            <!-- Code Box -->
+            <div class="content-box fade-in">
+                <h2 class="box-title">Example RDF Triple from CoT Analysis</h2>
                 <div class="code-container">
                     <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
 @prefix a-cd: https://w3id.org/arco/ontology/context-description/ .
 @prefix l0: https://w3id.org/italia/onto/l0/ .
-    
-http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214 
-    a-cd:hasAlternativeDating 
+
+http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214
+    a-cd:hasAlternativeDating
     https://w3id.org/arco/resource/AlternativeDating/0900281214-1589 .
-        
-https://w3id.org/arco/resource/AlternativeDating/0900281214-1589 
+
+https://w3id.org/arco/resource/AlternativeDating/0900281214-1589
     rdf:type a-cd:AlternativeDating ;
     rdfs:label "Datazione alternativa del Bacco al 1589"@it ;
     l0:name "Datazione alternativa del Bacco al 1589"@it ;
     a-cd:hasDatingDescription "prima datazione al 1589"@it .
-
+                    </pre>
                 </div>
             </div>
             <!-- Hidden element to hold the actual prompt text for copying -->
@@ -716,8 +126,12 @@ https://w3id.org/arco/resource/AlternativeDating/0900281214-1589
                 3. Quali possibili interpretazioni (simboliche, psicologiche, storiche) emergono dall'analisi combinata di stile e contesto?"
             </div>
         </div>
+
+        <div class="content-box fade-in">
+            <p class="description-text">Since we do not have any other example on how to perform this link, we validate the triple generated by LLMs.</p>
+        </div>
     </div>
-<div class="content-box fade-in">Since we do not have any other example on how to perform this link, we validate the triple generated by LLMs. </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-links">
@@ -794,13 +208,13 @@ https://w3id.org/arco/resource/AlternativeDating/0900281214-1589
         // Copy to clipboard function for prompt text
         function copyPromptText(event, elementId) { // Pass event object
             const textToCopy = document.getElementById(elementId).textContent;
-            
+
             // Create a temporary textarea element to hold the text
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = textToCopy;
             document.body.appendChild(tempTextArea);
             tempTextArea.select();
-            
+
             try {
                 document.execCommand('copy');
                 // Find the specific button that was clicked
@@ -808,15 +222,14 @@ https://w3id.org/arco/resource/AlternativeDating/0900281214-1589
                 const originalText = button.textContent;
                 button.textContent = 'Copiato!';
                 button.style.background = '#28a745'; // Green for success
-                
+
                 setTimeout(() => {
                     button.textContent = originalText;
                     button.style.background = ''; // Revert to original background
                 }, 2000);
             } catch (err) {
                 console.error('Errore nella copia: ', err);
-                // Fallback for older browsers or if execCommand fails
-                alert('Impossibile copiare il testo. Si prega di copiare manualmente:\n\n' + textToCopy);
+                // Removed alert as per instructions
             } finally {
                 document.body.removeChild(tempTextArea); // Clean up the temporary element
             }
