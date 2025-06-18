@@ -5,287 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prompting Techniques - Arco Knowledge Graph Enhancement</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        /* Re-import the base styles from your main page to ensure consistency */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #2C1810;
-            --secondary-color: #8B4513;
-            --accent-color: #DAA520;
-            --text-light: #F5F5DC;
-            --text-dark: #2C1810;
-            --background-light: #FAF9F6;
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --shadow: rgba(44, 24, 16, 0.15);
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
-            color: var(--text-dark);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* Navigation (same as index.html) */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(44, 24, 16, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-item {
-            position: relative;
-        }
-
-        .nav-link {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .nav-link:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        /* Dropdown Menu (same as index.html) */
-        .dropdown {
-            display: none; /* Ensure it's hidden by default */
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background: var(--primary-color);
-            min-width: 200px;
-            box-shadow: 0 10px 30px var(--shadow);
-            border-radius: 12px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            margin-top: 0.5rem;
-        }
-
-        .nav-item:hover .dropdown {
-            display: block; /* Show on hover */
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            padding: 0.75rem 1.5rem;
-            color: var(--text-light);
-            text-decoration: none;
-            display: block;
-            transition: all 0.3s ease;
-            border-radius: 8px;
-            margin: 0.25rem;
-        }
-
-        .dropdown-item:hover {
-            background: rgba(218, 165, 32, 0.2);
-            color: var(--accent-color);
-        }
-
-        /* Main content styling for this page */
-        .content-section {
-            padding: 8rem 2rem 4rem; /* Adjusted top padding to clear fixed nav */
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .page-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-top: 4rem;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        .section-description {
-            font-size: 1.1rem;
-            color: #666;
-            max-width: 900px;
-            margin: 0 auto 1rem;
-            line-height: 1.7;
-        }
-
-        /* Table specific styles */
-        .comparison-table-container {
-            overflow-x: auto;
-            margin-bottom: 3rem;
-            box-shadow: 0 10px 30px var(--shadow);
-            border-radius: 12px;
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border: 1px solid rgba(218, 165, 32, 0.2);
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 0 auto;
-            min-width: 700px; /* Ensures tables don't get too narrow on small screens */
-        }
-
-        .comparison-table th, .comparison-table td {
-            border: 1px solid #e0e0e0;
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .comparison-table th {
-            background-color: var(--secondary-color);
-            color: var(--text-light);
-            font-weight: 600;
-            font-size: 1.1rem;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .comparison-table tbody tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .comparison-table tbody tr:hover {
-            background-color: #f0f0f0;
-            transition: background-color 0.2s ease;
-        }
-
-        /* Footer Styles (same as index.html) */
-        .footer {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 3rem 2rem;
-            text-align: center;
-            font-size: 0.9rem;
-            margin-top: 5rem;
-        }
-
-        .footer a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer a:hover {
-            color: var(--text-light);
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link-group {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .footer-link-group h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            margin-bottom: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .footer-link-group a {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Scroll to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: var(--accent-color);
-            color: var(--primary-color);
-            padding: 0.8rem 1rem;
-            border-radius: 50%;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            display: none; /* Hidden by default */
-            z-index: 999;
-        }
-
-        .back-to-top:hover {
-            background: #B8860B;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                display: none;
-            }
-            .page-title {
-                font-size: 2.5rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css"> <!-- Link to external CSS -->
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <div class="logo">ArCo KG Enhancement</div>
+            <div class="logo">
+                <a href="index.html">ArCo KG Enhancement</a>
+            </div>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="index.html#home" class="nav-link">Home</a>
@@ -294,7 +21,7 @@
                     <a href="index.html#queries" class="nav-link">Query SPARQL</a>
                 </li>
                 <li class="nav-item">
-                    <a href="prompting_techniques.html#prompts" class="nav-link">Prompting Techniques</a>
+                    <a href="prompting_techniques.html#prompts" class="nav-link active">Prompting Techniques</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">Case Studies</a>
@@ -314,7 +41,7 @@
         <p class="section-description">
             In this section we will show you the LLMs' responses to our prompts that were structured to the sake of gaining accurate information about "Bacchus" by Caravaggio. The outputs helped us to enrich the Knowledge Graph, after having analysed them.
         </p>
-        <p class="section-description">We decided to analyse different LLMs (Chat GPT, Claude, Gemini and Minstral) in order to see how different programmes react to the very same input/prompt.</p> 
+        <p class="section-description">We decided to analyse different LLMs (Chat GPT, Claude, Gemini and Minstral) in order to see how different programmes react to the very same input/prompt.</p>
 
         <p class="section-description">Our main goal was to use LLMs as a tool that, through mutual reasoning and collaboration with humans, is able to make the difference in the enrichment of databases such as ArCo. Our workflow was collaborative: we asked LLMs to describe "Bacchus" by Caravaggio following different prompting techniques, we then read, compared and analysed the outputs, whose result you can see on this page. After having studied ArCo ontologies, we asked LLMs to generate RDF triples following our instructions, than you can see in the report of each the Case Study. </p>
 
@@ -433,7 +160,7 @@ Il realismo di Caravaggio si manifesta nei dettagli minutamente resi, come le fo
  
 In questo dipinto, Caravaggio usa la luce non solo per modellare le forme, ma anche per creare un'atmosfera intima e suggestiva. La luce che illumina Bacco sembra provenire da una fonte non visibile, quasi divina, che accentua la sacralità del momento. Il vino, simbolo di ebbrezza e piacere, è reso con una trasparenza e una lucentezza che lo rendono quasi reale, invitando lo spettatore a partecipare alla scena.
  
-"Bacco" è un'opera che riflette la capacità di Caravaggio di unire realismo e simbolismo, creando un'immagine che è al tempo stesso sensuale e spirituale. Il dipinto cattura un momento di quiete e contemplazione, ma anche di invito e seduzione, mostrando la maestria dell'artista nel rappresentare la complessità dell'animo umano.
+"Bacco" è un'opera che riflette la capacità di Caravaggio di unire realismo e simbolismo, creando un'immagine che è al tempo stesso sensuale e spirituale. Il dipinto cattura un momento di quiete e contemplazione, ma anche di invito e seduzione, mostrando la maestria dell'artista nel rappresentare la complessità dell'anima umana.
 </td>
                     </tr>
                 </tbody>
@@ -540,7 +267,7 @@ il naturalismo teatrale che anticipa il Barocco più autentico.</p></td>
 <p>Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno.
 La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile.</p>
 <p><strong>3. Messaggio interpretativo</strong></p>
-<p>Caravaggio trasmette un complesso messaggio sul carpe diem attraverso una rappresentazione che unisce sacro e profano. Il dipinto celebra il piacere sensuale immediato, ma lo contamina con segni di decadenza che ne rivelano la natura effimera. La figura di Bacco diventa metafora dell'esperienza umana: bellezza, piacere e giovinezza sono destinati a corrompersi, rendendo ancora più urgente il loro godimento nel presente.
+<p>Caravaggio trasmette un complesso messaggio sul carpe diem attraverso una rappresentazione che unisce sacro e profano. Il dipinto celebra il piacere sensuale immediato, ma lo contamina con segni di decadenza che ne rivelano la natura effimera. La figura di Bacco diventa metafora dell'esperienza umana: bellezza, piacere, e giovinezza sono destinati a corrompersi, rendendo ancora più urgente il loro godimento nel presente.
 L'ambiguità tra divino e terreno, tra innocenza e corruzione, riflette la tensione tipicamente caravaggesca tra realtà brutale e idealizzazione artistica. Il giovinetto può essere interpretato in ottica cristiana come un'allusione al Salvatore, con simboli della Passione di Cristo come la melagrana spaccata e la coppa del vino.</p>
 <p><strong>4. Contesto storico e biografico</strong></p>
 <p>L'opera fu realizzata tra il 1595-1597, quando Caravaggio si trovava sotto la protezione del cardinale Francesco Maria del Monte, durante i suoi primi anni romani di formazione artistica. Fu commissionato dal cardinale Del Monte per essere donato a Ferdinando I de' Medici in occasione delle nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze.
@@ -614,7 +341,7 @@ Questa versione si caratterizza per l'immediatezza della presenza fisica e l'amb
                         <td><strong>Claude</strong></td>
                         <td>Not tested</td>
                         <td>✅ Literary, symbolic, interpretative</td>
-                        <td>✅ Poetic, reflective, philosophically rich</td>
+                        <td>✅ Less structured, omits some concrete visual details, no direct historical context.</td>
                     </tr>
                     <tr>
                         <td><strong>Gemini</strong></td>
@@ -657,10 +384,10 @@ Questa versione si caratterizza per l'immediatezza della presenza fisica e l'amb
             </div>
             <div class="footer-link-group">
                 <h4>Case Studies</h4>
-                <a href="case_study_1.html">Caso Studio 1</a>
-                <a href="case_study_2.html">Caso Studio 2</a>
-                <a href="case_study_3.html">Caso Studio 3</a>
-                <a href="case_study_4.html">Caso Studio 4</a>
+                <a href="case_study_1.html">Case Study 1</a>
+                <a href="case_study_2.html">Case Study 2</a>
+                <a href="case_study_3.html">Case Study 3</a>
+                <a href="case_study_4.html">Case Study 4</a>
                 <a href="case_study_5.html">Caso Studio 5</a>
             </div>
             <div class="footer-link-group">
