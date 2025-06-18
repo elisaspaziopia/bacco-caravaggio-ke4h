@@ -144,11 +144,11 @@ LIMIT 100
             </div>
 
             <div class="content-box fade-in">
-                <h2 class="box-title">Triple - adding "chiaroscuro" as Datatypeproperty and as object property</h2>
+                <h2 class="box-title">Triple</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix arco-res: <https://w3id.org/arco/resource/> .
-@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+                    <pre class="code-block">@prefix arco-res: https://w3id.org/arco/resource/ .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
     
 arco-res:CulturalProperty/BaccoCaravaggio arco:hasCulturalPropertyFeature arco-res:CulturalPropertyFeature/Chiaroscuro .
 
@@ -156,6 +156,7 @@ arco-res:CulturalProperty/BaccoCaravaggio arco:hasCulturalPropertyFeature arco-r
                 </div>
             </div>
 
+    <div class="content-box fade-in"><div class="description-container"><strong>Validation:</strong> this query has some issues such as the fact that it did not find the URI either for "Bacchus" by Caravaggio or for "chiaroscuro". It retrieved a custom property, namely, <i>hasCulturalPropertyFeature</i>.</div></div>
             <div class="content-box fade-in">
                 <h2 class="box-title">hasPaintingTechnique as Datatypeproperty and as object property</h2>
                 <div class="code-container">
