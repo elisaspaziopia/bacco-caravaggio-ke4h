@@ -202,6 +202,36 @@ a-dd:hasPaintingTechnique
     </div>
 
     <!-- Navigation Buttons -->
+    .navigation-buttons {
+    display: flex;
+    justify-content: flex-end; /* Allinea il contenuto a destra */
+    margin: 20px 0;
+    padding: 0 20px; /* Aggiunge un po' di spazio dai bordi */
+}
+
+.nav-button {
+    background-color: #8B4513; /* Marrone sella */
+    color: white;
+    padding: 12px 20px;
+    text-decoration: none;
+    border-radius: 25px; /* Bordi molto arrotondati */
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Spazio tra testo e emoji */
+    box-shadow: 0 2px 4px rgba(139, 69, 19, 0.2); /* Ombra leggera */
+}
+
+.nav-button:hover {
+    background-color: #6B3410; /* Marrone più scuro al hover */
+    transform: translateY(-2px); /* Leggero effetto di sollevamento */
+    box-shadow: 0 4px 8px rgba(139, 69, 19, 0.3); /* Ombra più pronunciata */
+}
+
+.nav-button span {
+    font-size: 1.1em;
+}
     <div class="navigation-buttons">
         <a href="index.html" class="nav-button">
             Torna alla Home <span>🏠</span>
