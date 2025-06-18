@@ -1,21 +1,734 @@
+/* Base reset for all elements */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS variables for easy palette management */
+:root {
+    --primary-color: #2C1810; /* Dark brown / almost black, strong base */
+    --secondary-color: #8B4513; /* Sienna / Reddish brown, warm tones of Bacchus */
+    --accent-color: #DAA520; /* Gold yellow / Amber, bright and precious details */
+    --text-light: #F5F5DC; /* Off-white / Cream, for text on dark backgrounds */
+    --text-dark: #2C1810; /* Dark brown, for text on light backgrounds */
+    --background-light: #FAF9F6; /* Warm white / Ivory, main background */
+    --card-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent card background */
+    --shadow: rgba(44, 24, 16, 0.15); /* Light but present shadow */
+}
+
+/* Global styles for the document body */
 body {
-  font-family: system-ui, sans-serif;
-  margin: 2em;
-  background: #fdfdfd;
-  color: #333;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--background-light) 0%, #F0EDE5 100%);
+    color: var(--text-dark);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    padding-top: 80px; /* Ensures content is below fixed navbar */
 }
 
-header {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 2em;
+/* Fixed header styles */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(44, 24, 16, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: all 0.3s ease;
 }
 
-nav a {
-  margin-right: 1em;
-  text-decoration: none;
-  color: #0066cc;
+/* Navigation container to center and limit width */
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
 }
 
-nav a:hover {
-  text-decoration: underline;
+/* Style for the logo/title in the navigation */
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; /* Standardized font size */
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.logo a {
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Navigation menu */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem; /* Standardized gap */
+}
+
+/* Single menu item */
+.nav-item {
+    position: relative;
+}
+
+/* Navigation link */
+.nav-link {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.4rem 0.8rem; /* Standardized padding */
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+/* Hover effect for navigation links */
+.nav-link:hover {
+    background: rgba(218, 165, 32, 0.2);
+    color: var(--accent-color);
+}
+
+/* Dropdown menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--primary-color);
+    min-width: 180px; /* Standardized min-width */
+    box-shadow: 0 10px 30px var(--shadow);
+    border-radius: 12px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    margin-top: 0.5rem;
+}
+
+/* Show dropdown on hover over parent item */
+.nav-item:hover .dropdown {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Single dropdown item */
+.dropdown-item {
+    padding: 0.6rem 1.2rem; /* Standardized padding */
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0.2rem; /* Standardized margin */
+}
+
+/* Hover effect for dropdown items */
+.dropdown-item:hover {
+    background: rgba(218, 165, 32, 0.2);
+    color: var(--accent-color);
+}
+
+/* Active dropdown item for the current page */
+.dropdown-item.active {
+    background: rgba(218, 165, 32, 0.3);
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* Hero section (main introduction) */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, rgba(44, 24, 16, 0.8) 0%, rgba(139, 69, 19, 0.6) 100%);
+    overflow: hidden;
+    padding-top: 80px;
+    padding-bottom: 4rem;
+}
+
+/* Background image for hero section */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* Caravaggio's Bacchus painting as background image with low opacity */
+    background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg/800px-Michelangelo_Merisi_da_Caravaggio_-_Bacco_-_Google_Art_Project.jpg') center/cover;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* Main text content of hero section */
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+    color: var(--text-light);
+    z-index: 2;
+    margin-bottom: 2rem;
+}
+
+/* Main title of hero section */
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Paragraph of hero section */
+.hero p {
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+/* Container for the main image in hero section */
+.hero .image-container {
+    width: 70%;
+    max-width: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    border: 3px solid var(--accent-color);
+    margin-bottom: 2rem;
+    animation: fadeInScale 1s ease-out 0.8s both;
+}
+
+/* Image inside the container */
+.hero .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Text appearing after the image in hero */
+.hero-text-after-image {
+    text-align: center;
+    max-width: 800px;
+    padding: 0 2rem;
+    color: var(--text-light);
+    z-index: 2;
+    margin-bottom: 3rem;
+    font-size: 1rem;
+    opacity: 0.9;
+    animation: fadeInUp 1s ease-out 1.2s both;
+}
+
+/* Query Section (Methodology) - used in index.html */
+.queries-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* General section title used across multiple pages for main headings */
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-top: 4rem; /* For top-level sections on pages like prompting_techniques */
+    margin-bottom: 2rem; /* Adjusted for consistency on content pages */
+    color: var(--primary-color);
+}
+
+/* Vertical layout for content boxes (default for small screens) */
+.content-layout-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem; /* Reduced vertical space between content boxes */
+}
+
+/* Container for each individual content block (now generic, used for queries too) */
+.content-box {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem; /* Increased padding slightly for consistency with case studies */
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex; /* Ensure flex for internal alignment */
+    flex-direction: column; /* Stack contents vertically */
+    gap: 1.5rem; /* Space between elements inside content box */
+    text-align: left; /* Default text alignment within the box */
+}
+
+/* Animated top bar effect on hover over content box */
+.content-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), var(--secondary-color));
+    transition: all 0.5s ease;
+}
+
+/* Show bar on hover */
+.content-box:hover::before {
+    left: 0;
+}
+
+/* Styles for content box titles (used for query titles as well) */
+.box-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem; /* Reduced margin for consistency with case studies */
+    font-weight: 700;
+    text-align: left; /* Align to left within the box */
+    width: 100%; /* Take full width for alignment */
+}
+
+/* Description container inside content-box */
+.description-container {
+    background: var(--background-light);
+    border: 1px solid rgba(218, 165, 32, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #444;
+    line-height: 1.6;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    text-align: left;
+    margin-bottom: 0.5rem; /* Space between description and code/button/next element */
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Styles for description text inside its container */
+.description-text {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 1rem; /* Space between paragraphs in description */
+}
+
+.description-text:last-child {
+    margin-bottom: 0; /* No bottom margin on the last paragraph */
+}
+
+.description-text strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.description-text em {
+    color: var(--secondary-color);
+    font-style: italic;
+}
+
+/* Textarea for queries */
+.query-textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    resize: vertical;
+    background-color: #f8f9fa;
+    color: var(--text-dark);
+}
+
+/* Results display for queries (hidden for now) */
+.query-results {
+    display: none; /* Initially hide the results div */
+    background-color: #e9ecef;
+    border: 1px dashed #ced4da;
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 50px; /* Ensure some height even if empty */
+    align-items: center; /* Use align-items for vertical centering */
+    justify-content: center; /* Use justify-content for horizontal centering */
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 1rem;
+    text-align: center;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    width: 100%; /* Take full width */
+}
+
+/* Action button (e.g., Copy Prompt, View Results) */
+.action-button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.action-button:hover {
+    background: var(--primary-color);
+    transform: scale(1.05); /* Unified hover effect */
+}
+
+/* Styles for text inserted between content boxes */
+.content-separator-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 2rem auto;
+    color: var(--text-dark);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Case Study specific styles */
+.case-study-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem; /* Adjusted for main container, slightly less than index.html section padding */
+    display: flex; /* For case studies, main content itself is a flex container */
+    flex-direction: column;
+    gap: 3rem; /* Space between content boxes */
+}
+
+.case-study-header {
+    text-align: center;
+    margin-bottom: 1rem; /* Adjust space before case navigation */
+    padding: 2rem 0; /* Padding within the header itself */
+}
+
+.case-study-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.case-study-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Navigation between case studies (top navigation block) */
+.case-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding: 1rem 2rem;
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.case-nav-button {
+    background: var(--secondary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.case-nav-button:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px); /* Unified hover effect */
+}
+
+.case-nav-button.disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.case-nav-info {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-align: center;
+}
+
+/* General content section (wrapper for content boxes) in case studies */
+.content-section {
+    padding: 8rem 2rem 4rem; /* Adjusted top padding to clear fixed nav */
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center; /* Adjusted for general content sections like prompting_techniques */
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Space between the main content blocks */
+}
+
+/* Page title for prompting_techniques.html */
+.page-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+/* Section description for prompting_techniques.html */
+.section-description {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 900px;
+    margin: 0 auto 1rem;
+    line-height: 1.7;
+}
+
+/* Code block styling (used for RDF triples etc.) */
+.code-container {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    padding: 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    white-space: pre-wrap;
+    overflow-x: auto;
+    line-height: 1.4;
+    margin-top: 1rem; /* Space if code is below description, or from box title */
+}
+
+/* Highlight boxes for important info (used within descriptions) */
+.highlight-box {
+    background: linear-gradient(135deg, rgba(218, 165, 32, 0.1) 0%, rgba(139, 69, 19, 0.1) 100%);
+    border-left: 4px solid var(--accent-color);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+}
+
+/* Query-specific box (used in case_study_4 and the nested queries in case_study_1,2,3) */
+.query-box {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px var(--shadow);
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%; /* Ensure full width within its container */
+    max-width: 100%; /* Ensure it expands */
+    margin: 0; /* Reset margin as parent container will handle spacing */
+}
+
+/* Text area between queries (specifically in case_study_4) */
+.query-separator {
+    background: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px var(--shadow);
+    border: 1px solid rgba(218, 165, 32, 0.15);
+}
+
+.query-separator h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.query-separator p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+/* Table specific styles for comparison tables on prompting_techniques.html */
+.comparison-table-container {
+    overflow-x: auto;
+    margin-bottom: 3rem;
+    box-shadow: 0 10px 30px var(--shadow);
+    border-radius: 12px;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    min-width: 700px; /* Ensures tables don't get too narrow on small screens */
+}
+
+.comparison-table th, .comparison-table td {
+    border: 1px solid #e0e0e0;
+    padding: 1rem;
+    text-align: left;
+}
+
+.comparison-table th {
+    background-color: var(--secondary-color);
+    color: var(--text-light);
+    font-weight: 600;
+    font-size: 1.1rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.comparison-table tbody tr:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+/* Footer styles (consistent) */
+.footer {
+    background: var(--primary-color);
+    color: var(--text-light);
+    padding: 3rem 2rem;
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 5rem;
+}
+
+.footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: var(--text-light);
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.footer-link-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.footer-link-group h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent-color);
+}
+
+.footer-link-group a {
+    margin-bottom: 0.5rem;
+}
+
+/* Scroll to Top Button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--accent-color);
+    color: var(--primary-color);
+    padding: 0.8rem 1rem;
+    border-radius: 50%;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+    display: none; /* Hidden by default */
+    z-index: 999;
+}
+
+.back-to-top:hover {
+    background: #B8860B;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .nav-container {
+        padding: 0 1rem;
+    }
+
+    .hero h1, .case-study-title {
+        font-size: 2.2rem; /* Consistent title size for mobile */
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .hero .image-container {
+        width: 90%;
+    }
+
+    .queries-section, .case-study-container, .content-section { /* Added .content-section for mobile padding */
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .content-box {
+        padding: 1.5rem;
+    }
+
+    .description-container, .query-textarea, .query-results, .code-container {
+        padding: 1rem;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .case-nav {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .case-nav-button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 2.5rem; /* Specific override for mobile page title */
+    }
+
+    .section-title {
+        font-size: 1.8rem; /* Adjusted for mobile consistency */
+    }
 }
