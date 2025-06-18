@@ -806,7 +806,7 @@ LIMIT 100</textarea>
             </div>
         </div>
     </div>
-<div class="content-box fade-in">We found several issue related to this triple such as the use of custom properties and the use of properties that relate to Ontologies that are not included into ArCo. Having studied the ArCo Ontology, we propose the following triple:</div>
+<div class="content-box fade-in"><strong>Validation:</strong> We have found several issue related to this triple such as the use of custom properties and the use of properties that relate to Ontologies that are not included into ArCo. Having studied the ArCo Ontology, we propose the following triple:</div>
     <div class="content-box fade-in">
                <h2 class="box-title">Triple✅</h2>
                 <div class="code-container">
@@ -823,8 +823,8 @@ http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/09
         
 https://w3id.org/arco/resource/Commission/0900281214-bacco-del-monte 
     rdf:type cd:Commission ;
-    rdfs:label "Committenza del Cardinale Del Monte per Bacco"@it ;
-    l0:name "Committenza del Cardinale Del Monte per Bacco"@it ;
+    rdfs:label "Committenza 1 del bene 0900281214"@it ;
+    l0:name "Committenza 1 del bene 0900281214"@it ;
     cd:hasCommittent https://w3id.org/arco/resource/Agent/cardinale-del-monte ;
     cd:hasCircumstance https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608 ;
     TI:atTime https://w3id.org/arco/resource/TimeInterval/1608 .
@@ -841,6 +841,7 @@ https://w3id.org/arco/resource/Circumstance/nozze-cosimo-ii-medici-1608
                     </pre>
                 </div>
             </div>
+    <div class="content-box fade-in">We reduced the triple and followed the structure that is usually used for resource that have this feature. We added "Bacchus" by Caravaggio's URI and created resources that are linked through property. We ad names and labels to make data human-readable. We used ontologies out of the core ArCo namespaces (namely <i>10</i> and <i>TI</i>) because they are tipically employed in ArCo to model the class <i>Commission</i>.
     <!-- Page Footer -->
     <footer class="footer">
         <div class="footer-links">
