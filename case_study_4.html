@@ -146,20 +146,11 @@ LIMIT 100
             <div class="content-box fade-in">
                 <h2 class="box-title">Triple - adding "chiaroscuro" as Datatypeproperty and as object property</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
-@prefix arco-res: https://w3id.org/arco/resource/ .
-
-<https://w3id.org/arco/resource/HistoricOrArtisticProperty/0900289176>
-    arco:hasMaterialOrTechnique arco-res:TechnicalCharacteristic/chiaroscuro .
-
-arco-res:TechnicalCharacteristic/chiaroscuro
-    a a-dd:TechnicalCharacteristic ;
-    rdfs:label "Chiaroscuro"@en ;
-    rdfs:label "Chiaroscuro (tecnica pittorica)"@it ;
-    rdfs:comment "La tecnica pittorica del chiaroscuro, caratterizzata dall'uso di forti contrasti tra luci e ombre per ottenere effetti di volume e drammaticità."@it .
+                    <pre class="code-block">@prefix arco-res: <https://w3id.org/arco/resource/> .
+@prefix arco: <https://w3id.org/arco/ontology/arco/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+    
+arco-res:CulturalProperty/BaccoCaravaggio arco:hasCulturalPropertyFeature arco-res:CulturalPropertyFeature/Chiaroscuro .
 
                     </pre>
                 </div>
