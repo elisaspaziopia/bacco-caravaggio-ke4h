@@ -135,7 +135,7 @@ LIMIT 100
 
             <div class="content-box fade-in">
                 <div class="description-container">
-                    <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. We asked LLMs (Gemini) to generate a triple:</p>
+                    <p class="description-text">The result is that 4 works-8 in Italian and English-contain the value “chiaroscuro,” however, linked with the same property than in Caravaggio's "Bacchus" shows the value “canvas/oil painting.” On the one hand, this means that we could add “chiaroscuro” to the techniques and materials of a work without causing misunderstandings within the ontology: this technique is suitable for this property. On the other, we believe that it would be more useful for the purposes of such a rich cultural heritage database to expand the ArCo ontology and add within the TechnicalCharacteristic class, a property of the type <strong><i>has Painting Technique</i></strong>. We asked LLMs (Gemini, chain-of-thought prompt) to generate a triple:</p>
                     <p class="description-text"></p>
                 </div>
             </div>
@@ -157,12 +157,11 @@ arco-res:CulturalProperty/BaccoCaravaggio arco:hasCulturalPropertyFeature arco-r
             <div class="content-box fade-in">
                 <h2 class="box-title">Triple✅</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix arco: https://w3id.org/arco/ .
-@prefix arco-dd: https://w3id.org/arco/ontology/denotative-description/ .
+                    <pre class="code-block">@prefix arco: <https://w3id.org/arco/resource/> .
+@prefix arco-dd: <https://w3id.org/arco/ontology/denotative-description/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 
-arco:resource/HistoricOrArtisticProperty/0900289176 arco-dd:hasMaterialOrTechnique arco:resource/TechnicalCharacteristic/tela-pittura-a-olio .
-
-arco:resource/HistoricOrArtisticProperty/0900289176 arco-dd:hasMaterialOrTechnique arco:resource/TechnicalCharacteristic/chiaroscuro .
+arco:CulturalProperty/0900289176 arco-dd:employsTechnique arco:Technique/Chiaroscuro .
                     </pre>
                 </div>
             </div>
