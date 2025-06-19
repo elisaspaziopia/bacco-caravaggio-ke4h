@@ -103,51 +103,42 @@ LIMIT 100</textarea>
 @prefix TI: <https://w3id.org/italia/onto/TI/> .
 @prefix l0: <https://w3id.org/italia/onto/l0/> .
 
-# Main artwork resource
 <http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
     cd:hasCommission <https://dati.beniculturali.it/lodview-arco/resource/Commission/0900281214-1> ;
     cd:hasCulturalPropertyCreation <https://dati.beniculturali.it/lodview-arco/resource/CulturalPropertyCreation/0900281214-1> .
 
-# Commission resource
 <https://dati.beniculturali.it/lodview-arco/resource/Commission/0900281214-1> 
     rdf:type cd:Commission ;
     rdfs:label "Committenza 1 del bene 0900281214" ;
     cd:hasCommittent <https://w3id.org/arco/resource/Agent/francesco-maria-del-monte> ;
     cd:hasCircumstance <https://dati.beniculturali.it/lodview-arco/resource/Circumstance/donazione-ferdinando-medici-nozze-cosimo> .
 
-# Committent (Cardinal Del Monte)
 <https://w3id.org/arco/resource/Agent/francesco-maria-del-monte> 
     rdf:type cd:Committent ;
     rdf:type l0:Agent ;
     rdfs:label "Cardinale Francesco Maria del Monte" .
 
-# Circumstance of the commission
 <https://dati.beniculturali.it/lodview-arco/resource/Circumstance/donazione-ferdinando-medici-nozze-cosimo> 
     rdf:type cd:Circumstance ;
     rdfs:label "Fu commissionato dal cardinale Del Monte per essere donato a Ferdinando I de' Medici in occasione delle nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze" .
 
-# Cultural Property Creation (artwork creation context)
 <https://dati.beniculturali.it/lodview-arco/resource/CulturalPropertyCreation/0900281214-1> 
     rdf:type arco:CulturalPropertyCreation ;
     TI:atTime <https://w3id.org/arco/resource/TimeInterval/1595-1597> ;
     cd:hasCircumstance <https://dati.beniculturali.it/lodview-arco/resource/Circumstance/caravaggio-protezione-del-monte> .
 
-# Time interval for artwork creation
 <https://w3id.org/arco/resource/TimeInterval/1595-1597> 
     rdf:type TI:TimeInterval ;
     rdfs:label "1595-1597" .
 
-# Circumstance of artistic creation
 <https://dati.beniculturali.it/lodview-arco/resource/Circumstance/caravaggio-protezione-del-monte> 
     rdf:type cd:Circumstance ;
     rdfs:label "L'opera fu realizzata quando Caravaggio si trovava sotto la protezione del cardinale Francesco Maria del Monte, durante i suoi primi anni romani di formazione artistica" .
 
-# Additional agent (Ferdinando I de' Medici as recipient)
 <https://w3id.org/arco/resource/Agent/ferdinando-medici> 
     rdf:type l0:Agent ;
     rdfs:label "Ferdinando I de' Medici" .
 
-# Time interval for the donation/wedding occasion
 <https://w3id.org/arco/resource/TimeInterval/1608> 
     rdf:type TI:TimeInterval ;
     rdfs:label "1608" .
