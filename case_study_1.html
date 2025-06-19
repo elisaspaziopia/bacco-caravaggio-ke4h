@@ -129,15 +129,14 @@ ex:Bacchus_Interpretation
                 Formattare la risposta in un testo chiaro e strutturato, adatto per l'arricchimento di un Knowledge Graph, con enfasi sui nomi propri, concetti chiave e relazioni.
                 "
             </div>
-            <div class="content-box fade-in">
-                <p class="description-text"><strong>Validation:</strong> After providing a set of instructions on how to generate the query -such as specifying the IRI and the property we wanted to use- we asked LLMs to generate a triple. Working hand in hand with artificial intelligence and providing it with more data related to existing resources on ArCo and the classes already present in its ontology makes it easier to achieve appropriate results. However, LLMs still made some mistakes: even though it uses the correct IRI and property, it provided the wrong namespace, it calls the entity apparathus in a way that does not respect the usual structure of this property, and it uses rdfs:comment, that, even though it could be a valid option, it is not the most suitable property to use.
-    <p></p><p><strong> Result:</strong> We propose the following triple. We changed the name the apparathus and of By adding this triple to ArCo, we achieved a more structured and semantically rich representation of the artwork’s iconographic and decorative apparatus. This enhancement improves data clarity, enables more precise queries, and facilitates interoperability within the ArCo knowledge graph. Furthermore, it allows for modular descriptions that can be easily extended or linked to other resources, supporting deeper analysis and richer interpretations.</p>
+            <div class="content-box fade-in"><strong>Validation:</strong> After providing a set of instructions on how to generate the query -such as specifying the IRI and the property we wanted to use- we asked LLMs to generate a triple. Working hand in hand with artificial intelligence and providing it with more data related to existing resources on ArCo and the classes already present in its ontology makes it easier to achieve appropriate results. However, LLMs still made some mistakes: even though it uses the correct IRI and property, it provided the wrong namespace, it calls the entity apparathus in a way that does not respect the usual structure of this property, and it uses rdfs:comment, that, even though it could be a valid option, it is not the most suitable property to use.
+            <p></p><strong> Result:</strong> We propose the following triple. We changed the name the apparathus and of By adding this triple to ArCo, we achieved a more structured and semantically rich representation of the artwork’s iconographic and decorative apparatus. This enhancement improves data clarity, enables more precise queries, and facilitates interoperability within the ArCo knowledge graph. Furthermore, it allows for modular descriptions that can be easily extended or linked to other resources, supporting deeper analysis and richer interpretations.
             </div>
             <div class="content-box fade-in"><h2 class="box-title">Triple✅</h2>
             <div class="code-container">
                 <pre class="code-block">@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix a-dd: a-dd: https://w3id.org/arco/ontology/denotative-description/
+@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/
 @prefix core: https://w3id.org/arco/ontology/core
 @prefix : https://example.org/resource/ .
 
