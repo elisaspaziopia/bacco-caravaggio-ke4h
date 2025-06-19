@@ -75,18 +75,29 @@
             <div class="content-box fade-in">
                 <div class="query-box">
                     <h3 class="box-title">Query 1</h3>
-                    <textarea id="cs3Query1" class="query-textarea">@prefix arco-core: <https://w3id.org/arco/core/> .
-@prefix crm: <http://www.cidoc-crm.org/cidoc-crm/> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-arco-core:CulturalProperty/Bacchus_by_Caravaggio
-    crm:P4_has_time-span arco-core:TimeSpan/Movement_1596 .
-
-arco-core:TimeSpan/Movement_1596
-    rdfs:label "Movement around 1596"@en ;
-    crm:P82a_begin_of_the_begin "1596-01-01"^^xsd:date ;
-    crm:P82b_end_of_the_end "1596-12-31"^^xsd:date .
+                    <textarea id="cs3Query1" class="query-textarea">dy_3.html
++34
+-27
+Lines changed: 34 additions & 27 deletions
+Original file line number	Diff line number	Diff line change
+@@ -73,21 +73,21 @@ <h2 class="box-title">Alternative Dating</h2>
+            <div class="content-box fade-in">
+                <div class="query-box">
+                    <h3 class="box-title">Query 1</h3>
+                    <textarea id="cs3Query1" class="query-textarea">PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT (EXISTS {
+  ?instance rdf:type a-cd:AlternativeDating .
+} AS ?hasInstances)
+(EXISTS {
+  ?entity ?property ?alt .
+  ?alt rdf:type a-cd:AlternativeDating .
+} AS ?usedAsObject)
+(EXISTS {
+  ?s a-cd:isAlternativeDatingTypeOf ?o .
+} AS ?isAlternativeDatingTypeOfUsed)
+WHERE {
+}
 </textarea>
                     <a href="https://dati.cultura.gov.it/sparql?default-graph-uri=&query=PREFIX+a-cd%3A+%3Chttps%3A%2F%2Fw3id.org%2Farco%2Fontology%2Fcontext-description%2F%3E%0D%0APREFIX+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0A%0D%0ASELECT+%28EXISTS+%7B%0D%0A++%3Finstance+rdf%3Atype+a-cd%3AAlternativeDating+.%0D%0A%7D+AS+%3FhasInstances%29%0D%0A%28EXISTS+%7B%0D%0A++%3Fentity+%3Fproperty+%3Falt+.%0D%0A++%3Falt+rdf%3Atype+a-cd%3AAlternativeDating+.%0D%0A%7D+AS+%3FusedAsObject%29%0D%0A%28EXISTS+%7B%0D%0A++%3Fs+a-cd%3AisAlternativeDatingTypeOf+%3Fo+.%0D%0A%7D+AS+%3FisAlternativeDatingTypeOfUsed%29%0D%0AWHERE+%7B%0D%0A%7D%0D%0A&format=text%2Fhtml&timeout=0&signal_void=on" target="_blank" class="action-button">View results in ArCo</a>
                 </div>
