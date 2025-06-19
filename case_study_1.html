@@ -105,14 +105,17 @@ rdfs:label ?label ;
                 <h2 class="box-title">Triple</h2>
                 <div class="code-container">
                     <pre class="code-block">@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix a-dd: https://w3id.org/arco/ontology/context-description/ .
+@prefix arco-cd: https://w3id.org/arco/ontology/context-description/ .
 @prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix ex: https://example.org/resource/IconographicApparatus/ .
 
-<https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176>
-    a-dd:HasIconographicOrSymbolicApparatus _:symbolicApparatus1 .
+https://dati.beniculturali.it/lodview-arco/resource/HistoricOrArtisticProperty/0900289176
+    arco:hasIconographicOrDecorativeApparatus ex:Bacchus_Interpretation .
 
-_:symbolicApparatus1
-    rdfs:comment """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell'estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile.""" .</pre>
+ex:Bacchus_Interpretation
+    a arco-cd:IconographicOrDecorativeApparatus ;
+    rdfs:comment """Il vino nella coppa rappresenta l'ebbrezza divina e terrena, l'alterazione dei sensi che avvicina al divino ma anche al peccato. Le guance arrossate e la presa malferma del calice, che genera increspature sulla superficie del vino, sembrano tradire un certo stato di ebbrezza. La frutta, pur simboleggiando abbondanza e fertilità, rivela imperfezioni significative: la mela è bacata, la mela cotogna è ammaccata, la pesca è mezza marcia, alludendo alla caducità della bellezza e del piacere terreno. La nudità parziale evoca sensualità carnale e disponibilità, mentre la corona di pampini richiama la tradizione dionisiaca dell’estasi mistica. La luce caravaggesca, che illumina drammaticamente la pelle del giovane contro lo sfondo scuro, crea un effetto di immediata presenza fisica, quasi tattile.""" .
+</pre>
                 </div>
             </div>
             <!-- Hidden element to hold the actual prompt text for copying -->
