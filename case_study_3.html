@@ -75,8 +75,17 @@
             <div class="content-box fade-in">
                 <div class="query-box">
                     <h3 class="box-title">Query 1</h3>
-                    <textarea id="cs3Query1" class="query-textarea">PREFIX a-cd: https://w3id.org/arco/ontology/context-description/
-PREFIX rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+                    <textarea id="cs3Query1" class="query-textarea">dy_3.html
++34
+-27
+Lines changed: 34 additions & 27 deletions
+Original file line number	Diff line number	Diff line change
+@@ -73,21 +73,21 @@ <h2 class="box-title">Alternative Dating</h2>
+            <div class="content-box fade-in">
+                <div class="query-box">
+                    <h3 class="box-title">Query 1</h3>
+                    <textarea id="cs3Query1" class="query-textarea">PREFIX a-cd: <https://w3id.org/arco/ontology/context-description/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT (EXISTS {
   ?instance rdf:type a-cd:AlternativeDating .
 } AS ?hasInstances)
