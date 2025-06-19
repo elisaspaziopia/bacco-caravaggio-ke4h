@@ -89,112 +89,34 @@ LIMIT 100</textarea>
             </div>
 
             <div class="content-box fade-in">
-                <p class="description-text">The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs (Claude) to translate this content into a triple, just specifing that we want it to be suitable to ArCo.</p>
+                <p class="description-text">The query retrieves several results. By looking at them, and after having prompted LLMs (click on <a href="prompting_techniques.html#prompts">Prompting Techniques</a> to see what LLMs told us about "Bacchus" by Caravaggio), we notice that using this class to structure the Knowledge Graph would be a good enrichment. In order to do that, we ask LLMs (Claude, few-shot prompt) to translate this content into a triple, just specifing that we want it to be suitable to ArCo.</p>
             </div>
 
             <!-- Code Box (now second) -->
             <div class="content-box fade-in">
                 <h2 class="box-title">Triple</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix arco: https://w3id.org/arco/ontology/arco/ .
-@prefix a-cd: https://w3id.org/arco/ontology/context-description/ .
-@prefix a-dd: https://w3id.org/arco/ontology/denotative-description/ .
-@prefix cis: http://dati.beniculturali.it/cis/ .
-@prefix foaf: http://xmlns.com/foaf/0.1/ .
-@prefix dcterms: http://purl.org/dc/terms/ .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
-@prefix xsd: http://www.w3.org/2001/XMLSchema# .
-@prefix ti: https://w3id.org/italia/onto/TI/ .
+                    <pre class="code-block">turtle# Main artwork has commission
+<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
+    a-cd:hasCommission <http://dati.beniculturali.it/mibact/opere/resource/Commission/0900281214-1> .
 
-:bacchus_caravaggio a arco:HistoricOrArtisticProperty ;
-    rdfs:label "Bacco"@it ;
-    arco:hasCommissioningSituation :commission_situation ;
-    arco:hasCreationTimeInterval :creation_timespan_1595_1597 .
+# Commission resource
+<http://dati.beniculturali.it/mibact/opere/resource/Commission/0900281214-1> 
+    rdf:type cd:Commission ;
+    rdfs:label "Committenza 1 del bene 0900281214" ;
+    l0:name "Committenza 1 del bene 0900281214" ;
+    a-cd:hasCommittent <http://dati.beniculturali.it/mibact/opere/resource/Agent/francesco-maria-del-monte> ;
+    ti:atTime <http://dati.beniculturali.it/mibact/opere/resource/TimeInterval/1595-1597> .
 
-:commission_situation a a-cd:CommissioningSituation ;
-    rdfs:label "Commissione del Bacco di Caravaggio"@it ;
-    a-cd:hasCommissioner :cardinal_del_monte ;
-    a-cd:hasCommissionPurpose :diplomatic_gift_purpose ;
-    a-cd:hasCommissionedArtist :caravaggio ;
-    a-cd:hasIntendedRecipient :ferdinando_medici ;
-    a-cd:hasCommissionContext :artistic_formation_context .
+# Agent (Cardinal Del Monte)
+<http://dati.beniculturali.it/mibact/opere/resource/Agent/francesco-maria-del-monte> 
+    rdf:type l0:Agent ;
+    rdfs:label "Cardinale Francesco Maria del Monte" .
 
-:cardinal_del_monte a foaf:Person ;
-    rdfs:label "Francesco Maria del Monte"@it ;
-    a-dd:hasRole :cardinal_role ;
-    a-cd:hasPatronageRelation :caravaggio_patronage .
-
-:cardinal_role a a-dd:Role ;
-    rdfs:label "Cardinale"@it .
-
-:caravaggio a foaf:Person ;
-    rdfs:label "Michelangelo Merisi detto Caravaggio"@it ;
-    a-cd:hasProtector :cardinal_del_monte ;
-    a-cd:hasArtisticFormationPeriod :roman_formation_period .
-
-:caravaggio_patronage a a-cd:PatronageRelation ;
-    rdfs:label "Protezione di Caravaggio da parte del cardinale Del Monte"@it ;
-    a-cd:hasPatron :cardinal_del_monte ;
-    a-cd:hasProtégé :caravaggio ;
-    a-cd:hasTimeInterval :creation_timespan_1595_1597 .
-
-:artistic_formation_context a a-cd:ArtisticFormationContext ;
-    rdfs:label "Primi anni romani di formazione artistica di Caravaggio"@it ;
-    a-cd:hasFormationPeriod :roman_formation_period ;
-    a-cd:hasFormationLocation :roma ;
-    a-cd:involvesArtist :caravaggio .
-
-:roman_formation_period a ti:TimeInterval ;
-    rdfs:label "Periodo di formazione romana"@it ;
-    ti:hasIntervalStartTime :formation_start ;
-    ti:hasIntervalEndTime :formation_end .
-
-:creation_timespan_1595_1597 a ti:TimeInterval ;
-    rdfs:label "Periodo di realizzazione 1595-1597"@it ;
-    ti:hasIntervalStartTime "1595"^^xsd:gYear ;
-    ti:hasIntervalEndTime "1597"^^xsd:gYear .
-
-:diplomatic_gift_purpose a a-cd:Purpose ;
-    rdfs:label "Dono diplomatico"@it ;
-    a-cd:hasSpecificPurpose :wedding_gift_purpose ;
-    a-cd:hasDiplomaticObjective :strengthen_relations_objective .
-
-:wedding_gift_purpose a a-cd:SpecificPurpose ;
-    rdfs:label "Dono per le nozze di Cosimo II"@it ;
-    a-cd:hasOccasion :cosimo_wedding ;
-    a-cd:hasDate "1608"^^xsd:gYear .
-
-:strengthen_relations_objective a a-cd:DiplomaticObjective ;
-    rdfs:label "Rinsaldare i rapporti tra Roma e Firenze"@it ;
-    a-cd:involvesPoliticalEntities :papal_states, :grand_duchy_tuscany .
-
-:cosimo_wedding a a-cd:CeremonialEvent ;
-    rdfs:label "Nozze di Cosimo II de' Medici"@it ;
-    a-cd:hasMainParticipant :cosimo_medici ;
-    a-cd:hasDate "1608"^^xsd:gYear .
-
-:ferdinando_medici a foaf:Person ;
-    rdfs:label "Ferdinando I de' Medici"@it ;
-    a-dd:hasRole :grand_duke_role ;
-    a-cd:hasFamilyRelation :cosimo_medici .
-
-:grand_duke_role a a-dd:Role ;
-    rdfs:label "Granduca di Toscana"@it .
-
-:cosimo_medici a foaf:Person ;
-    rdfs:label "Cosimo II de' Medici"@it ;
-    a-cd:hasFather :ferdinando_medici .
-
-:roma a a-cd:Place ;
-    rdfs:label "Roma"@it .
-
-:papal_states a a-cd:PoliticalEntity ;
-    rdfs:label "Stato Pontificio"@it ;
-    a-cd:hasCapital :roma .
-
-:grand_duchy_tuscany a a-cd:PoliticalEntity ;
-    rdfs:label "Granducato di Toscana"@it ;
-    a-cd:hasRuler :ferdinando_medici .
+# Time interval
+<http://dati.beniculturali.it/mibact/opere/resource/TimeInterval/1595-1597> 
+    rdf:type ti:TimeInterval ;
+    rdfs:label "1595-1597" .
                     </pre>
                 </div>
             </div>
