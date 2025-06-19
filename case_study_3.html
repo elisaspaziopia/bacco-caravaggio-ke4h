@@ -93,7 +93,7 @@ arco-core:TimeSpan/Movement_1596
             </div>
 
             <div class="content-box fade-in">
-                <p class="description-text">This query shows no result: this means that the properties we looked for, even though they are part of the ArCo Ontology, are not used. We still decide to use them to enrich the Knowledge Graph and to serve the purpose of stating the obsolete date. We ask the LLMs (Minstral) to translate the data into RDF data.</p>
+                <p class="description-text">This query shows no result: this means that the properties we looked for, even though they are part of the ArCo Ontology, are not used. We still decide to use them to enrich the Knowledge Graph and to serve the purpose of stating the obsolete date. We ask the LLMs (Minstral, zero-shot prompt) to translate the data into RDF data.</p>
             </div>
 
             <!-- Code Box -->
@@ -101,18 +101,11 @@ arco-core:TimeSpan/Movement_1596
                 <h2 class="box-title">Triple</h2>
                 <div class="code-container">
                     <pre class="code-block">@prefix arco-core: https://w3id.org/arco/core/ .
-@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
 @prefix xsd: http://www.w3.org/2001/XMLSchema# .
 
-arco-core:CulturalProperty/Bacchus_by_Caravaggio
-    arco-core:hasDating arco-core:Dating/Initial_Dating_1589 .
+https://w3id.org/arco/core/BacchusByCaravaggio arco-core:hasAlternativeDate "1589"^^xsd:gYear ;
+    arco-core:hasPreferredDate "1596"^^xsd:gYear .
 
-arco-core:Dating/Initial_Dating_1589
-    a arco-core:Dating ;
-    rdfs:label "Initial Dating 1589"@en ;
-    arco-core:hasDate "1589"^^xsd:gYear ;
-    arco-core:hasDatingType arco-core:DatingType/Estimated ;
-    arco-core:hasNote "This dating was later revised"@en .
 
                     </pre>
                 </div>
