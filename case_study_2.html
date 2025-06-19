@@ -96,50 +96,50 @@ LIMIT 100</textarea>
             <div class="content-box fade-in">
                 <h2 class="box-title">Triple</h2>
                 <div class="code-container">
-                    <pre class="code-block">@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix arco: <https://w3id.org/arco/ontology/arco/> .
-@prefix cd: <https://w3id.org/arco/ontology/context-description/> .
-@prefix TI: <https://w3id.org/italia/onto/TI/> .
-@prefix l0: <https://w3id.org/italia/onto/l0/> .
+                    <pre class="code-block">@prefix rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# .
+@prefix rdfs: http://www.w3.org/2000/01/rdf-schema# .
+@prefix arco: https://w3id.org/arco/ontology/arco/ .
+@prefix cd: https://w3id.org/arco/ontology/context-description/ .
+@prefix TI: https://w3id.org/italia/onto/TI/ .
+@prefix l0: https://w3id.org/italia/onto/l0/ .
 
-<http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214> 
-    cd:hasCommission <https://dati.beniculturali.it/lodview-arco/resource/Commission/0900281214-1> ;
-    cd:hasCulturalPropertyCreation <https://dati.beniculturali.it/lodview-arco/resource/CulturalPropertyCreation/0900281214-1> .
+http://dati.beniculturali.it/mibact/opere/resource/HistoricOrArtisticProperty/0900281214
+    cd:hasCommission https://dati.beniculturali.it/lodview-arco/resource/Commission/0900281214-1 ;
+    cd:hasCulturalPropertyCreation https://dati.beniculturali.it/lodview-arco/resource/CulturalPropertyCreation/0900281214-1 .
 
-<https://dati.beniculturali.it/lodview-arco/resource/Commission/0900281214-1> 
+https://dati.beniculturali.it/lodview-arco/resource/Commission/0900281214-1
     rdf:type cd:Commission ;
     rdfs:label "Committenza 1 del bene 0900281214" ;
-    cd:hasCommittent <https://w3id.org/arco/resource/Agent/francesco-maria-del-monte> ;
-    cd:hasCircumstance <https://dati.beniculturali.it/lodview-arco/resource/Circumstance/donazione-ferdinando-medici-nozze-cosimo> .
+    cd:hasCommittent https://w3id.org/arco/resource/Agent/francesco-maria-del-monte ;
+    cd:hasCircumstance https://dati.beniculturali.it/lodview-arco/resource/Circumstance/donazione-ferdinando-medici-nozze-cosimo .
 
-<https://w3id.org/arco/resource/Agent/francesco-maria-del-monte> 
+https://w3id.org/arco/resource/Agent/francesco-maria-del-monte
     rdf:type cd:Committent ;
     rdf:type l0:Agent ;
     rdfs:label "Cardinale Francesco Maria del Monte" .
 
-<https://dati.beniculturali.it/lodview-arco/resource/Circumstance/donazione-ferdinando-medici-nozze-cosimo> 
+https://dati.beniculturali.it/lodview-arco/resource/Circumstance/donazione-ferdinando-medici-nozze-cosimo
     rdf:type cd:Circumstance ;
     rdfs:label "Fu commissionato dal cardinale Del Monte per essere donato a Ferdinando I de' Medici in occasione delle nozze del figlio Cosimo II nel 1608, come gesto diplomatico per rinsaldare i rapporti tra Roma e Firenze" .
 
-<https://dati.beniculturali.it/lodview-arco/resource/CulturalPropertyCreation/0900281214-1> 
+https://dati.beniculturali.it/lodview-arco/resource/CulturalPropertyCreation/0900281214-1
     rdf:type arco:CulturalPropertyCreation ;
-    TI:atTime <https://w3id.org/arco/resource/TimeInterval/1595-1597> ;
-    cd:hasCircumstance <https://dati.beniculturali.it/lodview-arco/resource/Circumstance/caravaggio-protezione-del-monte> .
+    TI:atTime https://w3id.org/arco/resource/TimeInterval/1595-1597 ;
+    cd:hasCircumstance https://dati.beniculturali.it/lodview-arco/resource/Circumstance/caravaggio-protezione-del-monte .
 
-<https://w3id.org/arco/resource/TimeInterval/1595-1597> 
+https://w3id.org/arco/resource/TimeInterval/1595-1597
     rdf:type TI:TimeInterval ;
     rdfs:label "1595-1597" .
 
-<https://dati.beniculturali.it/lodview-arco/resource/Circumstance/caravaggio-protezione-del-monte> 
+https://dati.beniculturali.it/lodview-arco/resource/Circumstance/caravaggio-protezione-del-monte 
     rdf:type cd:Circumstance ;
     rdfs:label "L'opera fu realizzata quando Caravaggio si trovava sotto la protezione del cardinale Francesco Maria del Monte, durante i suoi primi anni romani di formazione artistica" .
 
-<https://w3id.org/arco/resource/Agent/ferdinando-medici> 
+https://w3id.org/arco/resource/Agent/ferdinando-medici
     rdf:type l0:Agent ;
     rdfs:label "Ferdinando I de' Medici" .
 
-<https://w3id.org/arco/resource/TimeInterval/1608> 
+https://w3id.org/arco/resource/TimeInterval/1608
     rdf:type TI:TimeInterval ;
     rdfs:label "1608" .
                     </pre>
